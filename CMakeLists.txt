@@ -43,6 +43,9 @@ add_executable(${PROJECT_NAME}
         Source/Actors/Goomba.h
         Source/Actors/Spawner.cpp
         Source/Actors/Spawner.h
+        Source/CSV.h
+        Source/Components/DrawComponents/DrawTileComponent.h
+        Source/Components/DrawComponents/DrawTileComponent.cpp
 )
 
 ####### DO NOT EDIT BELLOW

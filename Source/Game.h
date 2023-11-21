@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include "Math.h"
+#include "CSV.h"
 
 class Game
 {
@@ -57,6 +58,9 @@ private:
 
     // Game-specific
     void LoadLevel(const std::string& texturePath, int width, int height);
+
+    // Tiled
+    void LoadData(const std::string& fileName);
 
     // All the actors in the game
     std::vector<class Actor*> mActors;
