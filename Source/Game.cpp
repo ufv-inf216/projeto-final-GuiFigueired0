@@ -81,8 +81,8 @@ void Game::InitializeActors()
 
     // Tiled
     auto* map = new Actor(this);
-    new DrawTileComponent(map, "../Assets/Maps/layer1.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
-    new DrawTileComponent(map, "../Assets/Maps/layer2.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
+    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
+    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer2.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
 
     //LoadData("../Assets/Maps/ObjectsOneSoldier.csv");
 }
