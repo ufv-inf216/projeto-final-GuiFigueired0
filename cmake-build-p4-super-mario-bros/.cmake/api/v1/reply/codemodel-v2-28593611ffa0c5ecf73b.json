@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "p4-super-mario-bros::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-p4-super-mario-bros-Debug-3953f8e81d606a2e40d0.json",
+					"jsonFile" : "target-p4-super-mario-bros-Debug-36b1e29421c612b0cbf5.json",
 					"name" : "p4-super-mario-bros",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros",
-		"source" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216"
+		"build" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros",
+		"source" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua"
 	},
 	"version" : 
 	{

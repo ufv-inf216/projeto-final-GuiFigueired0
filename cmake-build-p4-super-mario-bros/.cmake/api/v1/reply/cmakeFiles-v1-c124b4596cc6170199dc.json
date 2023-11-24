@@ -170,13 +170,26 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2023.2/bin/cmake/win/x64/share/cmake-3.26/Modules/FeatureSummary.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Program Files/SDL2_mixer-2.6.3/cmake/sdl2_mixer-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Program Files/SDL2_mixer-2.6.3/cmake/sdl2_mixer-config.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2023.2/bin/cmake/win/x64/share/cmake-3.26/Modules/FeatureSummary.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros",
-		"source" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216"
+		"build" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros",
+		"source" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua"
 	},
 	"version" : 
 	{

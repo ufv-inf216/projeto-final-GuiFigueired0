@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros"
+			"value" : "c:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -687,7 +687,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/JetBrains/CLion 2023.2/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/PROGRA~1/JetBrains/CLion 2023.2/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1278,6 +1278,18 @@
 			"value" : "C:/Program Files/SDL2_image-2.6.3/cmake"
 		},
 		{
+			"name" : "SDL2_mixer_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL2_mixer."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Program Files/SDL2_mixer-2.6.3/cmake"
+		},
+		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
 			"properties" : 
 			[
@@ -1299,7 +1311,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros"
 		},
 		{
 			"name" : "p4-super-mario-bros_IS_TOP_LEVEL",
@@ -1323,7 +1335,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua"
 		}
 	],
 	"kind" : "cache",

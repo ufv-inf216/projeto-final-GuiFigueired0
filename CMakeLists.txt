@@ -46,12 +46,14 @@ add_executable(${PROJECT_NAME}
         Source/CSV.h
         Source/Components/DrawComponents/DrawTileComponent.h
         Source/Components/DrawComponents/DrawTileComponent.cpp
-        AudioSystem.cpp
+        Source/AudioSystem.cpp
+        Source/AudioSystem.h
 )
 
 ####### DO NOT EDIT BELLOW
 find_package(SDL2 2.28.2 EXACT REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer)
