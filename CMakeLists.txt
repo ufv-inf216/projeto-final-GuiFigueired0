@@ -46,6 +46,7 @@ add_executable(${PROJECT_NAME}
         Source/CSV.h
         Source/Components/DrawComponents/DrawTileComponent.h
         Source/Components/DrawComponents/DrawTileComponent.cpp
+        AudioSystem.cpp
 )
 
 ####### DO NOT EDIT BELLOW

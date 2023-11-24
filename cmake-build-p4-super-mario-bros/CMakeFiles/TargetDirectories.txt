@@ -1,3 +1,3 @@
-C:/Users/guilh/Documents/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/p4-super-mario-bros.dir
-C:/Users/guilh/Documents/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/edit_cache.dir
-C:/Users/guilh/Documents/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/rebuild_cache.dir
+C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/p4-super-mario-bros.dir
+C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/edit_cache.dir
+C:/Users/guilh/Documents/Jogos/Projeto-Final-INF216/cmake-build-p4-super-mario-bros/CMakeFiles/rebuild_cache.dir
