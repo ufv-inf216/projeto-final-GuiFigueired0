@@ -23,6 +23,7 @@
 #include "Components/DrawComponents/DrawComponent.h"
 #include "Components/ColliderComponents/AABBColliderComponent.h"
 #include "Components/DrawComponents/DrawTileComponent.h"
+#include <Box2D/Box2D.h>
 
 const int LEVEL_WIDTH = 213;
 const int LEVEL_HEIGHT = 14;

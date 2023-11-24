@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.8)
 # Configurando o padrão c++
 set(CMAKE_CXX_STANDARD 17)
 
@@ -9,6 +9,9 @@ set(CMAKE_SKIP_RPATH ON)
 set(CMAKE_SKIP_RPATH ON CACHE BOOL "Skip RPATH" FORCE)
 # END NO SCREEN BUGFIX
 ####### DO NOT EDIT ABOVE
+
+# Adicione o caminho para os arquivos do Box2D
+add_subdirectory(box2d)
 
 # Configurando o nome e executável do projeto
 set(PROJECT_NAME "fogo-e-agua")
@@ -56,4 +59,4 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer box2d)
