@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/p4-super-mario-bros")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/fogo-e-agua")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

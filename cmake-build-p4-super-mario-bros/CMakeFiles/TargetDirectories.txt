@@ -1,3 +1,0 @@
-C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/CMakeFiles/p4-super-mario-bros.dir
-C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/CMakeFiles/edit_cache.dir
-C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/CMakeFiles/rebuild_cache.dir

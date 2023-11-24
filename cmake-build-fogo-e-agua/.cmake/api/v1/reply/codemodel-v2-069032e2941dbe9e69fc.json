@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "p4-super-mario-bros",
+					"name" : "fogo-e-agua",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "p4-super-mario-bros::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-p4-super-mario-bros-Debug-36b1e29421c612b0cbf5.json",
-					"name" : "p4-super-mario-bros",
+					"id" : "fogo-e-agua::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fogo-e-agua-Debug-c0284644d3fff64ed19d.json",
+					"name" : "fogo-e-agua",
 					"projectIndex" : 0
 				}
 			]
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros",
+		"build" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua",
 		"source" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua"
 	},
 	"version" : 

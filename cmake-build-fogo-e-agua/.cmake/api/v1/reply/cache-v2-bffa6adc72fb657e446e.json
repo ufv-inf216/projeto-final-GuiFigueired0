@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros"
+			"value" : "c:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -659,7 +659,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/p4-super-mario-bros"
+			"value" : "C:/Program Files (x86)/fogo-e-agua"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -687,7 +687,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/PROGRA~1/JetBrains/CLion 2023.2/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/Program Files/JetBrains/CLion 2023.2/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -875,7 +875,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "p4-super-mario-bros"
+			"value" : "fogo-e-agua"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1302,7 +1302,7 @@
 			"value" : "TRUE"
 		},
 		{
-			"name" : "p4-super-mario-bros_BINARY_DIR",
+			"name" : "fogo-e-agua_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1311,10 +1311,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-p4-super-mario-bros"
+			"value" : "C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua"
 		},
 		{
-			"name" : "p4-super-mario-bros_IS_TOP_LEVEL",
+			"name" : "fogo-e-agua_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1326,7 +1326,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "p4-super-mario-bros_SOURCE_DIR",
+			"name" : "fogo-e-agua_SOURCE_DIR",
 			"properties" : 
 			[
 				{

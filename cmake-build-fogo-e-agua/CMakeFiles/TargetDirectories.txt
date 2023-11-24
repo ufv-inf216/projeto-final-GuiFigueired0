@@ -1,0 +1,3 @@
+C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua/CMakeFiles/fogo-e-agua.dir
+C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua/CMakeFiles/edit_cache.dir
+C:/Users/guilh/Documents/Jogos/projeto-final-fogo-e-agua/cmake-build-fogo-e-agua/CMakeFiles/rebuild_cache.dir

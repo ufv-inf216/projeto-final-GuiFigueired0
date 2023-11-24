@@ -1,0 +1,21 @@
+# ninja log v5
+9	460	7225333221361135	CMakeFiles/fogo-e-agua.dir/Source/Math.cpp.obj	2a03cb6d8c7db7ff
+47	839	7225333224637062	CMakeFiles/fogo-e-agua.dir/Source/Components/Component.cpp.obj	23f46ff2645d6d95
+117	1031	7225333226767662	CMakeFiles/fogo-e-agua.dir/Source/Components/ColliderComponents/CircleColliderComponent.cpp.obj	b40ae37b5de3f18
+17	1101	7225333227782961	CMakeFiles/fogo-e-agua.dir/Source/Random.cpp.obj	5af117a1d6d0570b
+1	2378	7225333240472418	CMakeFiles/fogo-e-agua.dir/Source/Main.cpp.obj	f2d1931f0b646eb
+139	2538	7225333241877793	CMakeFiles/fogo-e-agua.dir/Source/Components/DrawComponents/DrawSpriteComponent.cpp.obj	5096a1f1a4995f5
+63	2552	7225333242076171	CMakeFiles/fogo-e-agua.dir/Source/Components/RigidBodyComponent.cpp.obj	47252b66ca3b64bf
+79	2617	7225333242656164	CMakeFiles/fogo-e-agua.dir/Source/Components/DrawComponents/DrawComponent.cpp.obj	c9fde7e4db1f998e
+31	2708	7225333243701526	CMakeFiles/fogo-e-agua.dir/Source/Actors/Actor.cpp.obj	84a2839f8e418366
+462	3318	7225333249213430	CMakeFiles/fogo-e-agua.dir/Source/Actors/Mario.cpp.obj	196746d13bd417ab
+840	3464	7225333251358300	CMakeFiles/fogo-e-agua.dir/Source/Components/DrawComponents/DrawPolygonComponent.cpp.obj	fa7e308e04f5fa77
+1102	3672	7225333253479109	CMakeFiles/fogo-e-agua.dir/Source/Actors/Goomba.cpp.obj	c15def5ddaf72975
+97	3676	7225333253519103	CMakeFiles/fogo-e-agua.dir/Source/Game.cpp.obj	7d32ac92a6b134d7
+1032	3920	7225333255953741	CMakeFiles/fogo-e-agua.dir/Source/Components/ColliderComponents/AABBColliderComponent.cpp.obj	e236fb0738b3f21d
+2539	4475	7225333261546454	CMakeFiles/fogo-e-agua.dir/Source/Actors/Block.cpp.obj	9e1df472fa36cb4e
+2553	4521	7225333262011684	CMakeFiles/fogo-e-agua.dir/Source/Actors/Spawner.cpp.obj	4d730eae3e8f2caa
+2618	4956	7225333266343226	CMakeFiles/fogo-e-agua.dir/Source/Components/DrawComponents/DrawTileComponent.cpp.obj	207e6fd32252110d
+2709	5268	7225333269456975	CMakeFiles/fogo-e-agua.dir/Source/AudioSystem.cpp.obj	ebf94279124a5a27
+2380	7217	7225333288917459	CMakeFiles/fogo-e-agua.dir/Source/Components/DrawComponents/DrawAnimatedComponent.cpp.obj	3a8f2637ba3db4b0
+7217	8293	7225333299687293	fogo-e-agua.exe	be571192338057ab

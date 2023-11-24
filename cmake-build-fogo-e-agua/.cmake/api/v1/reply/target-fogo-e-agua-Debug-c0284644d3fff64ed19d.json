@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "p4-super-mario-bros.exe"
+			"path" : "fogo-e-agua.exe"
 		},
 		{
-			"path" : "p4-super-mario-bros.pdb"
+			"path" : "fogo-e-agua.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++11 -fdiagnostics-color=always"
+					"fragment" : "-g -fdiagnostics-color=always"
 				}
 			],
 			"includes" : 
@@ -80,7 +80,7 @@
 				[
 					1
 				],
-				"standard" : "11"
+				"standard" : "17"
 			},
 			"sourceIndexes" : 
 			[
@@ -106,7 +106,7 @@
 			]
 		}
 	],
-	"id" : "p4-super-mario-bros::@6890427a1f51a3e7e1df",
+	"id" : "fogo-e-agua::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -146,8 +146,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "p4-super-mario-bros",
-	"nameOnDisk" : "p4-super-mario-bros.exe",
+	"name" : "fogo-e-agua",
+	"nameOnDisk" : "fogo-e-agua.exe",
 	"paths" : 
 	{
 		"build" : ".",

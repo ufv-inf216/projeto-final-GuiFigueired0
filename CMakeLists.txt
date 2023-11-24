@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 # Configurando o padrão c++
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # INIT NO SCREEN BUGFIX
 # Em alguns casos, o programa pode não renderizar a tela. Por isso temos
@@ -11,7 +11,7 @@ set(CMAKE_SKIP_RPATH ON CACHE BOOL "Skip RPATH" FORCE)
 ####### DO NOT EDIT ABOVE
 
 # Configurando o nome e executável do projeto
-set(PROJECT_NAME "p4-super-mario-bros")
+set(PROJECT_NAME "fogo-e-agua")
 project(${PROJECT_NAME})
 add_executable(${PROJECT_NAME}
         Source/Main.cpp
