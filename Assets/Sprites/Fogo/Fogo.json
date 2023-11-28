@@ -7,14 +7,30 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":42},
 	"sourceSize": {"w":24,"h":42}
+},
+{
+	"filename": "pixil-frame-2.png",
+	"frame": {"x":24,"y":0,"w":24,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":42},
+	"sourceSize": {"w":24,"h":42}
+},
+{
+	"filename": "pixil-frame-3.png",
+	"frame": {"x":48,"y":0,"w":24,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":42},
+	"sourceSize": {"w":24,"h":42}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "Fogo.png",
 	"format": "RGBA8888",
-	"size": {"w":24,"h":42},
+	"size": {"w":72,"h":42},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:de512064bb280179a074cf869233fa57:be697dca93c1c791dab2f630637ff0d6:a0c5a433b31199c94e0b1f53ba25fd52$"
+	"smartupdate": "$TexturePacker:SmartUpdate:fa74ca6a379eca124f8ae08fbb54564d:b44df6ed99fb1914a709fa2d188a225c:a0c5a433b31199c94e0b1f53ba25fd52$"
 }
 }
