@@ -159,10 +159,9 @@ void Game::UpdateGame()
     mTicksCount = SDL_GetTicks();
 
     // Box2D
-    b2Vec2 position = mPlayerBody->GetPosition();
     GetWorld()->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-    Vector2 pos(position.x*32 - 16, position.y*32 - 16);
-    mMario->SetPosition(pos);
+    b2Vec2 position = mPlayerBody->GetPosition();
+    mMario->SetPosition(tf.posWorldToMap(position));
     printf("%4.2f %4.2f \n", position.x, position.y);
 
     // Update all actors and pending actors
@@ -328,6 +327,7 @@ void Game::LoadData(const std::string& fileName)
 
             float x = std::stof(tiles[1]);
             float y = std::stof(tiles[2]);
+            Vector2 pos(x, y);
             float width = std::stof(tiles[3]);
             float height = std::stof(tiles[4]);
 
@@ -339,26 +339,22 @@ void Game::LoadData(const std::string& fileName)
             else if(tiles[0] == "Box")
             {
                 b2BodyDef groundBodyDef;
-                float new_x = x + 1.0*width/2.0f;
-                float new_y = y + 1.0*height/2.0f;
-                groundBodyDef.position.Set(new_x, new_y);
+                groundBodyDef.position = tf.posMapToWorld(pos);
                 b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
                 b2PolygonShape groundBox;
-                groundBox.SetAsBox(width/2.0f, height/2.0f);
+                groundBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
                 groundBody->CreateFixture(&groundBox, 0.0f);
             }
             else if(tiles[0] == "Player")
             {
-                float new_x = x + 1.0*width/2.0f;
-                float new_y = y + 1.0*height/2.0f;
-
                 b2BodyDef bodyDef;
                 bodyDef.type = b2_dynamicBody;
-                bodyDef.position.Set(new_x, new_y);
+                b2Vec2 world_pos = tf.posMapToWorld(pos);
+                bodyDef.position = world_pos;
                 b2Body* body = GetWorld()->CreateBody(&bodyDef);
 
                 b2PolygonShape dynamicBox;
-                dynamicBox.SetAsBox(width/2.0f, height/2.0f);
+                dynamicBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
 
                 b2FixtureDef fixtureDef;
                 fixtureDef.shape = &dynamicBox;
@@ -368,7 +364,7 @@ void Game::LoadData(const std::string& fileName)
                 body->CreateFixture(&fixtureDef);
 
                 mMario = new Mario(this);
-                mMario->SetPosition(Vector2(x*32, y*32));
+                mMario->SetPosition(tf.posWorldToMap(world_pos));
                 mPlayerBody = body;
             }
         }

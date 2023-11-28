@@ -13,6 +13,7 @@
 #include "Math.h"
 #include "CSV.h"
 #include <Box2D/Box2D.h>
+#include "Transform.h"
 
 class Game
 {
@@ -98,6 +99,7 @@ private:
     class Mario *mMario;
 
     // Box2d
+    Transform tf;
     b2World *mWorld;
     b2Body *mPlayerBody;
 };

@@ -51,6 +51,8 @@ add_executable(${PROJECT_NAME}
         Source/Components/DrawComponents/DrawTileComponent.cpp
         Source/AudioSystem.cpp
         Source/AudioSystem.h
+        Source/Transform.cpp
+        Source/Transform.h
 )
 
 ####### DO NOT EDIT BELLOW
