@@ -51,6 +51,8 @@ add_executable(${PROJECT_NAME}
         Source/Components/DrawComponents/DrawTileComponent.cpp
         Source/AudioSystem.cpp
         Source/AudioSystem.h
+        Source/Actors/Fogo.cpp
+        Source/Actors/Fogo.h
 )
 
 ####### DO NOT EDIT BELLOW
