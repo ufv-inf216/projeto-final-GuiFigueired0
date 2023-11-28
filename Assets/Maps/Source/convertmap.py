@@ -10,10 +10,10 @@ with open(fileInputName, 'r') as file:
 			outFile = open(fileOutputName, 'w')
 			for object in layer["objects"]:
 				line = object["type"] + ','
-				line += str(object["x"]/32.0) + ','
-				line += str(object["y"]/32.0) + ','
-				line += str(object["width"]/32.0) + ','
-				line += str(object["height"]/32.0) + ','
+				line += str(object["x"]) + ','
+				line += str(object["y"]) + ','
+				line += str(object["width"]) + ','
+				line += str(object["height"]) + ','
 				if object["type"] == 'Polygon':
 					points = object["polygon"]
 					for i in range(len(points)):
