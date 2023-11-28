@@ -17,6 +17,7 @@
 #include "Game.h"
 #include "Actors/Actor.h"
 #include "Actors/Mario.h"
+#include "Actors/Fogo.h"
 #include "Actors/Block.h"
 #include "Actors/Goomba.h"
 #include "Actors/Spawner.h"
@@ -161,7 +162,8 @@ void Game::UpdateGame()
     // Box2D
     GetWorld()->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
     b2Vec2 position = mPlayerBody->GetPosition();
-    mMario->SetPosition(tf.posWorldToMap(position));
+    //mMario->SetPosition(tf.posWorldToMap(position));
+    mFogo->SetPosition(tf.posWorldToMap(position));
     printf("%4.2f %4.2f \n", position.x, position.y);
 
     // Update all actors and pending actors
@@ -173,7 +175,8 @@ void Game::UpdateGame()
 
 void Game::UpdateCamera()
 {
-    float newCameraPos = mMario->GetPosition().x - (float)GetWindowWidth()/2.0f;
+    //float newCameraPos = mMario->GetPosition().x - (float)GetWindowWidth()/2.0f;
+    float newCameraPos = mFogo->GetPosition().x - (float)GetWindowWidth()/2.0f;
     if(newCameraPos > LEVEL_WIDTH*TILE_SIZE) newCameraPos = LEVEL_HEIGHT*TILE_SIZE;
     if(newCameraPos > mCameraPos.x) mCameraPos.x = newCameraPos;
 }
@@ -363,8 +366,10 @@ void Game::LoadData(const std::string& fileName)
 
                 body->CreateFixture(&fixtureDef);
 
-                mMario = new Mario(this);
-                mMario->SetPosition(tf.posWorldToMap(world_pos));
+                //mMario = new Mario(this);
+                mFogo = new Fogo(this);
+                //mMario->SetPosition(tf.posWorldToMap(world_pos));
+                mFogo->SetPosition(tf.posWorldToMap(world_pos));
                 mPlayerBody = body;
             }
         }

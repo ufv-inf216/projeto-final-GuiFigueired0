@@ -97,6 +97,7 @@ private:
 
     // Game-specific
     class Mario *mMario;
+    class Fogo *mFogo;
 
     // Box2d
     Transform tf;
