@@ -30,6 +30,12 @@ const int LEVEL_HEIGHT = 14;
 const int TILE_SIZE = 32;
 const float SPAWN_DISTANCE = 600.0f;
 
+// BOX2D
+float TIME_STEP = 1.0f / 60.0f;
+const int VELOCITY_ITERATIONS = 6;
+const int POSITION_ITERATIONS = 2;
+
+
 Game::Game(int windowWidth, int windowHeight)
         :mWindow(nullptr)
         ,mRenderer(nullptr)
@@ -38,6 +44,7 @@ Game::Game(int windowWidth, int windowHeight)
         ,mUpdatingActors(false)
         ,mWindowWidth(windowWidth)
         ,mWindowHeight(windowHeight)
+        ,mWorld(nullptr)
 {
 
 }
@@ -76,16 +83,17 @@ bool Game::Initialize()
 
 void Game::InitializeActors()
 {
-    mMario = new Mario(this);
-    mMario->SetPosition(Vector2(200, 100));
     //LoadLevel("../Assets/Levels/LevelTeste.txt", LEVEL_WIDTH, LEVEL_HEIGHT);
+
+    b2Vec2 gravity(0.0f, -10.0f);
+    mWorld = new b2World(gravity);
 
     // Tiled
     auto* map = new Actor(this);
     new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
     new DrawTileComponent(map, "../Assets/Maps/Map1_Layer2.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
 
-    //LoadData("../Assets/Maps/ObjectsOneSoldier.csv");
+    LoadData("../Assets/Maps/Map1_Objects.csv");
 }
 
 void Game::LoadLevel(const std::string& levelPath, const int width, const int height)
@@ -149,6 +157,13 @@ void Game::UpdateGame()
     }
 
     mTicksCount = SDL_GetTicks();
+
+    // Box2D
+    b2Vec2 position = mPlayerBody->GetPosition();
+    GetWorld()->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+    Vector2 pos(position.x*32 - 16, position.y*32 - 16);
+    mMario->SetPosition(pos);
+    printf("%4.2f %4.2f \n", position.x, position.y);
 
     // Update all actors and pending actors
     UpdateActors(deltaTime);
@@ -311,20 +326,50 @@ void Game::LoadData(const std::string& fileName)
                 continue;
             }
 
-            int x = std::stoi(tiles[1]);
-            int y = std::stoi(tiles[2]);
-            int width = std::stoi(tiles[3]);
-            int height = std::stoi(tiles[4]);
+            float x = std::stof(tiles[1]);
+            float y = std::stof(tiles[2]);
+            float width = std::stof(tiles[3]);
+            float height = std::stof(tiles[4]);
 
-            if(tiles[0] == "")
+            if(tiles[0].empty())
             {
                 //mPlayer = new Player(this);
                 //mPlayer->SetPosition(Vector2(x + width/2.0f, y + height/2.0));
             }
-            else if(tiles[0] == "Collider")
+            else if(tiles[0] == "Box")
             {
-                //auto *wall = new Wall(this, width, height);
-                //wall->SetPosition(Vector2(x + width/2.0f, y + height/2.0));
+                b2BodyDef groundBodyDef;
+                float new_x = x + 1.0*width/2.0f;
+                float new_y = y + 1.0*height/2.0f;
+                groundBodyDef.position.Set(new_x, new_y);
+                b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
+                b2PolygonShape groundBox;
+                groundBox.SetAsBox(width/2.0f, height/2.0f);
+                groundBody->CreateFixture(&groundBox, 0.0f);
+            }
+            else if(tiles[0] == "Player")
+            {
+                float new_x = x + 1.0*width/2.0f;
+                float new_y = y + 1.0*height/2.0f;
+
+                b2BodyDef bodyDef;
+                bodyDef.type = b2_dynamicBody;
+                bodyDef.position.Set(new_x, new_y);
+                b2Body* body = GetWorld()->CreateBody(&bodyDef);
+
+                b2PolygonShape dynamicBox;
+                dynamicBox.SetAsBox(width/2.0f, height/2.0f);
+
+                b2FixtureDef fixtureDef;
+                fixtureDef.shape = &dynamicBox;
+                fixtureDef.density = 1.0f;
+                fixtureDef.friction = 0.3f;
+
+                body->CreateFixture(&fixtureDef);
+
+                mMario = new Mario(this);
+                mMario->SetPosition(Vector2(x*32, y*32));
+                mPlayerBody = body;
             }
         }
     }

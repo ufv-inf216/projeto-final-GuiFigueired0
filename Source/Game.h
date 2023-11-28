@@ -49,7 +49,11 @@ public:
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
     // Game-specific
-    const class Mario* GetMario() { return mMario; }
+    class Mario* GetMario() { return mMario; }
+
+    // Box2d
+    class b2World* GetWorld() { return mWorld; }
+
 
 private:
     void ProcessInput();
@@ -92,4 +96,8 @@ private:
 
     // Game-specific
     class Mario *mMario;
+
+    // Box2d
+    b2World *mWorld;
+    b2Body *mPlayerBody;
 };
