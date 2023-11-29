@@ -1,13 +1,13 @@
-#include "Fogo.h"
+#include "Agua.h"
 #include "../Game.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/DrawComponents/DrawAnimatedComponent.h"
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
-Fogo::Fogo(Game* game,
-             const float forwardSpeed,
-             const float jumpSpeed)
+Agua::Agua(Game* game,
+           const float forwardSpeed,
+           const float jumpSpeed)
         : Actor(game)
         , mIsRunning(false)
         , mIsDead(false)
@@ -26,13 +26,13 @@ Fogo::Fogo(Game* game,
     */
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Fogo/CharAssets.png", "../Assets/Sprites/Fogo/CharAssets.json");
 
-    mDrawComponent->AddAnimation("Fogo", std::vector<int>{56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74});
+    mDrawComponent->AddAnimation("Agua", std::vector<int>{145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174});
 
-    mDrawComponent->SetAnimation("Fogo");
+    mDrawComponent->SetAnimation("Agua");
     mDrawComponent->SetAnimFPS(10.0f);
 }
 
-void Fogo::OnProcessInput(const uint8_t* state)
+void Agua::OnProcessInput(const uint8_t* state)
 {
     if(state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT]){
         mRigidBodyComponent->ApplyForce(Vector2(mForwardSpeed, 0));
@@ -50,7 +50,7 @@ void Fogo::OnProcessInput(const uint8_t* state)
     }
 }
 
-void Fogo::OnUpdate(float deltaTime)
+void Agua::OnUpdate(float deltaTime)
 {
     if(mPosition.x < GetGame()->GetCameraPos().x)
         mPosition.x = GetGame()->GetCameraPos().x;
@@ -61,16 +61,16 @@ void Fogo::OnUpdate(float deltaTime)
     ManageAnimations();
 }
 
-void Fogo::ManageAnimations()
+void Agua::ManageAnimations()
 {
 
 }
 
-void Fogo::Kill()
+void Agua::Kill()
 {
 }
 
-void Fogo::OnCollision(std::unordered_map<CollisionSide, AABBColliderComponent::Overlap>& responses)
+void Agua::OnCollision(std::unordered_map<CollisionSide, AABBColliderComponent::Overlap>& responses)
 {
     for(auto [side, overlap]: responses){
         if(overlap.target->GetLayer() == ColliderLayer::Blocks && side == CollisionSide::Down){

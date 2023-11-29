@@ -4,7 +4,7 @@
 
 #include "Spawner.h"
 #include "../Game.h"
-#include "Mario.h"
+#include "Fogo.h"
 #include "Goomba.h"
 
 const float GOOMBA_FORWARD_SPEED = 100.0f;
@@ -18,7 +18,7 @@ Spawner::Spawner(Game* game, float spawnDistance)
 
 void Spawner::OnUpdate(float deltaTime)
 {
-    auto distance = GetGame()->GetMario()->GetPosition() - GetPosition();
+    auto distance = GetGame()->GetFogo()->GetPosition() - GetPosition();
     if(distance.Length() < mSpawnDistance){
         auto goomba = new Goomba(GetGame(), GOOMBA_FORWARD_SPEED, 100.0f);
         goomba->SetPosition(GetPosition());

@@ -36,6 +36,10 @@ add_executable(${PROJECT_NAME}
         Source/Components/DrawComponents/DrawPolygonComponent.h
         Source/Actors/Mario.cpp
         Source/Actors/Mario.h
+        Source/Actors/Fogo.cpp
+        Source/Actors/Fogo.h
+        Source/Actors/Agua.cpp
+        Source/Actors/Agua.h
         Source/Components/ColliderComponents/AABBColliderComponent.cpp
         Source/Components/ColliderComponents/AABBColliderComponent.h
         Source/Components/DrawComponents/DrawAnimatedComponent.cpp
@@ -53,8 +57,6 @@ add_executable(${PROJECT_NAME}
         Source/AudioSystem.h
         Source/Transform.cpp
         Source/Transform.h
-        Source/Actors/Fogo.cpp
-        Source/Actors/Fogo.h
 )
 
 ####### DO NOT EDIT BELLOW

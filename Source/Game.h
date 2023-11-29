@@ -50,7 +50,8 @@ public:
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
     // Game-specific
-    class Mario* GetMario() { return mMario; }
+    class Fogo* GetFogo() { return mFogo; }
+    class Agua* GetAgua() { return mAgua; }
 
     // Box2d
     class b2World* GetWorld() { return mWorld; }
@@ -96,8 +97,8 @@ private:
     Vector2 mCameraPos;
 
     // Game-specific
-    class Mario *mMario;
     class Fogo *mFogo;
+    class Agua *mAgua;
 
     // Box2d
     Transform tf;
