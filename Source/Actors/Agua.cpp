@@ -16,14 +16,14 @@ Agua::Agua(Game* game,
 {
     mRigidBodyComponent = new RigidBodyComponent(this, 1.25, 5);
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
-    /*
+
     std::vector<Vector2> vertices;
     vertices.push_back(mColliderComponent->GetMin());
     vertices.push_back(mColliderComponent->GetMin() + Vector2(0, 32));
     vertices.push_back(mColliderComponent->GetMin() + Vector2(32, 0));
     vertices.push_back(mColliderComponent->GetMax());
     new DrawPolygonComponent(this, vertices);
-    */
+
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Fogo/CharAssets.png", "../Assets/Sprites/Fogo/CharAssets.json");
 
     mDrawComponent->AddAnimation("Agua", std::vector<int>{145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174});

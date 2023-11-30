@@ -103,6 +103,6 @@
   <object id="27" type="Polygon" x="192.184" y="159.984" rotation="-90">
    <polygon points="0,0 0,31.75 31.875,31.9375"/>
   </object>
-  <object id="36" name="Water" type="Player" x="179.818" y="37.8954" width="28.5455" height="56"/>
+  <object id="36" name="Water" type="Player" x="719.151" y="201.229" width="32" height="32"/>
  </objectgroup>
 </map>

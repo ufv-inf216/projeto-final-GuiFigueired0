@@ -8,14 +8,14 @@ Transform::Transform()
     : tileSize(32.0), mapWidth(25.0), mapHeight(25.0) {}
 
 b2Vec2 Transform::posMapToWorld(Vector2 pos) const {
-    float x = mapWidth - pos.x/tileSize;
+    float x = pos.x/tileSize;
     float y = mapHeight - pos.y/tileSize;
     return {x, y};
 }
 
 Vector2 Transform::posWorldToMap(b2Vec2 pos) const {
-    float x = -1*(pos.x - mapHeight)*tileSize;
-    float y = -1*(pos.x - mapHeight)*tileSize;
+    float x = (pos.x)*tileSize;
+    float y = -1*(pos.y - mapHeight)*tileSize;
     return Vector2(x, y);
 }
 

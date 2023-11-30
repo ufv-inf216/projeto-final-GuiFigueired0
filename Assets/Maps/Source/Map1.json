@@ -445,15 +445,15 @@
                  "y":159.984
                 }, 
                 {
-                 "height":56,
+                 "height":32,
                  "id":36,
                  "name":"Water",
                  "rotation":0,
                  "type":"Player",
                  "visible":true,
-                 "width":28.5454545454545,
-                 "x":179.818181818182,
-                 "y":37.895359848485
+                 "width":32,
+                 "x":719.151333333333,
+                 "y":201.228733333333
                 }],
          "opacity":1,
          "type":"objectgroup",

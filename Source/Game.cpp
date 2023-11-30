@@ -167,7 +167,7 @@ void Game::UpdateGame()
     GetWorld()->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
     b2Vec2 position = mPlayerBody->GetPosition();
     //mFogo->SetPosition(tf.posWorldToMap(position));
-    mAgua->SetPosition(tf.posWorldToMap(position)-Vector2(15,0));
+    mAgua->SetPosition(tf.posWorldToMap(position));
     printf("%4.2f %4.2f \n", position.x, position.y);
 
     // Update all actors and pending actors
@@ -179,10 +179,6 @@ void Game::UpdateGame()
 
 void Game::UpdateCamera()
 {
-    //float newCameraPos = mFogo->GetPosition().x - (float)GetWindowWidth()/2.0f;
-    float newCameraPos = mAgua->GetPosition().x - (float)GetWindowWidth()/2.0f;
-    if(newCameraPos > LEVEL_WIDTH*TILE_SIZE) newCameraPos = LEVEL_HEIGHT*TILE_SIZE;
-    if(newCameraPos > mCameraPos.x) mCameraPos.x = newCameraPos;
 }
 
 void Game::UpdateActors(float deltaTime)
