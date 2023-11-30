@@ -100,6 +100,9 @@ private:
     class Fogo *mFogo;
     class Agua *mAgua;
 
+    // Audios
+    class AudioSystem *mAudio;
+
     // Box2d
     Transform tf;
     b2World *mWorld;

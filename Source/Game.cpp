@@ -15,6 +15,7 @@
 #include "SDL_image.h"
 #include "Random.h"
 #include "Game.h"
+#include "AudioSystem.h"
 #include "Actors/Actor.h"
 #include "Actors/Fogo.h"
 #include "Actors/Agua.h"
@@ -71,6 +72,9 @@ bool Game::Initialize()
         SDL_Log("Failed to create renderer: %s", SDL_GetError());
         return false;
     }
+
+    mAudio = new AudioSystem(8);
+    mAudio->PlaySound("Level Music.mp3",true);
 
     Random::Init();
 
