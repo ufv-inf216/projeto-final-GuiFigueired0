@@ -1,12 +1,13 @@
 #pragma once
 #include "Actor.h"
+#include <Box2D/Box2D.h>
 
 class Agua : public Actor
 {
 public:
-    explicit Agua(Game* game,
-                  float forwardSpeed = 3000.0f,
-                  float jumpSpeed = -3500.0f);
+    explicit Agua(Game* game, b2Body*,
+                  float forwardSpeed = 1.0f,
+                  float jumpSpeed = 1.5f);
 
     void OnProcessInput(const Uint8* keyState) override;
     void OnUpdate(float deltaTime) override;
@@ -25,4 +26,5 @@ private:
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;
     class AABBColliderComponent* mColliderComponent;
+    b2Body *mPlayerBody;
 };

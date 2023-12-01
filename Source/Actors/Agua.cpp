@@ -5,7 +5,7 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
-Agua::Agua(Game* game,
+Agua::Agua(Game* game, b2Body* body,
            const float forwardSpeed,
            const float jumpSpeed)
         : Actor(game)
@@ -13,8 +13,8 @@ Agua::Agua(Game* game,
         , mIsDead(false)
         , mForwardSpeed(forwardSpeed)
         , mJumpSpeed(jumpSpeed)
+        , mPlayerBody(body)
 {
-    mRigidBodyComponent = new RigidBodyComponent(this, 1.25, 5);
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
 
     std::vector<Vector2> vertices;
@@ -35,17 +35,18 @@ Agua::Agua(Game* game,
 void Agua::OnProcessInput(const uint8_t* state)
 {
     if(state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT]){
-        mRigidBodyComponent->ApplyForce(Vector2(mForwardSpeed, 0));
+        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2(mForwardSpeed, 0),true);
         mRotation = 0;
         mIsRunning = true;
     } else if(state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT]){
-        mRigidBodyComponent->ApplyForce(Vector2((-1)*mForwardSpeed, 0));
+        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2((-1)*mForwardSpeed, 0),true);
         mRotation = Math::Pi;
         mIsRunning = true;
     } else mIsRunning = false;
+    // && mIsOnGround
+    if(state[SDL_SCANCODE_SPACE] ) {
+        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2(0, mJumpSpeed),true);
 
-    if(state[SDL_SCANCODE_SPACE] && mIsOnGround) {
-        mRigidBodyComponent->SetVelocity(Vector2(mRigidBodyComponent->GetVelocity().x, mJumpSpeed));
         mIsOnGround = false;
     }
 }

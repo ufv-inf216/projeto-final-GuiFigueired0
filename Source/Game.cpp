@@ -26,6 +26,7 @@
 #include "Components/ColliderComponents/AABBColliderComponent.h"
 #include "Components/DrawComponents/DrawTileComponent.h"
 #include <Box2D/Box2D.h>
+#include "Components/DrawComponents/DrawPolygonComponent.h"
 
 const int LEVEL_WIDTH = 213;
 const int LEVEL_HEIGHT = 14;
@@ -34,8 +35,8 @@ const float SPAWN_DISTANCE = 600.0f;
 
 // BOX2D
 float TIME_STEP = 1.0f / 60.0f;
-const int VELOCITY_ITERATIONS = 6;
-const int POSITION_ITERATIONS = 2;
+const int VELOCITY_ITERATIONS = 8;
+const int POSITION_ITERATIONS = 3;
 
 
 Game::Game(int windowWidth, int windowHeight)
@@ -48,7 +49,7 @@ Game::Game(int windowWidth, int windowHeight)
         ,mWindowHeight(windowHeight)
         ,mWorld(nullptr)
 {
-
+    mWorldColliders.clear();
 }
 
 bool Game::Initialize()
@@ -95,10 +96,14 @@ void Game::InitializeActors()
 
     // Tiled
     auto* map = new Actor(this);
+    ///*
     new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
     new DrawTileComponent(map, "../Assets/Maps/Map1_Layer2.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
 
     LoadData("../Assets/Maps/Map1_Objects.csv");
+    //*/
+    //new DrawTileComponent(map, "../Assets/Maps/MapTeste.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
+    //LoadData("../Assets/Maps/MapTeste_Objects.csv");
 }
 
 void Game::LoadLevel(const std::string& levelPath, const int width, const int height)
@@ -164,11 +169,12 @@ void Game::UpdateGame()
     mTicksCount = SDL_GetTicks();
 
     // Box2D
-    GetWorld()->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-    b2Vec2 position = mPlayerBody->GetPosition();
-    //mFogo->SetPosition(tf.posWorldToMap(position));
-    mAgua->SetPosition(tf.posWorldToMap(position));
-    printf("%4.2f %4.2f \n", position.x, position.y);
+    GetWorld()->Step(deltaTime/2.0f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+
+    b2Vec2 pos = mPlayerBody->GetPosition();
+    mAgua->SetPosition(tf.posWorldToMap(pos, b2Vec2(1.0f,1.0f)));
+    //printf("%4.2f %4.2f \n", pos.x, pos.y);
+
 
     // Update all actors and pending actors
     UpdateActors(deltaTime);
@@ -284,6 +290,36 @@ void Game::GenerateOutput()
         }
     }
 
+    SDL_SetRenderDrawColor(mRenderer, 0, 255, 0, 255);
+    for(auto &collider: mWorldColliders){
+        auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
+        b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
+        auto position = tf.posWorldToMap(collider->GetPosition(), worldSize);
+        Vector2 size(worldSize.x*32, worldSize.y*32);
+        std::cout << "Size: " << size.x << ' ' << size.y << '\n';
+        std::cout << "Pos: " << position.x << ' ' << position.y << '\n';
+
+        std::vector<Vector2> vertices;
+        vertices.push_back(position);
+        vertices.push_back(position + Vector2(0, size.y));
+        vertices.push_back(position + Vector2(size.x, 0));
+        vertices.push_back(position+size);
+
+        // Render vertices as lines
+        for(int i = 0; i < vertices.size() - 1; i++) {
+            SDL_RenderDrawLine(mRenderer, (int)vertices[i].x,
+                               (int)vertices[i].y,
+                               (int)vertices[i+1].x,
+                               (int)vertices[i+1].y);
+        }
+
+        // Close geometry
+        SDL_RenderDrawLine(mRenderer, (int)vertices[vertices.size() - 1].x,
+                           (int)vertices[vertices.size() - 1].y,
+                           (int)vertices[0].x,
+                           (int)vertices[0].y);
+    }
+
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);
 }
@@ -333,43 +369,43 @@ void Game::LoadData(const std::string& fileName)
             Vector2 pos(x, y);
             float width = std::stof(tiles[3]);
             float height = std::stof(tiles[4]);
+            Vector2 size(width, height);
 
             if(tiles[0].empty())
             {
                 //mPlayer = new Player(this);
                 //mPlayer->SetPosition(Vector2(x + width/2.0f, y + height/2.0));
             }
-            else if(tiles[0] == "Box")
+            else if(tiles[0] == "Floor" || tiles[0] == "Box")
             {
                 b2BodyDef groundBodyDef;
-                groundBodyDef.position = tf.posMapToWorld(pos);
-                b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
                 b2PolygonShape groundBox;
+                groundBodyDef.position = tf.posMapToWorld(pos, size);
+                b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
                 groundBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
                 groundBody->CreateFixture(&groundBox, 0.0f);
+                mWorldColliders.push_back(groundBody);
             }
             else if(tiles[0] == "Player")
             {
                 b2BodyDef bodyDef;
                 bodyDef.type = b2_dynamicBody;
-                b2Vec2 world_pos = tf.posMapToWorld(pos);
-                bodyDef.position = world_pos;
+                b2Vec2 worldPos = tf.posMapToWorld(pos, size);;
+                bodyDef.position = worldPos;
                 b2Body* body = GetWorld()->CreateBody(&bodyDef);
 
                 b2PolygonShape dynamicBox;
-                dynamicBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
+                b2Vec2 worldSize(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
+                dynamicBox.SetAsBox(worldSize.x, worldSize.y);
 
                 b2FixtureDef fixtureDef;
                 fixtureDef.shape = &dynamicBox;
                 fixtureDef.density = 1.0f;
                 fixtureDef.friction = 0.3f;
-
                 body->CreateFixture(&fixtureDef);
 
-                //mFogo = new Fogo(this);
-                mAgua = new Agua(this);
-                //mFogo->SetPosition(tf.posWorldToMap(world_pos));
-                mAgua->SetPosition(tf.posWorldToMap(world_pos));
+                mAgua = new Agua(this, body);
+                mAgua->SetPosition(tf.posWorldToMap(worldPos, worldSize));
                 mPlayerBody = body;
             }
         }

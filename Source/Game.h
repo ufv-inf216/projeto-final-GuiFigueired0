@@ -107,4 +107,5 @@ private:
     Transform tf;
     b2World *mWorld;
     b2Body *mPlayerBody;
+    std::vector<b2Body*> mWorldColliders;
 };
