@@ -28,3 +28,11 @@ float Transform::sizeMapToWorld(float x) const {
 float Transform::sizeWorldToMap(float x) const {
     return x*tileSize;
 }
+
+b2Vec2 Transform::pointMapToWorld(float x, float y) const {
+    return { x/tileSize, (mapHeight - y)/tileSize };
+}
+
+Vector2 Transform::pointWorldToMap(b2Vec2 v) const {
+    return Vector2(v.x * tileSize, mapHeight - v.y * tileSize);
+}

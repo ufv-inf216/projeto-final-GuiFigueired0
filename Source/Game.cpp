@@ -96,8 +96,8 @@ void Game::InitializeActors()
     // Tiled
     auto* map = new Actor(this);
     ///*
-    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
-    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer2.csv", "../Assets/Maps/myBlocks.png", 576, 576, 32);
+    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 800, 800, 32);
+    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer2.csv", "../Assets/Maps/myBlocks.png", 800, 800, 32);
 
     LoadData("../Assets/Maps/Map1_Objects.csv");
     //*/
@@ -316,6 +316,22 @@ void Game::GenerateOutput()
                            (int)vertices[0].y);
     }
 
+    for(auto &v: mRamps){
+        SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255);
+        for(int i = 0; i < v.size() - 1; i++) {
+            SDL_RenderDrawLine(mRenderer, (int)v[i].x,
+                               (int)v[i].y,
+                               (int)v[i+1].x,
+                               (int)v[i+1].y);
+        }
+
+        // Close geometry
+        SDL_RenderDrawLine(mRenderer, (int)v[v.size() - 1].x,
+                           (int)v[v.size() - 1].y,
+                           (int)v[0].x,
+                           (int)v[0].y);
+    }
+
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);
 }
@@ -355,54 +371,61 @@ void Game::LoadData(const std::string& fileName)
         if(!line.empty())
         {
             auto tiles = CSVHelper::Split(line);
-
-            if(tiles[0] == "Type") {
-                continue;
-            }
-
             float x = std::stof(tiles[1]);
             float y = std::stof(tiles[2]);
             Vector2 pos(x, y);
-            float width = std::stof(tiles[3]);
-            float height = std::stof(tiles[4]);
-            Vector2 size(width, height);
 
-            if(tiles[0].empty())
-            {
-                //mPlayer = new Player(this);
-                //mPlayer->SetPosition(Vector2(x + width/2.0f, y + height/2.0));
-            }
-            else if(tiles[0] == "Floor" || tiles[0] == "Box")
-            {
-                b2BodyDef groundBodyDef;
-                b2PolygonShape groundBox;
-                groundBodyDef.position = tf.posMapToWorld(pos, size);
-                b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
-                groundBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
-                groundBody->CreateFixture(&groundBox, 0.0f);
-                mWorldColliders.push_back(groundBody);
-            }
-            else if(tiles[0] == "Player")
-            {
-                b2BodyDef bodyDef;
-                bodyDef.type = b2_dynamicBody;
-                b2Vec2 worldPos = tf.posMapToWorld(pos, size);;
-                bodyDef.position = worldPos;
-                b2Body* body = GetWorld()->CreateBody(&bodyDef);
+            if(tiles[0] == "Ramp") {
+                // Defina os vértices para um triângulo (em metros)
+                b2Vec2 vertices[3];
+                vertices[0] = tf.pointMapToWorld(std::stof(tiles[3])+x, std::stof(tiles[4])+y);
+                vertices[1] = tf.pointMapToWorld(std::stof(tiles[5])+x, std::stof(tiles[6])+y);
+                vertices[2] = tf.pointMapToWorld(std::stof(tiles[7])+x, std::stof(tiles[8])+y);
 
-                b2PolygonShape dynamicBox;
-                b2Vec2 worldSize(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
-                dynamicBox.SetAsBox(worldSize.x, worldSize.y);
+                b2BodyDef rampBodyDef;
+                b2Body* rampBody = GetWorld()->CreateBody(&rampBodyDef);
+                b2PolygonShape shape;
+                shape.Set(vertices, 3);
+                rampBody->CreateFixture(&shape, 1.0f);
+                std::vector<Vector2> v = { tf.pointWorldToMap(vertices[0]), tf.pointWorldToMap(vertices[1]), tf.pointWorldToMap(vertices[2]) };
+                mRamps.emplace_back(v);
+            } else {
+                float width = std::stof(tiles[3]);
+                float height = std::stof(tiles[4]);
+                Vector2 size(width, height);
 
-                b2FixtureDef fixtureDef;
-                fixtureDef.shape = &dynamicBox;
-                fixtureDef.density = 1.0f;
-                fixtureDef.friction = 0.3f;
-                body->CreateFixture(&fixtureDef);
+                if(tiles[0] == "Floor" || tiles[0] == "Box")
+                {
+                    b2BodyDef groundBodyDef;
+                    b2PolygonShape groundBox;
+                    groundBodyDef.position = tf.posMapToWorld(pos, size);
+                    b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
+                    groundBox.SetAsBox(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
+                    groundBody->CreateFixture(&groundBox, 0.0f);
+                    mWorldColliders.push_back(groundBody);
+                }
+                else if(tiles[0] == "Player")
+                {
+                    b2BodyDef bodyDef;
+                    bodyDef.type = b2_dynamicBody;
+                    b2Vec2 worldPos = tf.posMapToWorld(pos, size);;
+                    bodyDef.position = worldPos;
+                    b2Body* body = GetWorld()->CreateBody(&bodyDef);
 
-                mAgua = new Player(this, body, PlayerType::FireBoyHead, &tf);
-                mAgua->SetPosition(tf.posWorldToMap(worldPos, worldSize));
-                mPlayerBody = body;
+                    b2PolygonShape dynamicBox;
+                    b2Vec2 worldSize(tf.sizeMapToWorld(width), tf.sizeMapToWorld(height));
+                    dynamicBox.SetAsBox(worldSize.x, worldSize.y);
+
+                    b2FixtureDef fixtureDef;
+                    fixtureDef.shape = &dynamicBox;
+                    fixtureDef.density = 1.0f;
+                    fixtureDef.friction = 0.0f;
+                    body->CreateFixture(&fixtureDef);
+
+                    mAgua = new Player(this, body, PlayerType::FireBoyHead, &tf);
+                    mAgua->SetPosition(tf.posWorldToMap(worldPos, worldSize));
+                    mPlayerBody = body;
+                }
             }
         }
     }

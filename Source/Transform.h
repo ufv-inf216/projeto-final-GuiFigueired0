@@ -16,8 +16,12 @@ public:
     b2Vec2 posMapToWorld(Vector2 pos, Vector2 size) const;
     Vector2 posWorldToMap(b2Vec2 pos, b2Vec2 size) const;
 
+    b2Vec2 pointMapToWorld(float x, float y) const;
+    Vector2 pointWorldToMap(b2Vec2 v) const;
+
     float sizeMapToWorld(float x) const;
     float sizeWorldToMap(float x) const;
+
 
 private:
     float tileSize;

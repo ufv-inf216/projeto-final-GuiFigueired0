@@ -16,7 +16,7 @@ struct MapValues {
 
 class WorldBodyComponent {
 public:
-    WorldBodyComponent(b2Body* body, Transform* transform, float runVelocity = 8, float jumpVelocity = 8);
+    WorldBodyComponent(b2Body* body, Transform* transform, float runVelocity = 8, float jumpVelocity = 12);
     ~WorldBodyComponent() = default;
 
     Vector2 GetPosition() { return mMapValues.pos; }

@@ -108,4 +108,5 @@ private:
     b2World *mWorld;
     b2Body *mPlayerBody;
     std::vector<b2Body*> mWorldColliders;
+    std::vector<std::vector<Vector2>> mRamps;
 };
