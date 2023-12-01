@@ -5,6 +5,8 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
+#include <iostream>
+
 Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
            const float forwardSpeed,
            const float jumpSpeed)
@@ -60,19 +62,20 @@ Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
         mDrawComponent->AddAnimation("Default", std::vector<int>{0});
     }
 
+    mIsOnGround = true;
     mDrawComponent->SetAnimation("Idle");
     mDrawComponent->SetAnimFPS(10.0f);
 }
 
 void Player::OnProcessInput(const uint8_t* state)
 {
-    if(state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT])
+    if(state[SDL_SCANCODE_RIGHT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_D] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(true);
         mRotation = 0;
         mIsRunning = true;
     }
-    else if(state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT])
+    else if(state[SDL_SCANCODE_LEFT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_A] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(false);
         mRotation = Math::Pi;
@@ -83,20 +86,23 @@ void Player::OnProcessInput(const uint8_t* state)
         mIsRunning = false;
     }
 
-    if(state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP])
+    if(state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Jump();
+        mIsJumping = true;
         mIsOnGround = false;
     }
 }
 
 void Player::OnUpdate(float deltaTime)
 {
-    if(mPosition.x < GetGame()->GetCameraPos().x)
-        mPosition.x = GetGame()->GetCameraPos().x;
+    if(mWorldBodyComponent->GetVelocity().y < 0) {
+        mIsOnGround = false;
+        mIsJumping = false;
+    }
 
-    if(mPosition.y > (float)GetGame()->GetWindowHeight())
-        Kill();
+    if(!mIsJumping && mWorldBodyComponent->GetVelocity().y == 0)
+        mIsOnGround = true;
 
     ManageAnimations();
 }

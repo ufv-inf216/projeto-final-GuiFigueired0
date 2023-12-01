@@ -20,9 +20,6 @@ void DrawPolygonComponent::Draw(SDL_Renderer *renderer)
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     Vector2 pos = mOwner->GetPosition();
     Vector2 cameraPos = mOwner->GetGame()->GetCameraPos();
-    std::cout << "Agua: " << pos.x << ' ' << pos.y << '\n';
-    std::cout << "Agua: " << mVertices[1].x << ' ' << mVertices[1].y << '\n';
-    std::cout << "Agua: " << cameraPos.x << ' ' << cameraPos.y << '\n';
 
     // Render vertices as lines
     for(int i = 0; i < mVertices.size() - 1; i++) {

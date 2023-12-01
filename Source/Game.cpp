@@ -294,8 +294,6 @@ void Game::GenerateOutput()
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
         auto position = tf.posWorldToMap(collider->GetPosition(), worldSize);
         Vector2 size(worldSize.x*32, worldSize.y*32);
-        std::cout << "Size: " << size.x << ' ' << size.y << '\n';
-        std::cout << "Pos: " << position.x << ' ' << position.y << '\n';
 
         std::vector<Vector2> vertices;
         vertices.push_back(position);
