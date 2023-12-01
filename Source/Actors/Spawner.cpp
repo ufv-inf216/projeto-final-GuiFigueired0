@@ -4,7 +4,7 @@
 
 #include "Spawner.h"
 #include "../Game.h"
-#include "Fogo.h"
+#include "Player.h"
 #include "Goomba.h"
 
 const float GOOMBA_FORWARD_SPEED = 100.0f;

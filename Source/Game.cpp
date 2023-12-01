@@ -17,8 +17,7 @@
 #include "Game.h"
 #include "AudioSystem.h"
 #include "Actors/Actor.h"
-#include "Actors/Fogo.h"
-#include "Actors/Agua.h"
+#include "Actors/Player.h"
 #include "Actors/Block.h"
 #include "Actors/Goomba.h"
 #include "Actors/Spawner.h"
@@ -91,7 +90,7 @@ void Game::InitializeActors()
 {
     //LoadLevel("../Assets/Levels/LevelTeste.txt", LEVEL_WIDTH, LEVEL_HEIGHT);
 
-    b2Vec2 gravity(0.0f, -10.0f);
+    b2Vec2 gravity(0.0f, -40.0f);
     mWorld = new b2World(gravity);
 
     // Tiled
@@ -170,9 +169,8 @@ void Game::UpdateGame()
 
     // Box2D
     GetWorld()->Step(deltaTime/2.0f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-
-    b2Vec2 pos = mPlayerBody->GetPosition();
-    mAgua->SetPosition(tf.posWorldToMap(pos, b2Vec2(1.0f,1.0f)));
+    mAgua->GetBodyComponent()->Update();
+    mAgua->SetPosition(mAgua->GetBodyComponent()->GetPosition());
     //printf("%4.2f %4.2f \n", pos.x, pos.y);
 
 
@@ -404,7 +402,7 @@ void Game::LoadData(const std::string& fileName)
                 fixtureDef.friction = 0.3f;
                 body->CreateFixture(&fixtureDef);
 
-                mAgua = new Agua(this, body);
+                mAgua = new Player(this, body, PlayerType::FireBoyHead, &tf);
                 mAgua->SetPosition(tf.posWorldToMap(worldPos, worldSize));
                 mPlayerBody = body;
             }

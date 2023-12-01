@@ -59,6 +59,8 @@ add_executable(${PROJECT_NAME}
         Source/Transform.h
         Source/Actors/Player.cpp
         Source/Actors/Player.h
+        Source/Components/WorldBodyComponent.cpp
+        Source/Components/WorldBodyComponent.h
 )
 
 ####### DO NOT EDIT BELLOW

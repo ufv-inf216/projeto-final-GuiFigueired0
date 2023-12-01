@@ -50,8 +50,8 @@ public:
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
     // Game-specific
-    class Fogo* GetFogo() { return mFogo; }
-    class Agua* GetAgua() { return mAgua; }
+    class Player* GetFogo() { return mFogo; }
+    class Player* GetAgua() { return mAgua; }
 
     // Box2d
     class b2World* GetWorld() { return mWorld; }
@@ -97,8 +97,8 @@ private:
     Vector2 mCameraPos;
 
     // Game-specific
-    class Fogo *mFogo;
-    class Agua *mAgua;
+    class Player *mFogo;
+    class Player *mAgua;
 
     // Audios
     class AudioSystem *mAudio;

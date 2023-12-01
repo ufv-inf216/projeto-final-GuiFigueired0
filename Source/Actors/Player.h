@@ -1,6 +1,8 @@
 #pragma once
 #include "Actor.h"
 #include <Box2D/Box2D.h>
+#include "../Components/WorldBodyComponent.h"
+#include "../Transform.h"
 
 enum class PlayerType
 {
@@ -13,7 +15,7 @@ enum class PlayerType
 class Player : public Actor
 {
 public:
-    explicit Player(Game* game, b2Body*, PlayerType type,
+    explicit Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
                   float forwardSpeed = 1.0f,
                   float jumpSpeed = 1.5f);
 
@@ -22,6 +24,8 @@ public:
     void OnCollision(std::unordered_map<CollisionSide, AABBColliderComponent::Overlap>& responses) override;
 
     void Kill() override;
+
+    WorldBodyComponent* GetBodyComponent() { return mWorldBodyComponent; }
 
 private:
     void ManageAnimations();
@@ -38,5 +42,6 @@ private:
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;
     class AABBColliderComponent* mColliderComponent;
+    WorldBodyComponent* mWorldBodyComponent;
     b2Body *mPlayerBody;
 };

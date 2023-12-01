@@ -5,7 +5,7 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
-Player::Player(Game* game, b2Body* body, PlayerType type,
+Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
            const float forwardSpeed,
            const float jumpSpeed)
         : Actor(game)
@@ -19,7 +19,7 @@ Player::Player(Game* game, b2Body* body, PlayerType type,
         , mPlayerBody(body)
 {
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
-
+    mWorldBodyComponent = new WorldBodyComponent(body, transform);
     std::vector<Vector2> vertices;
     vertices.push_back(mColliderComponent->GetMin());
     vertices.push_back(mColliderComponent->GetMin() + Vector2(0, 32));
@@ -64,13 +64,13 @@ void Player::OnProcessInput(const uint8_t* state)
 {
     if(state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT])
     {
-        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2(mForwardSpeed, 0),true);
+        mWorldBodyComponent->Run(true);
         mRotation = 0;
         mIsRunning = true;
     }
     else if(state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT])
     {
-        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2((-1)*mForwardSpeed, 0),true);
+        mWorldBodyComponent->Run(false);
         mRotation = Math::Pi;
         mIsRunning = true;
     }
@@ -81,7 +81,7 @@ void Player::OnProcessInput(const uint8_t* state)
 
     if(state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP])
     {
-        mPlayerBody->ApplyLinearImpulseToCenter(b2Vec2(0, mJumpSpeed),true);
+        mWorldBodyComponent->Jump();
         mIsOnGround = false;
     }
 }
