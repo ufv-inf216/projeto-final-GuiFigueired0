@@ -57,6 +57,8 @@ add_executable(${PROJECT_NAME}
         Source/AudioSystem.h
         Source/Transform.cpp
         Source/Transform.h
+        Source/Actors/Player.cpp
+        Source/Actors/Player.h
 )
 
 ####### DO NOT EDIT BELLOW

@@ -26,7 +26,7 @@ Fogo::Fogo(Game* game,
     */
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Fogo/CharAssets.png", "../Assets/Sprites/Fogo/CharAssets.json");
 
-    mDrawComponent->AddAnimation("Fogo", std::vector<int>{56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74});
+    mDrawComponent->AddAnimation("Fogo", std::vector<int>{});
 
     mDrawComponent->SetAnimation("Fogo");
     mDrawComponent->SetAnimFPS(10.0f);
