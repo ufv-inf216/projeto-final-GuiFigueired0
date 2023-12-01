@@ -1,5 +1,5 @@
 default -> 0
-fumaça_morte -> 1 -- 45
+fumaça_morte -> 1 -- 45           OK
 diamond_fb0000 -> 46
 diamond_fbwg0000 -> 47
 diamond_silver0000 -> 48
