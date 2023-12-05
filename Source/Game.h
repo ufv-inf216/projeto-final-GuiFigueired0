@@ -12,8 +12,11 @@
 #include <string>
 #include "Math.h"
 #include "CSV.h"
+#include "Level.h"
 #include <Box2D/Box2D.h>
 #include "Transform.h"
+#include "Actors/Actor.h"
+#include "Actors/Player.h"
 
 class Game
 {
@@ -26,7 +29,6 @@ public:
     void Quit() { mIsRunning = false; }
 
     // Actor functions
-    void InitializeActors();
     void UpdateActors(float deltaTime);
     void AddActor(class Actor* actor);
     void RemoveActor(class Actor* actor);
@@ -40,34 +42,20 @@ public:
     void RemoveCollider(class AABBColliderComponent* collider);
     std::vector<class AABBColliderComponent*>& GetColliders() { return mColliders; }
 
-    Vector2& GetCameraPos() { return mCameraPos; };
-    void SetCameraPos(const Vector2& position) { mCameraPos = position; };
-
     // Window functions
     int GetWindowWidth() const { return mWindowWidth; }
     int GetWindowHeight() const { return mWindowHeight; }
+    Vector2 GetCameraPos() const { return Vector2(0,0); };
 
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
-    // Game-specific
-    class Player* GetFogo() { return mFogo; }
-    class Player* GetAgua() { return mAgua; }
-
-    // Box2d
-    class b2World* GetWorld() { return mWorld; }
-
+    // Level
+    class Level* GetLevel(int id) { return mLevels[id]; }
 
 private:
     void ProcessInput();
     void UpdateGame();
-    void UpdateCamera();
     void GenerateOutput();
-
-    // Game-specific
-    void LoadLevel(const std::string& texturePath, int width, int height);
-
-    // Tiled
-    void LoadData(const std::string& fileName);
 
     // All the actors in the game
     std::vector<class Actor*> mActors;
@@ -94,19 +82,10 @@ private:
     bool mIsRunning;
     bool mUpdatingActors;
 
-    Vector2 mCameraPos;
-
-    // Game-specific
-    class Player *mFogo;
-    class Player *mAgua;
-
     // Audios
     class AudioSystem *mAudio;
 
-    // Box2d
-    Transform tf;
-    b2World *mWorld;
-    b2Body *mPlayerBody;
-    std::vector<b2Body*> mWorldColliders;
-    std::vector<std::vector<Vector2>> mRamps;
+    // Levels
+    std::vector<Level*> mLevels;
+    int mCurrentLevel;
 };

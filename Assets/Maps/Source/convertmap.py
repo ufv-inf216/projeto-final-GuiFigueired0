@@ -19,5 +19,9 @@ with open(fileInputName, 'r') as file:
 				else:
 					line += ',' + str(object["width"])
 					line += ',' + str(object["height"])
-					line += ",,,,"
+					if object["name"] != '':
+						line += ',' + str(object["name"])
+						line += ",,,"
+					else:
+						line += ",,,,"
 				outFile.write(line + '\n')

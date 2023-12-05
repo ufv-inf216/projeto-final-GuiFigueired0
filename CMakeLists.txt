@@ -61,6 +61,8 @@ add_executable(${PROJECT_NAME}
         Source/Actors/Player.h
         Source/Components/WorldBodyComponent.cpp
         Source/Components/WorldBodyComponent.h
+        Source/Level.cpp
+        Source/Level.h
 )
 
 ####### DO NOT EDIT BELLOW

@@ -3,6 +3,7 @@
 //
 
 #include "WorldBodyComponent.h"
+#include <iostream>
 
 WorldBodyComponent::WorldBodyComponent(b2Body* body, Transform* transform, float runVelocity, float jumpVelocity)
     : mBody(body), tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity)
@@ -19,6 +20,7 @@ void WorldBodyComponent::Update(){
     mMapValues.angle = mBody->GetAngle();
     mMapValues.velocity = Vector2(mBody->GetLinearVelocity().x, mBody->GetLinearVelocity().y);
     mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
+    std::cout << "Velocity: " << mBody->GetLinearVelocity().x << ", " << mBody->GetLinearVelocity().y << std::endl;
 }
 
 void WorldBodyComponent::Jump(){
