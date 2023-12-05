@@ -53,10 +53,10 @@ void DrawAnimatedComponent::Draw(SDL_Renderer *renderer)
     Vector2 pos = GetOwner()->GetPosition();
 
     SDL_Rect dstrect{
-            (int)pos.x - (int)GetGame()->GetCameraPos().x-50,
-            (int)pos.y-50,
-            mSpriteSheetData[spriteIdx]->w,
-            mSpriteSheetData[spriteIdx]->h,
+            (int)pos.x-26,
+            (int)pos.y-30,
+            static_cast<int>(mSpriteSheetData[spriteIdx]->w * (1.0/1.5)),
+            static_cast<int>(mSpriteSheetData[spriteIdx]->h * (1.0/1.5)),
     };
     auto rotation = mOwner->GetRotation();
     auto angle = rotation;
