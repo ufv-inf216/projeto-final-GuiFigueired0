@@ -6,7 +6,7 @@
 #include <iostream>
 
 WorldBodyComponent::WorldBodyComponent(b2Body* body, Transform* transform, float runVelocity, float jumpVelocity)
-    : mBody(body), tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity)
+    : mBody(body), tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity), mIsJumping(false)
 {
     Update();
 }

@@ -12,6 +12,10 @@ float TIME_STEP = 1.0f / 60.0f;
 const int VELOCITY_ITERATIONS = 8;
 const int POSITION_ITERATIONS = 3;
 
+short BodyTypes::Player = 1;
+short BodyTypes::Wall = 2;
+short BodyTypes::Floor = 4;
+
 Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
         : mGame(game),
           mLayerFileName(std::move(layerFileName)),
@@ -78,6 +82,16 @@ void Level::LoadData(const std::string& fileName)
                 rampBody->CreateFixture(&shape, 1.0f);
                 std::vector<Vector2> v = { tf->pointWorldToMap(vertices[0]), tf->pointWorldToMap(vertices[1]), tf->pointWorldToMap(vertices[2]) };
                 mRamps.emplace_back(v);
+
+                b2FixtureDef fixtureDef;
+                fixtureDef.shape = &shape;
+                fixtureDef.density = 1.0f;
+                fixtureDef.friction = 0.0f;
+                fixtureDef.restitution = 0.0f;
+                fixtureDef.filter.categoryBits = BodyTypes::Floor;
+                fixtureDef.filter.maskBits = BodyTypes::Player;
+                rampBody->CreateFixture(&fixtureDef);
+
             } else {
                 float width = std::stof(tiles[3]);
                 float height = std::stof(tiles[4]);
@@ -85,32 +99,14 @@ void Level::LoadData(const std::string& fileName)
 
                 if(tiles[0] == "Floor" || tiles[0] == "Box")
                 {
-                    b2BodyDef groundBodyDef;
-                    b2PolygonShape groundBox;
-                    groundBodyDef.position = tf->posMapToWorld(pos, size);
-                    b2Body* groundBody = GetWorld()->CreateBody(&groundBodyDef);
-                    groundBox.SetAsBox(tf->sizeMapToWorld(width), tf->sizeMapToWorld(height));
-                    groundBody->CreateFixture(&groundBox, 0.0f);
-                    mWorldColliders.push_back(groundBody);
+                    auto body = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player);
+                    mWorldColliders.push_back(body);
                 }
                 else if(tiles[0] == "Player")
                 {
-                    b2BodyDef bodyDef;
-                    bodyDef.type = b2_dynamicBody;
-                    b2Vec2 worldPos = tf->posMapToWorld(pos, size);;
-                    bodyDef.position = worldPos;
-                    b2Body* body = GetWorld()->CreateBody(&bodyDef);
-
-                    b2PolygonShape dynamicBox;
-                    b2Vec2 worldSize(tf->sizeMapToWorld(width), tf->sizeMapToWorld(height));
-                    dynamicBox.SetAsBox(worldSize.x, worldSize.y);
-
-                    b2FixtureDef fixtureDef;
-                    fixtureDef.shape = &dynamicBox;
-                    fixtureDef.density = 1.0f;
-                    fixtureDef.friction = 0.0f;
-                    body->CreateFixture(&fixtureDef);
-
+                    auto body = CreateBody(pos, size, true, BodyTypes::Player, BodyTypes::Floor);
+                    b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
+                    b2Vec2 worldPos = tf->posMapToWorld(pos, size);
                     std::string name = tiles[5];
                     if(name == "FireBoy")
                     {
@@ -126,6 +122,30 @@ void Level::LoadData(const std::string& fileName)
             }
         }
     }
+}
+
+class b2Body *Level::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, short type, short collidesWith, bool fixedRotation) {
+    b2BodyDef bodyDef;
+    if(isDynamic)
+        bodyDef.type = b2_dynamicBody;
+    bodyDef.fixedRotation = fixedRotation;
+    b2Vec2 worldPos = tf->posMapToWorld(position, size);
+    bodyDef.position = worldPos;
+    b2Body* body = GetWorld()->CreateBody(&bodyDef);
+
+    b2PolygonShape shape;
+    b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
+    shape.SetAsBox(worldSize.x, worldSize.y);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.0f;
+    fixtureDef.restitution = 0.0f;
+    fixtureDef.filter.categoryBits = type;
+    fixtureDef.filter.maskBits = collidesWith;
+    body->CreateFixture(&fixtureDef);
+    return body;
 }
 
 void Level::DrawColliders(SDL_Renderer *renderer){

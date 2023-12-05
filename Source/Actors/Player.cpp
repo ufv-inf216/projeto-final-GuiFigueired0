@@ -4,6 +4,7 @@
 #include "../Components/DrawComponents/DrawAnimatedComponent.h"
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
+#include "../Math.h"
 
 #include <iostream>
 
