@@ -8,6 +8,8 @@
 #include "../../Json.h"
 #include <fstream>
 
+#include <iostream>
+
 DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, int drawOrder)
         :DrawSpriteComponent(owner, spriteSheetPath, 0, 0, drawOrder)
 {
@@ -51,18 +53,21 @@ void DrawAnimatedComponent::Draw(SDL_Renderer *renderer)
     Vector2 pos = GetOwner()->GetPosition();
 
     SDL_Rect dstrect{
-            (int)pos.x - (int)GetGame()->GetCameraPos().x,
-            (int)pos.y,
+            (int)pos.x - (int)GetGame()->GetCameraPos().x-50,
+            (int)pos.y-50,
             mSpriteSheetData[spriteIdx]->w,
             mSpriteSheetData[spriteIdx]->h,
     };
     auto rotation = mOwner->GetRotation();
+    auto angle = rotation;
+    if(mAnimName == "Running")
+        angle = abs(mOwner->GetAngle());
     SDL_RenderCopyEx(
             renderer,
             mSpriteSheetSurface,
             mSpriteSheetData[spriteIdx],
             &dstrect,
-            rotation,
+            angle,
             nullptr,
             (rotation == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL
     );

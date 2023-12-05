@@ -7,6 +7,7 @@
 #include "../Math.h"
 
 #include <iostream>
+#define EPS 1e-9
 
 Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
            const float forwardSpeed,
@@ -97,13 +98,16 @@ void Player::OnProcessInput(const uint8_t* state)
 
 void Player::OnUpdate(float deltaTime)
 {
-    if(mWorldBodyComponent->GetVelocity().y < 0) {
+    if(!mIsJumping && abs(mWorldBodyComponent->GetVelocity().y) < EPS)
+        mIsOnGround = true;
+    else if(mIsJumping && mWorldBodyComponent->GetVelocity().y < 0) {
         mIsOnGround = false;
         mIsJumping = false;
     }
-
-    if(!mIsJumping && mWorldBodyComponent->GetVelocity().y == 0)
-        mIsOnGround = true;
+    else if(!mIsJumping && mIsOnGround && mIsRunning && mWorldBodyComponent->GetVelocity().y < 0){
+        mIsOnGround = false;
+        mIsJumping = false;
+    }
 
     ManageAnimations();
 }
@@ -148,6 +152,8 @@ void Player::ManageAnimations()
     else
     {
         //AJUSTAR ANGULAÇÃO DA CABEÇA
+        SetAngle(mWorldBodyComponent->GetAngle()*(180.0f / M_PI));
+        std::cout << GetAngle() << '\n';
         mDrawComponent->SetAnimation("Running");
     }
 }

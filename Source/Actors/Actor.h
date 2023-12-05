@@ -45,6 +45,10 @@ public:
     float GetRotation() const { return mRotation; }
     void SetRotation(float rotation) { mRotation = rotation; }
 
+    // Angle getter/setter
+    float GetAngle() const { return mAngle; }
+    void SetAngle(float angle) { mAngle = angle; }
+
     // State getter/setter
     ActorState GetState() const { return mState; }
     void SetState(ActorState state) { mState = state; }
@@ -92,6 +96,7 @@ protected:
     Vector2 mPosition;
     float mScale;
     float mRotation;
+    float mAngle;
 
     // Components
     std::vector<class Component*> mComponents;
