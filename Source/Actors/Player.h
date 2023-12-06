@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include <Box2D/Box2D.h>
+#include <string>
 #include "../Components/WorldBodyComponent.h"
 #include "../Transform.h"
 
@@ -15,7 +16,7 @@ enum class PlayerType
 class Player : public Actor
 {
 public:
-    explicit Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
+    explicit Player(Game* game, const std::string &line, b2World* world, PlayerType type, Transform* transform,
                   float forwardSpeed = 1.0f,
                   float jumpSpeed = 1.5f);
 

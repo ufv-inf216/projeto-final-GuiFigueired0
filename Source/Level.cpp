@@ -23,12 +23,14 @@ Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
           mFireboy(nullptr),
           mWatergirl(nullptr),
           mWorld(nullptr),
-          tf(new Transform())
+          tf(new Transform()),
+          mContactListener(new MyContactListener())
 {}
 
 void Level::InicializeLevel() {
     b2Vec2 gravity(0.0f, -40.0f);
     mWorld = new b2World(gravity);
+    mWorld->SetContactListener(mContactListener);
 
     // Tiled
     auto* map = new Actor(GetGame());
@@ -63,88 +65,23 @@ void Level::LoadData(const std::string& fileName)
         if(!line.empty())
         {
             auto tiles = CSVHelper::Split(line);
-            float x = std::stof(tiles[1]);
-            float y = std::stof(tiles[2]);
-            Vector2 pos(x, y);
-
-            if(tiles[0] == "Ramp") {
-                // Defina os vértices para um triângulo (em metros)
-                b2Vec2 vertices[3];
-                vertices[0] = tf->pointMapToWorld(std::stof(tiles[3])+x, std::stof(tiles[4])+y);
-                vertices[1] = tf->pointMapToWorld(std::stof(tiles[5])+x, std::stof(tiles[6])+y);
-                vertices[2] = tf->pointMapToWorld(std::stof(tiles[7])+x, std::stof(tiles[8])+y);
-
-                b2BodyDef rampBodyDef;
-                b2Body* rampBody = GetWorld()->CreateBody(&rampBodyDef);
-                b2PolygonShape shape;
-                shape.Set(vertices, 3);
-                rampBody->CreateFixture(&shape, 1.0f);
-                std::vector<Vector2> v = { tf->pointWorldToMap(vertices[0]), tf->pointWorldToMap(vertices[1]), tf->pointWorldToMap(vertices[2]) };
-                mRamps.emplace_back(v);
-
-                b2FixtureDef fixtureDef;
-                fixtureDef.shape = &shape;
-                fixtureDef.density = 1.0f;
-                fixtureDef.friction = 0.0f;
-                fixtureDef.restitution = 0.0f;
-                fixtureDef.filter.categoryBits = BodyTypes::Floor;
-                fixtureDef.filter.maskBits = BodyTypes::Player;
-                rampBody->CreateFixture(&fixtureDef);
-
+            if(tiles[0] == "Player"){
+                std::string name = tiles[5];
+                if(name == "FireBoy")
+                {
+                    mFireboy = new Player(GetGame(), line, GetWorld(), PlayerType::FireBoyHead, tf);
+                    mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+                }
+                else if(name == "WaterGirl")
+                {
+                    mWatergirl = new Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
+                    mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
+                }
             } else {
-                float width = std::stof(tiles[3]);
-                float height = std::stof(tiles[4]);
-                Vector2 size(width, height);
-
-                if(tiles[0] == "Floor" || tiles[0] == "Box")
-                {
-                    auto body = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player);
-                    mWorldColliders.push_back(body);
-                }
-                else if(tiles[0] == "Player")
-                {
-                    auto body = CreateBody(pos, size, true, BodyTypes::Player, BodyTypes::Floor);
-                    b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
-                    b2Vec2 worldPos = tf->posMapToWorld(pos, size);
-                    std::string name = tiles[5];
-                    if(name == "FireBoy")
-                    {
-                        mFireboy = new Player(GetGame(), body, PlayerType::FireBoyHead, tf);
-                        mFireboy->SetPosition(tf->posWorldToMap(worldPos, worldSize));
-                    }
-                    else if(name == "WaterGirl")
-                    {
-                        mWatergirl = new Player(GetGame(), body, PlayerType::WaterGirlHead, tf);
-                        mWatergirl->SetPosition(tf->posWorldToMap(worldPos, worldSize));
-                    }
-                }
+                auto body = new WorldBodyComponent(line, GetWorld(), tf);
             }
         }
     }
-}
-
-class b2Body *Level::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, short type, short collidesWith, bool fixedRotation) {
-    b2BodyDef bodyDef;
-    if(isDynamic)
-        bodyDef.type = b2_dynamicBody;
-    bodyDef.fixedRotation = fixedRotation;
-    b2Vec2 worldPos = tf->posMapToWorld(position, size);
-    bodyDef.position = worldPos;
-    b2Body* body = GetWorld()->CreateBody(&bodyDef);
-
-    b2PolygonShape shape;
-    b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
-    shape.SetAsBox(worldSize.x, worldSize.y);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.0f;
-    fixtureDef.restitution = 0.0f;
-    fixtureDef.filter.categoryBits = type;
-    fixtureDef.filter.maskBits = collidesWith;
-    body->CreateFixture(&fixtureDef);
-    return body;
 }
 
 void Level::DrawColliders(SDL_Renderer *renderer){

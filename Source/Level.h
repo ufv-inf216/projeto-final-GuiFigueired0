@@ -14,14 +14,8 @@
 #include "Transform.h"
 #include "Game.h"
 #include "Actors/Player.h"
+#include "MyContactListener.h"
 #include <fstream>
-
-class BodyTypes {
-public:
-    static short Player;
-    static short Wall;
-    static short Floor;
-};
 
 class Level {
 public:
@@ -37,7 +31,6 @@ public:
 
     // Box2d
     class b2World* GetWorld() { return mWorld; }
-    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, short type, short collidesWith, bool fixedRotation = false);
 private:
     class Game *mGame;
     Transform *tf;
@@ -50,6 +43,8 @@ private:
     // Tiled
     std::string mLayerFileName;
     std::string mObjectsFileName;
+
+    class MyContactListener *mContactListener;
 };
 
 

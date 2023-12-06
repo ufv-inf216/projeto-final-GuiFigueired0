@@ -59,6 +59,8 @@ add_executable(${PROJECT_NAME}
         Source/Components/WorldBodyComponent.h
         Source/Level.cpp
         Source/Level.h
+        Source/MyContactListener.cpp
+        Source/MyContactListener.h
 )
 
 ####### DO NOT EDIT BELLOW

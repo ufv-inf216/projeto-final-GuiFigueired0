@@ -9,7 +9,7 @@
 #include <iostream>
 #define EPS 1e-9
 
-Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
+Player::Player(Game* game, const std::string &line, b2World* world, PlayerType type, Transform* transform,
            const float forwardSpeed,
            const float jumpSpeed)
         : Actor(game)
@@ -20,10 +20,10 @@ Player::Player(Game* game, b2Body* body, PlayerType type, Transform* transform,
         , mIsDead(false)
         , mForwardSpeed(forwardSpeed)
         , mJumpSpeed(jumpSpeed)
-        , mPlayerBody(body)
 {
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
-    mWorldBodyComponent = new WorldBodyComponent(body, transform);
+    mWorldBodyComponent = new WorldBodyComponent(line, world, transform);
+    mPlayerBody = mWorldBodyComponent->GetBody();
     std::vector<Vector2> vertices;
     vertices.push_back(mColliderComponent->GetMin());
     vertices.push_back(mColliderComponent->GetMin() + Vector2(0, 32));
@@ -158,7 +158,7 @@ void Player::ManageAnimations()
     {
         //AJUSTAR ANGULAÇÃO DA CABEÇA
         SetAngle(mWorldBodyComponent->GetAngle()*(180.0f / M_PI));
-        std::cout << GetAngle() << '\n';
+        //std::cout << GetAngle() << '\n';
         mDrawComponent->SetAnimation("Running");
     }
 }
