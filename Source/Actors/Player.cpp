@@ -94,6 +94,11 @@ void Player::OnProcessInput(const uint8_t* state)
         mIsJumping = true;
         mIsOnGround = false;
     }
+
+    if(state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead)
+    {
+        GetGame()->changeShowColliders();
+    }
 }
 
 void Player::OnUpdate(float deltaTime)

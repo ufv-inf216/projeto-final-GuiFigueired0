@@ -51,6 +51,8 @@ public:
 
     // Level
     class Level* GetLevel(int id) { return mLevels[id]; }
+    bool showColliders() const { return mShowColliders; }
+    void changeShowColliders() { mShowColliders = !mShowColliders; }
 
 private:
     void ProcessInput();
@@ -88,4 +90,5 @@ private:
     // Levels
     std::vector<Level*> mLevels;
     int mCurrentLevel;
+    bool mShowColliders;
 };

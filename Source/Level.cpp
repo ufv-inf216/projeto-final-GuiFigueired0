@@ -32,10 +32,9 @@ void Level::InicializeLevel() {
 
     // Tiled
     auto* map = new Actor(GetGame());
-    ///*
-    new DrawTileComponent(map, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/myBlocks.png", 800, 800, 32);
 
-    LoadData("../Assets/Maps/Map1_Objects.csv");
+    new DrawTileComponent(map, "../Assets/Maps/Map2.csv", "../Assets/Maps/finalBlocks.png", 800, 800, 32);
+    LoadData("../Assets/Maps/Map2_Objects.csv");
 }
 
 void Level::UpdateLevel(float deltaTime) {

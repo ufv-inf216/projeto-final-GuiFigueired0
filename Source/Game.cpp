@@ -32,6 +32,7 @@ Game::Game(int windowWidth, int windowHeight)
         ,mWindowWidth(windowWidth)
         ,mWindowHeight(windowHeight)
         ,mCurrentLevel(0)
+        ,mShowColliders(false)
 {
     mLevels.emplace_back(new Level(this, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/Map1_Objects.csv"));
 }
@@ -223,8 +224,8 @@ void Game::GenerateOutput()
             drawable->Draw(mRenderer);
         }
     }
-
-    GetLevel(mCurrentLevel)->DrawColliders(mRenderer);
+    if(showColliders())
+        GetLevel(mCurrentLevel)->DrawColliders(mRenderer);
 
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);
