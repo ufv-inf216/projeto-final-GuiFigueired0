@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "Actors/Actor.h"
 #include "Actors/Player.h"
+#include "Actors/Block.h"
 #include "Components/DrawComponents/DrawTileComponent.h"
 
 // BOX2D
@@ -77,6 +78,11 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl = new class Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
+            } else if(tiles[1] == "Block"){
+                auto block = new WorldBodyComponent(line, GetWorld(), tf);
+                mBodies.push_back(block);
+                auto myBlock = new Block(GetGame(), "", 45);
+                mActors.push_back(myBlock);
             } else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
             }
@@ -88,7 +94,7 @@ void Level::DrawColliders(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     for(int i=0; i<mBodies.size(); i++){
-        if(mBodies[i]->GetClass() != "Box") continue;
+        if(mBodies[i]->GetClass() != "Box" && mBodies[i]->GetClass() != "Block") continue;
         auto collider = mBodies[i]->GetBody();
         auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];

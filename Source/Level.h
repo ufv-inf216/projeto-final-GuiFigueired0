@@ -46,6 +46,7 @@ private:
 
     class MyContactListener *mContactListener;
     std::vector<WorldBodyComponent*> mBodies;
+    std::vector<class Actor*> mActors;
 };
 
 

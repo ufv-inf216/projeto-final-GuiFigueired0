@@ -51,6 +51,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
 
         if(tiles[1] == "Block")
         {
+            mClass = "Block";
             b2BodyDef bodyDef;
             bodyDef.type = b2_dynamicBody;
             bodyDef.position = tf->posMapToWorld(pos, size);
@@ -64,12 +65,14 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
             // Configurando a densidade, fricção e restituição
             b2FixtureDef fixtureDef;
             fixtureDef.shape = &dynamicBox;
-            fixtureDef.density = 5.0f;
+            fixtureDef.density = 10.0f;
             fixtureDef.friction = 0.8f;
-            fixtureDef.restitution = 0.5f;
+            fixtureDef.restitution = 0.0f;
             fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
             dynamicBody->CreateFixture(&fixtureDef);
             mBody = dynamicBody;
+            std::cout << "My Class is " << mClass << "\n";
+            mBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
         } else if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
             mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player, true, 0.0f, 1.0f);

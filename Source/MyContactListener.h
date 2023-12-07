@@ -26,6 +26,7 @@ public:
     void EndContact(b2Contact* contact) override;
 
     bool isPlayerOnGround(WorldBodyComponent* a, WorldBodyComponent* b);
+    bool isPlayerOnBox(WorldBodyComponent* a, WorldBodyComponent* b);
 };
 
 

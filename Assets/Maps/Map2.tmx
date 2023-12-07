@@ -121,7 +121,7 @@
   <object id="57" name="Portal" type="Sensor" x="660" y="136" width="32" height="56"/>
   <object id="58" name="Portal" type="Sensor" x="712" y="136" width="32" height="56"/>
   <object id="56" name="FireBoy" type="Player" x="64" y="725.333" width="32" height="32"/>
-  <object id="59" name="Block" type="Box" x="237.333" y="517" width="40" height="50"/>
+  <object id="59" name="Block" type="Box" x="237.333" y="517" width="45" height="45"/>
   <object id="61" name="Ball" type="Ball" x="238" y="427" width="20" height="20">
    <ellipse/>
   </object>

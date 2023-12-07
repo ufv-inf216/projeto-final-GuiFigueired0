@@ -837,13 +837,13 @@
                  "y":725.333
                 }, 
                 {
-                 "height":50,
+                 "height":45,
                  "id":59,
                  "name":"Block",
                  "rotation":0,
                  "type":"Box",
                  "visible":true,
-                 "width":40,
+                 "width":45,
                  "x":237.333333333333,
                  "y":517
                 }, 
