@@ -17,18 +17,21 @@ struct MapValues {
 };
 
 
-class BodyTypes {
-public:
-    static short Player;
-    static short Wall;
-    static short Floor;
+enum BodyTypes {
+    Player = 1,
+    Wall = 2,
+    Floor = 4,
+    Ceiling = 8,
+    Box = 16,
+    Ball = 32,
+    Sensor = 64
 };
 
 class WorldBodyComponent {
 public:
     WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity = 8, float jumpVelocity = 12);
     ~WorldBodyComponent() = default;
-    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, short type, short collidesWith, bool fixedRotation = false);
+    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation = false);
 
     Vector2 GetPosition() { return mMapValues.pos; }
     Vector2 GetSize() { return mMapValues.size; }
@@ -36,15 +39,22 @@ public:
     float GetAngle() { return mMapValues.angle; }
     class b2World* GetWorld() { return mWorld; }
     class b2Body* GetBody() { return mBody; }
-    const std::string &GetType() const { return mType; }
+    BodyTypes GetType() { return mType; }
     const std::string &GetClass() const { return mClass; }
 
     void Update();
     void Jump();
     void Run(bool toTheRight);
-    bool IsJumping() { return mIsJumping; }
+    bool IsOnGround() { return mIsOnGround; }
+    void SetIsOnGround(bool isOnGround) {
+        if(isOnGround)
+            std::cout << "I'm on ground\n";
+        else
+            std::cout << "I'm not on ground\n";
+        mIsOnGround = isOnGround;
+    }
 
-    void hit() { std::cout << "I've been hit" << std::endl; }
+    void hit() { std::cout << "I've been hit\nMytype: " << (int)GetType() << std::endl; }
 
 private:
     b2Body* mBody;
@@ -53,8 +63,8 @@ private:
     MapValues mMapValues;
     float mJumpVelocity;
     float mRunVelocity;
-    bool mIsJumping;
-    std::string mType;
+    bool mIsOnGround;
+    BodyTypes mType;
     std::string mClass;
 };
 

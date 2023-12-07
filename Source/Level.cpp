@@ -12,10 +12,6 @@ float TIME_STEP = 1.0f / 60.0f;
 const int VELOCITY_ITERATIONS = 8;
 const int POSITION_ITERATIONS = 3;
 
-short BodyTypes::Player = 1;
-short BodyTypes::Wall = 2;
-short BodyTypes::Floor = 4;
-
 Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
         : mGame(game),
           mLayerFileName(std::move(layerFileName)),
@@ -66,19 +62,19 @@ void Level::LoadData(const std::string& fileName)
         {
             auto tiles = CSVHelper::Split(line);
             if(tiles[0] == "Player"){
-                std::string name = tiles[5];
+                std::string name = tiles[1];
                 if(name == "FireBoy")
                 {
-                    mFireboy = new Player(GetGame(), line, GetWorld(), PlayerType::FireBoyHead, tf);
+                    mFireboy = new class Player(GetGame(), line, GetWorld(), PlayerType::FireBoyHead, tf);
                     mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
                 }
                 else if(name == "WaterGirl")
                 {
-                    mWatergirl = new Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
+                    mWatergirl = new class Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
             } else {
-                auto body = new WorldBodyComponent(line, GetWorld(), tf);
+                mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
             }
         }
     }

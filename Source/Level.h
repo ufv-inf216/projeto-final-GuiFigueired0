@@ -45,6 +45,7 @@ private:
     std::string mObjectsFileName;
 
     class MyContactListener *mContactListener;
+    std::vector<WorldBodyComponent*> mBodies;
 };
 
 
