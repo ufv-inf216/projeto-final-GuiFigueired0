@@ -5,8 +5,8 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 #include "../Math.h"
+#include "../AudioSystem.h"
 
-#include <iostream>
 #define EPS 1e-9
 
 Player::Player(Game* game, const std::string &line, b2World* world, PlayerType type, Transform* transform,
@@ -14,8 +14,6 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
            const float jumpSpeed)
         : Actor(game)
         , mType(type)
-        , mIsRunning(false)
-        , mIsJumping(false)
         , mWinner(false)
         , mIsDead(false)
         , mForwardSpeed(forwardSpeed)
@@ -64,7 +62,6 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
         mDrawComponent->AddAnimation("Default", std::vector<int>{0});
     }
 
-    mIsOnGround = true;
     mDrawComponent->SetAnimation("Idle");
     mDrawComponent->SetAnimFPS(10.0f);
 }
@@ -74,9 +71,11 @@ void Player::OnProcessInput(const uint8_t* state)
     if(state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         if(GetBodyComponent()->IsOnGround()){
+            if(mType == PlayerType::FireBoyHead)
+                GetGame()->GetSound()->PlaySound("Jump fb.mp3");
+            if(mType == PlayerType::WaterGirlHead)
+                GetGame()->GetSound()->PlaySound("Jump wg.mp3");
             mWorldBodyComponent->Jump();
-            mIsJumping = true;
-            mIsOnGround = false;
         }
     }
 
@@ -84,17 +83,11 @@ void Player::OnProcessInput(const uint8_t* state)
     {
         mWorldBodyComponent->Run(true);
         mRotation = 0;
-        mIsRunning = true;
     }
     else if(state[SDL_SCANCODE_LEFT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_A] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(false);
         mRotation = Math::Pi;
-        mIsRunning = true;
-    }
-    else
-    {
-        mIsRunning = false;
     }
 
     if(state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead)
@@ -105,17 +98,6 @@ void Player::OnProcessInput(const uint8_t* state)
 
 void Player::OnUpdate(float deltaTime)
 {
-    if(!mIsJumping && abs(mWorldBodyComponent->GetVelocity().y) < EPS)
-        mIsOnGround = true;
-    else if(mIsJumping && mWorldBodyComponent->GetVelocity().y < 0) {
-        mIsOnGround = false;
-        mIsJumping = false;
-    }
-    else if(!mIsJumping && mIsOnGround && mIsRunning && mWorldBodyComponent->GetVelocity().y < 0){
-        mIsOnGround = false;
-        mIsJumping = false;
-    }
-
     ManageAnimations();
 }
 
@@ -135,23 +117,23 @@ void Player::ManageAnimations()
         else
             mDrawComponent->SetAnimation("Default");
     }
-    else if(!mIsRunning)
+    else if(mWorldBodyComponent->GetVelocity().x == 0)
     {
-        if(mIsOnGround)
+        if(GetBodyComponent()->IsOnGround())
         {
             mDrawComponent->SetAnimation("Idle");
         }
-        else if(mIsJumping)
-        {
-            if (mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
-                mDrawComponent->SetAnimation("Jumping");
-            else
-                mDrawComponent->SetAnimation("Idle");
-        }
-        else if(!mIsJumping)
+        else if(mWorldBodyComponent->GetVelocity().y < 0)
         {
             if(mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
                 mDrawComponent->SetAnimation("Falling");
+            else
+                mDrawComponent->SetAnimation("Idle");
+        }
+        else
+        {
+            if (mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
+                mDrawComponent->SetAnimation("Jumping");
             else
                 mDrawComponent->SetAnimation("Idle");
         }
@@ -173,12 +155,11 @@ void Player::OnCollision(std::unordered_map<CollisionSide, AABBColliderComponent
 {
     for(auto [side, overlap]: responses){
         if(overlap.target->GetLayer() == ColliderLayer::Blocks && side == CollisionSide::Down){
-            mIsOnGround = true;
         } else if(overlap.target->GetLayer() == ColliderLayer::Enemy && side == CollisionSide::Down){
             overlap.target->GetOwner()->Kill();
             mRigidBodyComponent->SetVelocity(Vector2(mRigidBodyComponent->GetVelocity().x, mJumpSpeed/1.5f));
         } else if(overlap.target->GetLayer() == ColliderLayer::Enemy && (side == CollisionSide::Right || side == CollisionSide::Left)){
-            if(mIsOnGround) {
+            if(GetBodyComponent()->IsOnGround()) {
                 Kill();
             } else {
                 overlap.target->GetOwner()->Kill();
