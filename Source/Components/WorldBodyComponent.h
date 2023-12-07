@@ -46,15 +46,7 @@ public:
     void Jump();
     void Run(bool toTheRight);
     bool IsOnGround() { return mIsOnGround; }
-    void SetIsOnGround(bool isOnGround) {
-        if(isOnGround)
-            std::cout << "I'm on ground\n";
-        else
-            std::cout << "I'm not on ground\n";
-        mIsOnGround = isOnGround;
-    }
-
-    void hit() { std::cout << "I've been hit\nMytype: " << (int)GetType() << std::endl; }
+    void SetIsOnGround(bool isOnGround) { mIsOnGround = isOnGround; }
 
 private:
     b2Body* mBody;

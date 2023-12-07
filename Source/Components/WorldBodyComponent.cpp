@@ -34,6 +34,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         b2PolygonShape shape;
         shape.Set(vertices, 3);
         mBody->CreateFixture(&shape, 1.0f);
+        mBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 
         auto fixtureDef = new b2FixtureDef();
         fixtureDef->shape = &shape;
@@ -43,7 +44,6 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         fixtureDef->filter.categoryBits = BodyTypes::Floor;
         fixtureDef->filter.maskBits = BodyTypes::Player;
         mBody->CreateFixture(fixtureDef);
-        fixtureDef->userData.pointer = reinterpret_cast<uintptr_t>(this);
     } else {
         float width = std::stof(tiles[4]);
         float height = std::stof(tiles[5]);
@@ -52,7 +52,6 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
             mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player);
-            //mWorldColliders.push_back(body);
         }
         else if(tiles[0] == "Player")
         {
@@ -72,7 +71,6 @@ void WorldBodyComponent::Update(){
     mMapValues.angle = mBody->GetAngle();
     mMapValues.velocity = Vector2(mBody->GetLinearVelocity().x, mBody->GetLinearVelocity().y);
     mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
-    //std::cout << "Velocity: " << mBody->GetLinearVelocity().x << ", " << mBody->GetLinearVelocity().y << std::endl;
 }
 
 class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation) {
@@ -83,6 +81,7 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
     b2Vec2 worldPos = tf->posMapToWorld(position, size);
     bodyDef.position = worldPos;
     b2Body* body = GetWorld()->CreateBody(&bodyDef);
+    body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 
     b2PolygonShape shape;
     b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
@@ -95,7 +94,6 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
     fixtureDef->restitution = 0.0f;
     fixtureDef->filter.categoryBits = type;
     fixtureDef->filter.maskBits = collidesWith;
-    fixtureDef->userData.pointer = (uintptr_t)(this);
     body->CreateFixture(fixtureDef);
     return body;
 }

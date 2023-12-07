@@ -71,6 +71,15 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
 
 void Player::OnProcessInput(const uint8_t* state)
 {
+    if(state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
+    {
+        if(GetBodyComponent()->IsOnGround()){
+            mWorldBodyComponent->Jump();
+            mIsJumping = true;
+            mIsOnGround = false;
+        }
+    }
+
     if(state[SDL_SCANCODE_RIGHT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_D] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(true);
@@ -86,13 +95,6 @@ void Player::OnProcessInput(const uint8_t* state)
     else
     {
         mIsRunning = false;
-    }
-
-    if(state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
-    {
-        mWorldBodyComponent->Jump();
-        mIsJumping = true;
-        mIsOnGround = false;
     }
 
     if(state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead)
