@@ -10,6 +10,7 @@ with open(fileInputName, 'r') as file:
 			outFile = open(fileOutputName, 'w')
 			for object in layer["objects"]:
 				line = object["type"]
+				line += ',' + str(object["name"])
 				line += ',' + str(object["x"])
 				line += ',' + str(object["y"])
 				if object["type"] == 'Ramp':
@@ -20,7 +21,6 @@ with open(fileInputName, 'r') as file:
 					line += ',' + str(object["width"])
 					line += ',' + str(object["height"])
 					if object["name"] != '':
-						line += ',' + str(object["name"])
 						line += ",,,"
 					else:
 						line += ",,,,"

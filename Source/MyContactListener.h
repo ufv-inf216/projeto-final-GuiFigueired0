@@ -22,15 +22,10 @@
 
 class MyContactListener : public b2ContactListener {
 public:
-    void BeginContact(b2Contact* contact) override {
-        auto* bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
-        auto* bodyB = &contact->GetFixtureB()->GetBody()->GetUserData();
-        if(bodyA && bodyB) {
-            auto* actorA = reinterpret_cast<WorldBodyComponent*>(bodyA);
-            auto* actorB = reinterpret_cast<WorldBodyComponent*>(bodyB);
-            actorA->hit();
-        }
-    }
+    void BeginContact(b2Contact* contact) override;
+    void EndContact(b2Contact* contact) override;
+
+    bool isPlayerOnGround(WorldBodyComponent* a, WorldBodyComponent* b);
 };
 
 
