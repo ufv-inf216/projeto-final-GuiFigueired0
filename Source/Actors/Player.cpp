@@ -149,6 +149,7 @@ void Player::ManageAnimations()
 
 void Player::Kill()
 {
+    GetGame()->GetSound()->PlaySound("Death.mp3");
 }
 
 void Player::OnCollision(std::unordered_map<CollisionSide, AABBColliderComponent::Overlap>& responses)
