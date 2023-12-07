@@ -51,6 +51,7 @@ public:
 
     // Level
     class Level* GetLevel(int id) { return mLevels[id]; }
+    class AudioSystem* GetSound() { return mAudio; }
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }
 
