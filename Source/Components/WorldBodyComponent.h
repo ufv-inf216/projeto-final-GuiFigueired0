@@ -25,7 +25,8 @@ class WorldBodyComponent {
 public:
     WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity = 8, float jumpVelocity = 12);
     ~WorldBodyComponent() = default;
-    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation = false, float density = 1.0f);
+    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type,
+            BodyTypes collidesWith, bool fixedRotation = false, float density = 1.0f, float friction = 0.0f);
 
     Vector2 GetPosition();
     Vector2 GetSize();

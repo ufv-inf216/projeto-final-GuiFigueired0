@@ -51,32 +51,28 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
 
         if(tiles[1] == "Block")
         {
-            std::cout << "creating a block\n";
             b2BodyDef bodyDef;
-            bodyDef.type = b2_kinematicBody;
-            bodyDef.fixedRotation = true;
-            b2Vec2 worldPos = tf->posMapToWorld(pos, size);
-            bodyDef.position = worldPos;
-            b2Body* body = GetWorld()->CreateBody(&bodyDef);
-            body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+            bodyDef.type = b2_dynamicBody;
+            bodyDef.position = tf->posMapToWorld(pos, size);
+            b2Body* dynamicBody = GetWorld()->CreateBody(&bodyDef);
 
-            b2PolygonShape shape;
+            // Adicionando uma forma ao corpo (um retângulo)
+            b2PolygonShape dynamicBox;
             b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
-            shape.SetAsBox(worldSize.x, worldSize.y);
+            dynamicBox.SetAsBox(worldSize.x, worldSize.y);
 
-            auto fixtureDef = new b2FixtureDef();
-            fixtureDef->shape = &shape;
-            fixtureDef->density = 1.0f;
-            fixtureDef->friction = 0.0f;
-            fixtureDef->restitution = 0.0f;
-            fixtureDef->filter.categoryBits = BodyTypes::Floor;
-            fixtureDef->filter.maskBits = BodyTypes::Player | BodyTypes::Floor;
-            body->CreateFixture(fixtureDef);
-            mBody = body;
-        }
-        if(tiles[0] == "Floor" || tiles[0] == "Box")
+            // Configurando a densidade, fricção e restituição
+            b2FixtureDef fixtureDef;
+            fixtureDef.shape = &dynamicBox;
+            fixtureDef.density = 5.0f;
+            fixtureDef.friction = 0.8f;
+            fixtureDef.restitution = 0.5f;
+            fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
+            dynamicBody->CreateFixture(&fixtureDef);
+            mBody = dynamicBody;
+        } else if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
-            mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player);
+            mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player, true, 0.0f, 1.0f);
         }
         else if(tiles[0] == "Player")
         {
@@ -86,7 +82,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
     Update();
 }
 
-class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation, float density) {
+class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation, float density, float friction) {
     b2BodyDef bodyDef;
     if(isDynamic)
         bodyDef.type = b2_dynamicBody;
@@ -103,7 +99,7 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
     auto fixtureDef = new b2FixtureDef();
     fixtureDef->shape = &shape;
     fixtureDef->density = density;
-    fixtureDef->friction = 0.0f;
+    fixtureDef->friction = friction;
     fixtureDef->restitution = 0.0f;
     fixtureDef->filter.categoryBits = type;
     fixtureDef->filter.maskBits = collidesWith;
