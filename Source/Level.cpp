@@ -41,6 +41,10 @@ void Level::UpdateLevel(float deltaTime) {
     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
     mFireboy->GetBodyComponent()->Update();
     mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+    for(auto &body: mBodies){
+        body->Update();
+    }
+
 }
 
 void Level::LoadData(const std::string& fileName)

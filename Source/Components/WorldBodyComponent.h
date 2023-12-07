@@ -11,12 +11,6 @@
 #include "../Transform.h"
 #include <iostream>
 
-struct MapValues {
-    Vector2 pos, size, velocity;
-    float angle;
-};
-
-
 enum BodyTypes {
     Player = 1,
     Wall = 2,
@@ -31,12 +25,12 @@ class WorldBodyComponent {
 public:
     WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity = 8, float jumpVelocity = 12);
     ~WorldBodyComponent() = default;
-    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation = false);
+    class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation = false, float density = 1.0f);
 
-    Vector2 GetPosition() { return mMapValues.pos; }
-    Vector2 GetSize() { return mMapValues.size; }
-    Vector2 GetVelocity() { return mMapValues.velocity; }
-    float GetAngle() { return mMapValues.angle; }
+    Vector2 GetPosition();
+    Vector2 GetSize();
+    Vector2 GetVelocity();
+    float GetAngle();
     class b2World* GetWorld() { return mWorld; }
     class b2Body* GetBody() { return mBody; }
     BodyTypes GetType() { return mType; }
@@ -52,7 +46,6 @@ private:
     b2Body* mBody;
     Transform* tf;
     b2World* mWorld;
-    MapValues mMapValues;
     float mJumpVelocity;
     float mRunVelocity;
     bool mIsOnGround;

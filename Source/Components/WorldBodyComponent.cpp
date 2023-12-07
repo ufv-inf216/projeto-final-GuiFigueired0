@@ -51,7 +51,28 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
 
         if(tiles[1] == "Block")
         {
-            mBody = CreateBody(pos, size, true, BodyTypes::Floor, BodyTypes::Player, false, 0.1f);
+            std::cout << "creating a block\n";
+            b2BodyDef bodyDef;
+            bodyDef.type = b2_kinematicBody;
+            bodyDef.fixedRotation = true;
+            b2Vec2 worldPos = tf->posMapToWorld(pos, size);
+            bodyDef.position = worldPos;
+            b2Body* body = GetWorld()->CreateBody(&bodyDef);
+            body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+
+            b2PolygonShape shape;
+            b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
+            shape.SetAsBox(worldSize.x, worldSize.y);
+
+            auto fixtureDef = new b2FixtureDef();
+            fixtureDef->shape = &shape;
+            fixtureDef->density = 1.0f;
+            fixtureDef->friction = 0.0f;
+            fixtureDef->restitution = 0.0f;
+            fixtureDef->filter.categoryBits = BodyTypes::Floor;
+            fixtureDef->filter.maskBits = BodyTypes::Player | BodyTypes::Floor;
+            body->CreateFixture(fixtureDef);
+            mBody = body;
         }
         if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
@@ -63,18 +84,6 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         }
     }
     Update();
-}
-
-void WorldBodyComponent::Update(){
-    if(GetClass()=="Ramp" || GetClass() == "Sensor" || GetClass() == "Ball") return;
-    auto shape = dynamic_cast<b2PolygonShape*>(mBody->GetFixtureList()->GetShape());
-    b2Vec2 worldSize = shape->m_vertices[2] - shape->m_vertices[0];
-
-    mMapValues.size = Vector2(worldSize.x*32, worldSize.y*32);
-    mMapValues.pos = tf->posWorldToMap(mBody->GetPosition(), worldSize);
-    mMapValues.angle = mBody->GetAngle();
-    mMapValues.velocity = Vector2(mBody->GetLinearVelocity().x, mBody->GetLinearVelocity().y);
-    mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
 }
 
 class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation, float density) {
@@ -100,6 +109,33 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
     fixtureDef->filter.maskBits = collidesWith;
     body->CreateFixture(fixtureDef);
     return body;
+}
+
+void WorldBodyComponent::Update(){
+    if(GetClass()=="Ramp" || GetClass() == "Sensor" || GetClass() == "Ball") return;
+    if(GetType() == BodyTypes::Player)
+        mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
+}
+
+Vector2 WorldBodyComponent::GetVelocity() {
+    return Vector2(mBody->GetLinearVelocity().x, mBody->GetLinearVelocity().y);;
+}
+
+Vector2 WorldBodyComponent::GetPosition() {
+    auto shape = dynamic_cast<b2PolygonShape*>(mBody->GetFixtureList()->GetShape());
+    b2Vec2 worldSize = shape->m_vertices[2] - shape->m_vertices[0];
+    return tf->posWorldToMap(mBody->GetPosition(), worldSize);
+}
+
+Vector2 WorldBodyComponent::GetSize() {
+    auto shape = dynamic_cast<b2PolygonShape*>(mBody->GetFixtureList()->GetShape());
+    b2Vec2 worldSize = shape->m_vertices[2] - shape->m_vertices[0];
+    return Vector2(worldSize.x*32, worldSize.y*32);
+
+}
+
+float WorldBodyComponent::GetAngle() {
+    return mBody->GetAngle();
 }
 
 void WorldBodyComponent::Jump(){
