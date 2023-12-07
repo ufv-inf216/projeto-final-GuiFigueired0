@@ -834,18 +834,18 @@
                  "visible":true,
                  "width":32,
                  "x":64,
-                 "y":725.333333333333
+                 "y":725.333
                 }, 
                 {
-                 "height":60,
+                 "height":50,
                  "id":59,
                  "name":"Block",
                  "rotation":0,
                  "type":"Box",
                  "visible":true,
-                 "width":60,
-                 "x":416,
-                 "y":228
+                 "width":40,
+                 "x":33.3333333333333,
+                 "y":524.666666666667
                 }, 
                 {
                  "ellipse":true,

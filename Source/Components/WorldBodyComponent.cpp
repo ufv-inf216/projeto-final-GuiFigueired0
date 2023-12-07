@@ -49,6 +49,10 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         float height = std::stof(tiles[5]);
         Vector2 size(width, height);
 
+        if(tiles[1] == "Block")
+        {
+            mBody = CreateBody(pos, size, true, BodyTypes::Floor, BodyTypes::Player, false, 0.1f);
+        }
         if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
             mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player);
@@ -73,7 +77,7 @@ void WorldBodyComponent::Update(){
     mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
 }
 
-class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation) {
+class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vector2 &size, bool isDynamic, BodyTypes type, BodyTypes collidesWith, bool fixedRotation, float density) {
     b2BodyDef bodyDef;
     if(isDynamic)
         bodyDef.type = b2_dynamicBody;
@@ -89,7 +93,7 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
 
     auto fixtureDef = new b2FixtureDef();
     fixtureDef->shape = &shape;
-    fixtureDef->density = 1.0f;
+    fixtureDef->density = density;
     fixtureDef->friction = 0.0f;
     fixtureDef->restitution = 0.0f;
     fixtureDef->filter.categoryBits = type;

@@ -83,7 +83,9 @@ void Level::LoadData(const std::string& fileName)
 void Level::DrawColliders(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    for(auto &collider: mWorldColliders){
+    for(int i=0; i<mBodies.size(); i++){
+        if(mBodies[i]->GetClass() != "Box") continue;
+        auto collider = mBodies[i]->GetBody();
         auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
         auto position = tf->posWorldToMap(collider->GetPosition(), worldSize);
