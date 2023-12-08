@@ -88,9 +88,10 @@ void Level::LoadData(const std::string& fileName)
             } else if(tiles[1] == "Block"){
                 auto x = std::stoi(tiles[4]);
                 auto y = std::stoi(tiles[5]);
-                auto block = new WorldBodyComponent(line, GetWorld(), tf);
-                mBodies.push_back(block);
+
                 auto myBlock = new Block(GetGame(), "Blocks/Block", x, y);
+                auto block = new WorldBodyComponent(line, GetWorld(), tf, myBlock);
+                mBodies.push_back(block);
                 myBlock->SetPosition(block->GetPosition());
                 myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
@@ -109,7 +110,7 @@ void Level::LoadData(const std::string& fileName)
                     myBlock = new Block(GetGame(), "Characters/DiamondWater", x, y);
                 else
                     myBlock = new Block(GetGame(), "Temple/Door", x, y);
-                myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf));
+                myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf, myBlock));
                 myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
                 mBodies.push_back(myBlock->GetBodyComponent());
             }

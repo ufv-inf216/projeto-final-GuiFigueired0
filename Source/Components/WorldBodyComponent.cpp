@@ -6,8 +6,8 @@
 #include <iostream>
 #include "../CSV.h"
 
-WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity, float jumpVelocity)
-    :   tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity), mIsOnGround(false), mWorld(world), cont_Collision(0)
+WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, Actor* owner, float runVelocity, float jumpVelocity)
+    :   mOwner(owner),  tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity), mIsOnGround(false), mWorld(world), cont_Collision(0)
 {
     auto tiles = CSVHelper::Split(line);
     float x = std::stof(tiles[2]);

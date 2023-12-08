@@ -20,7 +20,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
         , mJumpSpeed(jumpSpeed)
 {
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
-    mWorldBodyComponent = new WorldBodyComponent(line, world, transform);
+    mWorldBodyComponent = new WorldBodyComponent(line, world, transform, this);
     mPlayerBody = mWorldBodyComponent->GetBody();
     std::vector<Vector2> vertices;
     vertices.push_back(mColliderComponent->GetMin());
@@ -136,7 +136,7 @@ void Player::OnUpdate(float deltaTime)
             if((mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" ||
                 mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl")
                 && sensor->GetFunction() == "Diamond")
-                std::cout << "Collided with diamond\n";
+                sensor->GetOwner()->SetState(ActorState::Paused);
         }
 
         contactEdge = contactEdge->next;

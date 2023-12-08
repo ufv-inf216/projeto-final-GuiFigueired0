@@ -10,6 +10,7 @@
 #include <string>
 #include "../Transform.h"
 #include <iostream>
+#include "../Actors/Actor.h"
 
 enum BodyTypes {
     Player = 1,
@@ -23,7 +24,7 @@ enum BodyTypes {
 
 class WorldBodyComponent {
 public:
-    WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity = 8, float jumpVelocity = 12);
+    WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, Actor* owner = nullptr, float runVelocity = 8, float jumpVelocity = 12);
     ~WorldBodyComponent() = default;
     class b2Body* CreateBody(const Vector2& position, const Vector2 &size, bool isDynamic, BodyTypes type,
             BodyTypes collidesWith, bool fixedRotation = false, float density = 1.0f, float friction = 0.0f);
@@ -44,6 +45,9 @@ public:
     void SetIsOnGround(bool isOnGround) { mIsOnGround = isOnGround; }
     int cont_Collision = 0;
 
+    Actor* GetOwner() { return mOwner; }
+    void SetOwner(Actor* owner) { mOwner = owner; }
+
 private:
     b2Body* mBody;
     Transform* tf;
@@ -53,6 +57,7 @@ private:
     bool mIsOnGround;
     BodyTypes mType;
     std::string mClass;
+    Actor* mOwner;
 };
 
 
