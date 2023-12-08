@@ -117,12 +117,12 @@
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
   <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
-  <object id="55" name="WaterGirl" type="Player" x="484" y="550.667" width="32" height="32"/>
-  <object id="57" name="Portal" type="Sensor" x="660" y="136" width="32" height="56"/>
-  <object id="58" name="Portal" type="Sensor" x="712" y="136" width="32" height="56"/>
-  <object id="56" name="FireBoy" type="Player" x="342" y="516.333" width="32" height="32"/>
+  <object id="55" name="WaterGirl" type="Player" x="418.667" y="140" width="32" height="32"/>
+  <object id="57" name="PF" type="Sensor" x="660" y="136" width="32" height="56"/>
+  <object id="58" name="PW" type="Sensor" x="712" y="136" width="32" height="56"/>
+  <object id="56" name="FireBoy" type="Player" x="331.333" y="145" width="32" height="32"/>
   <object id="59" name="Block" type="Box" x="238.333" y="530" width="45" height="45"/>
-  <object id="123" name="Block" type="Box" x="153.833" y="306.083" width="45" height="45"/>
+  <object id="123" name="Block" type="Box" x="140.5" y="301.417" width="45" height="45"/>
   <object id="122" name="Floor" type="Box" x="739.333" y="435.667" width="25.6667" height="38.3333"/>
  </objectgroup>
 </map>

@@ -799,14 +799,14 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":484,
-                 "y":550.666666666667
+                 "x":418.666666666667,
+                 "y":140
                 },
             
                 {
                  "height":56,
                  "id":57,
-                 "name":"Portal",
+                 "name":"PF",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
@@ -817,7 +817,7 @@
                 {
                  "height":56,
                  "id":58,
-                 "name":"Portal",
+                 "name":"PF",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
@@ -833,8 +833,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":342,
-                 "y":516.333
+                 "x":331.333333333333,
+                 "y":144.999666666667
                 }, 
                 {
                  "height":45,
@@ -855,8 +855,8 @@
                  "type":"Box",
                  "visible":true,
                  "width":45,
-                 "x":153.833333333333,
-                 "y":306.083333333333
+                 "x":140.5,
+                 "y":301.416666666666
                 }, 
                 {
                  "height":38.3333333333333,

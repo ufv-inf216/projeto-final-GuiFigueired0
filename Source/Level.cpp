@@ -7,6 +7,8 @@
 #include "Actors/Player.h"
 #include "Actors/Block.h"
 #include "Components/DrawComponents/DrawTileComponent.h"
+#include "Components/WorldBodyComponent.h"
+#include "Components/SensorBodyComponent.h"
 
 // BOX2D
 float TIME_STEP = 1.0f / 60.0f;
@@ -90,7 +92,14 @@ void Level::LoadData(const std::string& fileName)
                 myBlock->SetPosition(block->GetPosition());
                 myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
-            } else {
+            } else if(tiles[0] == "Sensor") {
+                std::string type = tiles[1][0] == 'P' ? "Portal" : "Water";
+                std::cout << tiles[1] << std::endl;
+                std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
+                auto sensor = new SensorBodyComponent("Portal", "WaterGirl", line, GetWorld(), tf);
+                mBodies.push_back(sensor);
+            }
+            else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
             }
         }

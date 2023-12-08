@@ -19,6 +19,16 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 b->SetIsOnGround(true);
                 b->cont_Collision++;
             }
+        } else if (isPlayerOnSensor(a, b)) {
+            std::cout << "Begin Collision with portal\n";
+                SensorBodyComponent* sensor;
+                if(a->GetClass() == "Sensor")
+                    sensor = (SensorBodyComponent*)a;
+                else
+                    sensor = (SensorBodyComponent*)b;
+                std::cout << "Sensor: " << sensor->GetAffectBody() << "\n";
+                std::cout << "Function: " << sensor->GetFunction() << "\n";
+
         }
     }
 }
@@ -40,6 +50,8 @@ void MyContactListener::EndContact(b2Contact *contact) {
                 if(b->cont_Collision == 0)
                     b->SetIsOnGround(false);
             }
+        } else if (isPlayerOnSensor(a, b)) {
+            std::cout << "End Collision with portal\n";
         }
     }
 }
@@ -54,6 +66,13 @@ bool MyContactListener::isPlayerOnGround(WorldBodyComponent *a, WorldBodyCompone
 bool MyContactListener::isPlayerOnBox(WorldBodyComponent *a, WorldBodyComponent *b) {
     if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
         if(a->GetClass() == "Block" || b->GetClass() == "Block")
+            return true;
+    return false;
+}
+
+bool MyContactListener::isPlayerOnSensor(WorldBodyComponent *a, WorldBodyComponent *b) {
+    if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
+        if(a->GetClass() == "Sensor" || b->GetClass() == "Sensor")
             return true;
     return false;
 }
