@@ -11,10 +11,10 @@
 
 #define EPS 1e-9
 
-Block::Block(Game* game, const std::string &texturePath, int size)
+Block::Block(Game* game, const std::string &texturePath, int x, int y)
         :Actor(game)
 {
-    new DrawSpriteComponent(this, "../Assets/Sprites/Blocks/Block"+texturePath+".png", size, size);
+    new DrawSpriteComponent(this, "../Assets/Sprites/"+texturePath+".png", x, y);
 }
 
 void Block::OnUpdate(float deltaTime)

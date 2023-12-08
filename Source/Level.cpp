@@ -40,10 +40,6 @@ void Level::InicializeLevel() {
 
 void Level::UpdateLevel(float deltaTime) {
     GetWorld()->Step(deltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-    mWatergirl->GetBodyComponent()->Update();
-    mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
-    mFireboy->GetBodyComponent()->Update();
-    mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
     for(auto &body: mBodies){
         body->Update();
     }
@@ -53,6 +49,10 @@ void Level::UpdateLevel(float deltaTime) {
         actor->SetPosition(actor->GetBodyComponent()->GetPosition());
     }
 
+    mWatergirl->GetBodyComponent()->Update();
+    mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
+    mFireboy->GetBodyComponent()->Update();
+    mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
 }
 
 void Level::LoadData(const std::string& fileName)
@@ -86,18 +86,24 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
             } else if(tiles[1] == "Block"){
+                auto x = std::stoi(tiles[4]);
+                auto y = std::stoi(tiles[5]);
                 auto block = new WorldBodyComponent(line, GetWorld(), tf);
                 mBodies.push_back(block);
-                auto myBlock = new Block(GetGame(), "", 45);
+                auto myBlock = new Block(GetGame(), "Blocks/Block", x, y);
                 myBlock->SetPosition(block->GetPosition());
                 myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
             } else if(tiles[0] == "Sensor") {
+                auto x = std::stoi(tiles[4]);
+                auto y = std::stoi(tiles[5]);
                 std::string type = tiles[1][0] == 'P' ? "Portal" : "Water";
                 std::cout << tiles[1] << std::endl;
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
-                auto sensor = new SensorBodyComponent(type, affect, line, GetWorld(), tf);
-                mBodies.push_back(sensor);
+                auto myBlock = new Block(GetGame(), "Temple/Door", x, y);
+                myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf));
+                myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
+                mBodies.push_back(myBlock->GetBodyComponent());
             }
             else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
@@ -110,7 +116,7 @@ void Level::DrawColliders(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     for(int i=0; i<mBodies.size(); i++){
-        if(mBodies[i]->GetClass() == "Ramp") continue;
+        if(mBodies[i]->GetClass() == "Ramp" || mBodies[i]->GetClass() == "Liquid") continue;
         auto collider = mBodies[i]->GetBody();
         auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
