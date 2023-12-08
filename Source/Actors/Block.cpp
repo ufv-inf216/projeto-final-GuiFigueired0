@@ -19,12 +19,10 @@ Block::Block(Game* game, const std::string &texturePath, int x, int y)
 
 void Block::OnUpdate(float deltaTime)
 {
-    if(GetGame()->GetSound()->GetSoundState(mSoundHandle) != SoundState::Playing && abs(mWorldBodyComponent->GetVelocity().x) > EPS)
-    {
+    if (GetGame()->GetSound()->GetSoundState(mSoundHandle) != SoundState::Playing && abs(mWorldBodyComponent->GetVelocity().x) > EPS) {
         mSoundHandle = GetGame()->GetSound()->PlaySound("Platform corrupt.mp3");
     }
-    if(GetGame()->GetSound()->GetSoundState(mSoundHandle) == SoundState::Playing && abs(mWorldBodyComponent->GetVelocity().x) < EPS)
-    {
+    if (GetGame()->GetSound()->GetSoundState(mSoundHandle) == SoundState::Playing && abs(mWorldBodyComponent->GetVelocity().x) < EPS) {
         GetGame()->GetSound()->StopSound(mSoundHandle);
     }
 }
