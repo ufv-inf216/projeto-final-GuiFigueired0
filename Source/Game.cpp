@@ -59,8 +59,8 @@ bool Game::Initialize()
         return false;
     }
 
-    mAudio = new AudioSystem(8);
-    mAudio->PlaySound("Level Music.mp3",true);
+    mAudio = new AudioSystem(16);
+    //mAudio->PlaySound("Level Music.mp3",true);
 
     Random::Init();
 
@@ -120,6 +120,8 @@ void Game::UpdateGame()
 
     // Update all actors and pending actors
     UpdateActors(deltaTime);
+
+    mAudio->Update(deltaTime);
 }
 
 void Game::UpdateActors(float deltaTime)
