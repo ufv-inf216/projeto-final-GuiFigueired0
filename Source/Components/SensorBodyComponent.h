@@ -17,7 +17,7 @@
 
 class SensorBodyComponent : public WorldBodyComponent {
 public:
-    SensorBodyComponent(const std::string type, const std::string &affectBody, const std::string &line, b2World* world, Transform* transform, Actor* owner, float runVelocity = 8, float jumpVelocity = 12);
+    SensorBodyComponent(const std::string &type, const std::string &affectBody, const std::string &line, b2World* world, Transform* transform, Actor* owner, float runVelocity = 8, float jumpVelocity = 12);
     const std::string &GetAffectBody() const { return mAffectBody; }
     const std::string &GetFunction() const { return mFunction; }
 private:

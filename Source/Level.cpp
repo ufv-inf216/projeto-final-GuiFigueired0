@@ -9,6 +9,7 @@
 #include "Components/DrawComponents/DrawTileComponent.h"
 #include "Components/WorldBodyComponent.h"
 #include "Components/SensorBodyComponent.h"
+#include "Actors/Liquid.h"
 
 // BOX2D
 float TIME_STEP = 1.0f / 60.0f;
@@ -98,21 +99,26 @@ void Level::LoadData(const std::string& fileName)
             } else if(tiles[0] == "Sensor") {
                 auto x = std::stoi(tiles[4]);
                 auto y = std::stoi(tiles[5]);
-                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : "Water";
+                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : "Liquid";
                 std::cout << tiles[1] << std::endl;
-                std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
-                Block* myBlock;
-                if(type == "Portal")
-                    myBlock = new Block(GetGame(), "Temple/Door", x, y);
-                else if(type == "Diamond" && affect == "FireBoy")
-                    myBlock = new Block(GetGame(), "Characters/DiamondFire", x, y);
-                else if(type == "Diamond" && affect == "WaterGirl")
-                    myBlock = new Block(GetGame(), "Characters/DiamondWater", x, y);
-                else
-                    myBlock = new Block(GetGame(), "Temple/Door", x, y);
-                myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf, myBlock));
-                myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
-                mBodies.push_back(myBlock->GetBodyComponent());
+                std::string affect = tiles[1][1] == 'F' ? "FireBoy" : tiles[1][1] == 'W' ? "WaterGirl" : "Both";
+                if(type == "Liquid"){
+                    std::string orientation = tiles[1][2] == 'R' ? "Right" : tiles[1][2] == 'L' ? "Left" : "Center";
+                    Liquid myLiquid(type, affect, orientation, GetGame(), line, GetWorld(), tf);
+                    mBodies.push_back(myLiquid.GetBodyComponent());
+                    std::cout << "Created Liquid" << std::endl;
+                } else {
+                    Block* myBlock;
+                    if(type == "Portal")
+                        myBlock = new Block(GetGame(), "Temple/Door", x, y);
+                    else if(type == "Diamond" && affect == "FireBoy")
+                        myBlock = new Block(GetGame(), "Characters/DiamondFire", x, y);
+                    else if(type == "Diamond" && affect == "WaterGirl")
+                        myBlock = new Block(GetGame(), "Characters/DiamondWater", x, y);
+                    myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf, myBlock));
+                    myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
+                    mBodies.push_back(myBlock->GetBodyComponent());
+                }
             }
             else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));

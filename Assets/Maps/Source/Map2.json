@@ -1071,9 +1071,9 @@
                 {
                  "height":16,
                  "id":132,
-                 "name":"WaterCenter",
+                 "name":"LFC",
                  "rotation":0,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":32,
                  "x":416,
@@ -1082,9 +1082,9 @@
                 {
                  "height":16,
                  "id":134,
-                 "name":"LavaCenter",
+                 "name":"LWC",
                  "rotation":0,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":32,
                  "x":576,
@@ -1093,7 +1093,7 @@
                 {
                  "height":0,
                  "id":135,
-                 "name":"WaterLeft",
+                 "name":"LFL",
                  "polygon":[
                         {
                          "x":0,
@@ -1108,7 +1108,7 @@
                          "y":15.9091
                         }],
                  "rotation":180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":415.781,
@@ -1117,7 +1117,7 @@
                 {
                  "height":0,
                  "id":136,
-                 "name":"LavaLeft",
+                 "name":"LWL",
                  "polygon":[
                         {
                          "x":0,
@@ -1132,7 +1132,7 @@
                          "y":15.9091
                         }],
                  "rotation":180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":576,
@@ -1141,7 +1141,7 @@
                 {
                  "height":0,
                  "id":138,
-                 "name":"WaterRight",
+                 "name":"LFR",
                  "polygon":[
                         {
                          "x":0,
@@ -1156,7 +1156,7 @@
                          "y":15.9091
                         }],
                  "rotation":-180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":448.114,
@@ -1165,7 +1165,7 @@
                 {
                  "height":0,
                  "id":139,
-                 "name":"LavaRight",
+                 "name":"LWR",
                  "polygon":[
                         {
                          "x":0,
@@ -1180,7 +1180,7 @@
                          "y":15.9091
                         }],
                  "rotation":-180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":608.375,
@@ -1260,9 +1260,9 @@
                 {
                  "height":16,
                  "id":144,
-                 "name":"PoisonCenter",
+                 "name":"LBC",
                  "rotation":0,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":32,
                  "x":512.495,
@@ -1271,7 +1271,7 @@
                 {
                  "height":0,
                  "id":145,
-                 "name":"PoisonLeft",
+                 "name":"LBL",
                  "polygon":[
                         {
                          "x":0,
@@ -1286,7 +1286,7 @@
                          "y":15.9091
                         }],
                  "rotation":180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":512.239,
@@ -1295,7 +1295,7 @@
                 {
                  "height":0,
                  "id":146,
-                 "name":"PoisonRight",
+                 "name":"LBR",
                  "polygon":[
                         {
                          "x":0,
@@ -1310,7 +1310,7 @@
                          "y":15.9091
                         }],
                  "rotation":-180,
-                 "type":"Liquid",
+                 "type":"Sensor",
                  "visible":true,
                  "width":0,
                  "x":544.792,
