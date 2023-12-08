@@ -154,15 +154,15 @@
                  "y":287.958
                 }, 
                 {
-                 "height":29.6666666666667,
+                 "height":29.6667,
                  "id":150,
                  "name":"Wall",
                  "rotation":0,
                  "type":"Box",
                  "visible":true,
                  "width":2,
-                 "x":286.001727272727,
-                 "y":672.564060606061
+                 "x":286.002,
+                 "y":672.564
                 }, 
                 {
                  "height":64,
@@ -259,8 +259,8 @@
                  "rotation":0,
                  "type":"Box",
                  "visible":true,
-                 "width":352.094696969697,
-                 "x":127.905303030303,
+                 "width":352.095,
+                 "x":127.905,
                  "y":448
                 }, 
                 {
@@ -838,7 +838,7 @@
                  "visible":true,
                  "width":0,
                  "x":127,
-                 "y":448.000090909091
+                 "y":448
                 }, 
                 {
                  "height":2,
@@ -859,8 +859,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":76.0003333333334,
-                 "y":626.333333333333
+                 "x":76.0003,
+                 "y":626.333
                 }, 
                 {
                  "height":68.25,
@@ -882,7 +882,7 @@
                  "visible":true,
                  "width":45,
                  "x":435.5,
-                 "y":125.083333333333
+                 "y":125.083
                 }, 
                 {
                  "height":32,
@@ -892,8 +892,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":73.9996666666667,
-                 "y":721.333333333333
+                 "x":73.9997,
+                 "y":721.333
                 }, 
                 {
                  "height":45,
@@ -980,8 +980,8 @@
                  "type":"Box",
                  "visible":true,
                  "width":96,
-                 "x":480.369318181818,
-                 "y":640.067826704545
+                 "x":480.369,
+                 "y":640.068
                 }, 
                 {
                  "height":16,
@@ -1287,8 +1287,8 @@
                  "type":"Ramp",
                  "visible":true,
                  "width":0,
-                 "x":480.467777777778,
-                 "y":640.163555555556
+                 "x":480.468,
+                 "y":640.164
                 }, 
                 {
                  "height":16,
@@ -1298,8 +1298,8 @@
                  "type":"Liquid",
                  "visible":true,
                  "width":32,
-                 "x":512.494777777778,
-                 "y":640.078111111111
+                 "x":512.495,
+                 "y":640.078
                 }, 
                 {
                  "height":0,
@@ -1322,8 +1322,8 @@
                  "type":"Liquid",
                  "visible":true,
                  "width":0,
-                 "x":512.239222222222,
-                 "y":656.010555555556
+                 "x":512.239,
+                 "y":656.011
                 }, 
                 {
                  "height":0,
@@ -1348,6 +1348,72 @@
                  "width":0,
                  "x":544.792,
                  "y":655.917
+                }, 
+                {
+                 "height":16,
+                 "id":158,
+                 "name":"DiamondFire",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":423.772727272727,
+                 "y":723.772727272727
+                }, 
+                {
+                 "height":16,
+                 "id":160,
+                 "name":"DiamondWater",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":582.863636363636,
+                 "y":722.681818181818
+                }, 
+                {
+                 "height":16,
+                 "id":161,
+                 "name":"DiamondFire",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":339.121166666667,
+                 "y":136.5455
+                }, 
+                {
+                 "height":16,
+                 "id":162,
+                 "name":"DiamondWater",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":218.212166666667,
+                 "y":410.121166666667
+                }, 
+                {
+                 "height":16,
+                 "id":163,
+                 "name":"DiamondWater",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":516,
+                 "y":581
+                }, 
+                {
+                 "height":16,
+                 "id":164,
+                 "name":"DiamondFire",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":16,
+                 "x":648,
+                 "y":445
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1356,7 +1422,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":158,
+ "nextobjectid":165,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

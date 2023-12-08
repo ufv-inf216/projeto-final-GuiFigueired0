@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="158">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="165">
  <editorsettings>
   <export target="Source/Map2.json" format="json"/>
  </editorsettings>
@@ -179,5 +179,11 @@
   <object id="146" name="PoisonRight" type="Liquid" x="544.792" y="655.917" rotation="-180">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
+  <object id="158" name="DiamondFire" type="Box" x="423.773" y="723.773" width="16" height="16"/>
+  <object id="160" name="DiamondWater" type="Box" x="582.864" y="722.682" width="16" height="16"/>
+  <object id="161" name="DiamondFire" type="Box" x="339.121" y="136.546" width="16" height="16"/>
+  <object id="162" name="DiamondWater" type="Box" x="218.212" y="410.121" width="16" height="16"/>
+  <object id="163" name="DiamondWater" type="Box" x="516" y="581" width="16" height="16"/>
+  <object id="164" name="DiamondFire" type="Box" x="648" y="445" width="16" height="16"/>
  </objectgroup>
 </map>
