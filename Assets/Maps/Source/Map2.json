@@ -859,8 +859,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":199.0003,
-                 "y":115.333
+                 "x":85,
+                 "y":625.333
                 }, 
                 {
                  "height":68.25,
@@ -892,8 +892,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":263.9997,
-                 "y":117.333
+                 "x":87,
+                 "y":727.333
                 }, 
                 {
                  "height":45,
@@ -1069,124 +1069,6 @@
                  "y":768.091
                 }, 
                 {
-                 "height":16,
-                 "id":132,
-                 "name":"LFC",
-                 "rotation":0,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":32,
-                 "x":416,
-                 "y":768
-                }, 
-                {
-                 "height":16,
-                 "id":134,
-                 "name":"LWC",
-                 "rotation":0,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":768
-                }, 
-                {
-                 "height":0,
-                 "id":135,
-                 "name":"LFL",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":-0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":415.781,
-                 "y":784.031
-                }, 
-                {
-                 "height":0,
-                 "id":136,
-                 "name":"LWL",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":-0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":576,
-                 "y":783.938
-                }, 
-                {
-                 "height":0,
-                 "id":138,
-                 "name":"LFR",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":-31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":-180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":448.114,
-                 "y":783.875
-                }, 
-                {
-                 "height":0,
-                 "id":139,
-                 "name":"LWR",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":-31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":-180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":608.375,
-                 "y":784
-                }, 
-                {
                  "height":29.8697,
                  "id":140,
                  "name":"Floor",
@@ -1207,31 +1089,6 @@
                  "width":96,
                  "x":480.417,
                  "y":655.917
-                },
-            
-                {
-                 "height":0,
-                 "id":142,
-                 "name":"Floor",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":-31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":0,
-                 "type":"Ramp",
-                 "visible":true,
-                 "width":0,
-                 "x":576.235,
-                 "y":640.099
                 }, 
                 {
                  "height":0,
@@ -1258,65 +1115,6 @@
                  "y":640.164
                 }, 
                 {
-                 "height":16,
-                 "id":144,
-                 "name":"LBC",
-                 "rotation":0,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":32,
-                 "x":512.495,
-                 "y":640.078
-                }, 
-                {
-                 "height":0,
-                 "id":145,
-                 "name":"LBL",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":-0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":512.239,
-                 "y":656.011
-                }, 
-                {
-                 "height":0,
-                 "id":146,
-                 "name":"LBR",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0.0909091,
-                         "y":15.8639
-                        }, 
-                        {
-                         "x":-31.7273,
-                         "y":15.9091
-                        }],
-                 "rotation":-180,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":0,
-                 "x":544.792,
-                 "y":655.917
-                }, 
-                {
                  "height":24,
                  "id":158,
                  "name":"DF",
@@ -1324,8 +1122,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":423.273,
-                 "y":702.773
+                 "x":579.523,
+                 "y":706.773
                 }, 
                 {
                  "height":24,
@@ -1335,8 +1133,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":585.864,
-                 "y":702.182
+                 "x":419.697333333333,
+                 "y":706.598666666667
                 }, 
                 {
                  "height":24,
@@ -1357,8 +1155,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":514.712,
-                 "y":574.121
+                 "x":211.712,
+                 "y":404.121
                 }, 
                 {
                  "height":24,
@@ -1368,9 +1166,10 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":193.5,
-                 "y":403
-                }, 
+                 "x":516.681818181818,
+                 "y":579.363636363636
+                },
+            
                 {
                  "height":24,
                  "id":164,
@@ -1379,8 +1178,209 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":340.5,
-                 "y":136.5
+                 "x":81.5,
+                 "y":100.5
+                }, 
+                {
+                 "height":16,
+                 "id":181,
+                 "name":"LFC",
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":32,
+                 "x":416,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":182,
+                 "name":"LFL",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":16.3125
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":183,
+                 "name":"LFR",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-0.125,
+                         "y":15.875
+                        }, 
+                        {
+                         "x":31.625,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":448,
+                 "y":768
+                }, 
+                {
+                 "height":16,
+                 "id":187,
+                 "name":"LBC",
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":32,
+                 "x":512,
+                 "y":640
+                }, 
+                {
+                 "height":0,
+                 "id":188,
+                 "name":"LBL",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":16.3125
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":640
+                }, 
+                {
+                 "height":0,
+                 "id":189,
+                 "name":"LBR",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-0.125,
+                         "y":15.875
+                        }, 
+                        {
+                         "x":31.625,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":544,
+                 "y":640
+                }, 
+                {
+                 "height":16,
+                 "id":190,
+                 "name":"LWC",
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":32,
+                 "x":576,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":191,
+                 "name":"LWL",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":16.3125
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":544,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":192,
+                 "name":"LWR",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-0.125,
+                         "y":15.875
+                        }, 
+                        {
+                         "x":31.625,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"Sensor",
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":193,
+                 "name":"Floor",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0.0909091,
+                         "y":15.8639
+                        }, 
+                        {
+                         "x":-31.7273,
+                         "y":15.9091
+                        }],
+                 "rotation":0,
+                 "type":"Ramp",
+                 "visible":true,
+                 "width":0,
+                 "x":575.727272727273,
+                 "y":639.848484848485
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1389,7 +1389,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":165,
+ "nextobjectid":194,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

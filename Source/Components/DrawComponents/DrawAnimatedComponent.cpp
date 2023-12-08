@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, float scale, int drawOrder)
-        :DrawSpriteComponent(owner, spriteSheetPath, 0, 0, drawOrder), mScale(scale)
+DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, float scale, Vector2 offSet, int drawOrder)
+        :DrawSpriteComponent(owner, spriteSheetPath, 0, 0, drawOrder), mScale(scale), mOffset(offSet)
 {
     LoadSpriteSheet(spriteSheetPath, spriteSheetData);
 }
@@ -53,8 +53,8 @@ void DrawAnimatedComponent::Draw(SDL_Renderer *renderer)
     Vector2 pos = GetOwner()->GetPosition();
 
     SDL_Rect dstrect{
-            (int)(pos.x) - 26,
-            (int)(pos.y) - 30,
+            (int)(pos.x - mOffset.x),
+            (int)(pos.y - mOffset.y),
             static_cast<int>((float)(mSpriteSheetData[spriteIdx]->w) * mScale),
             static_cast<int>((float)(mSpriteSheetData[spriteIdx]->h) * mScale),
     };

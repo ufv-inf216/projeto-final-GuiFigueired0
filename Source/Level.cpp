@@ -103,8 +103,9 @@ void Level::LoadData(const std::string& fileName)
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : tiles[1][1] == 'W' ? "WaterGirl" : "Both";
                 if(type == "Liquid"){
                     std::string orientation = tiles[1][2] == 'R' ? "Right" : tiles[1][2] == 'L' ? "Left" : "Center";
-                    Liquid myLiquid(type, affect, orientation, GetGame(), line, GetWorld(), tf);
-                    mBodies.push_back(myLiquid.GetBodyComponent());
+                    auto myLiquid = new Liquid(type, affect, orientation, GetGame(), line, GetWorld(), tf);
+                    myLiquid->SetPosition(Vector2(std::stoi(tiles[2]),std::stoi(tiles[3])));
+                    mBodies.push_back(myLiquid->GetBodyComponent());
                 } else {
                     Block* myBlock;
                     if(type == "Portal" && affect == "FireBoy")

@@ -10,7 +10,7 @@
 class DrawAnimatedComponent : public DrawSpriteComponent {
 public:
     // (Lower draw order corresponds with further back)
-    DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, float scale=1, int drawOrder = 100);
+    DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, float scale=1, Vector2 offSet=Vector2::Zero, int drawOrder = 100);
     ~DrawAnimatedComponent() override;
 
     void Draw(SDL_Renderer* renderer) override;
