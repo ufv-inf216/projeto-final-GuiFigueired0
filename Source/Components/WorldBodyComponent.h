@@ -42,6 +42,7 @@ public:
     void Run(bool toTheRight);
     bool IsOnGround() { return mIsOnGround; }
     void SetIsOnGround(bool isOnGround) { mIsOnGround = isOnGround; }
+    int cont_Collision = 0;
 
 private:
     b2Body* mBody;

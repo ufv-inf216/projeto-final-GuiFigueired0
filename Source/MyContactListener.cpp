@@ -11,8 +11,14 @@ void MyContactListener::BeginContact(b2Contact* contact) {
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
         if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b)) {
-            if(a->GetType() == BodyTypes::Player) a->SetIsOnGround(true);
-            else b->SetIsOnGround(true);
+            if(a->GetType() == BodyTypes::Player){
+                a->SetIsOnGround(true);
+                a->cont_Collision++;
+            }
+            else{
+                b->SetIsOnGround(true);
+                b->cont_Collision++;
+            }
         }
     }
 }
@@ -24,8 +30,16 @@ void MyContactListener::EndContact(b2Contact *contact) {
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
         if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b)) {
-            if(a->GetType() == BodyTypes::Player) a->SetIsOnGround(false);
-            else b->SetIsOnGround(false);
+            if(a->GetType() == BodyTypes::Player){
+                a->cont_Collision--;
+                if(a->cont_Collision == 0)
+                    a->SetIsOnGround(false);
+            }
+            else{
+                b->cont_Collision--;
+                if(b->cont_Collision == 0)
+                    b->SetIsOnGround(false);
+            }
         }
     }
 }

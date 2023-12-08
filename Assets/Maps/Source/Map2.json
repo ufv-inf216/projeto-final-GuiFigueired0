@@ -799,8 +799,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":634
+                 "x":484,
+                 "y":550.666666666667
                 },
             
                 {
@@ -833,8 +833,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":725.333
+                 "x":342,
+                 "y":516.333
                 }, 
                 {
                  "height":45,
@@ -844,20 +844,30 @@
                  "type":"Box",
                  "visible":true,
                  "width":45,
-                 "x":237.333333333333,
-                 "y":517
+                 "x":238.333333333333,
+                 "y":530
                 }, 
                 {
-                 "ellipse":true,
-                 "height":20,
-                 "id":61,
-                 "name":"Ball",
+                 "height":45,
+                 "id":123,
+                 "name":"Block",
                  "rotation":0,
-                 "type":"Ball",
+                 "type":"Box",
                  "visible":true,
-                 "width":20,
-                 "x":238,
-                 "y":427
+                 "width":45,
+                 "x":153.833333333333,
+                 "y":306.083333333333
+                }, 
+                {
+                 "height":38.3333333333333,
+                 "id":122,
+                 "name":"Floor",
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":25.6666666666666,
+                 "x":739.333333333333,
+                 "y":435.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -866,7 +876,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":122,
+ "nextobjectid":124,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
