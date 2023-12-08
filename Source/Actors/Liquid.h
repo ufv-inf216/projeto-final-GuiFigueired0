@@ -2,8 +2,8 @@
 #include "Actor.h"
 #include <Box2D/Box2D.h>
 #include <string>
-#include "../Components/WorldBodyComponent.h"
 #include "../Transform.h"
+#include "../Components/SensorBodyComponent.h"
 
 enum class LiquidType
 {
@@ -22,17 +22,15 @@ enum class LiquidPos
 class Liquid : public Actor
 {
 public:
-    explicit Liquid(Game* game, const std::string &line, b2World* world, LiquidType lType, LiquidPos lPos, Transform* transform);
+    explicit Liquid(const std::string &type, const std::string &affectBody, const std::string &orientation, Game* game, const std::string &line, b2World* world, Transform* transform);
 
-    WorldBodyComponent* GetBodyComponent() { return mWorldBodyComponent; }
+    WorldBodyComponent* GetBodyComponent() { return mSensorBodyComponent; }
 
 private:
     LiquidType mType;
     LiquidPos mPos;
 
-    class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;
-    class AABBColliderComponent* mColliderComponent;
-    WorldBodyComponent* mWorldBodyComponent;
+    SensorBodyComponent* mSensorBodyComponent;
     b2Body *mPlayerBody;
 };

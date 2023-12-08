@@ -5,15 +5,14 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
-Liquid::Liquid(Game* game, const std::string &line, b2World* world, LiquidType lType, LiquidPos lPos, Transform* transform)
+Liquid::Liquid(const std::string &type, const std::string &affectBody, const std::string &orientation, Game* game, const std::string &line, b2World* world, Transform* transform)
         : Actor(game)
-        , mType(lType)
-        , mPos(lPos)
 {
-    mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
-    mWorldBodyComponent = new WorldBodyComponent(line, world, transform);
-    mPlayerBody = mWorldBodyComponent->GetBody();
+    mSensorBodyComponent = new SensorBodyComponent(type, affectBody, line, world, transform, this);
+    mPlayerBody = mSensorBodyComponent->GetBody();
 
+    mType = affectBody == "WaterGirl" ? LiquidType::Lava : affectBody == "FireBoy" ? LiquidType::Water : LiquidType::Poison;
+    mPos = orientation == "Right" ? LiquidPos::Right : orientation == "Left" ? LiquidPos::Left : LiquidPos::Center;
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Ground/GroundAssets.png", "../Assets/Sprites/Ground/GroundAssets.json");
 
     if (mType == LiquidType::Lava)

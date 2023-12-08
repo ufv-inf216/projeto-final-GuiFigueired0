@@ -147,18 +147,18 @@
   <object id="131" name="Floor" type="Ramp" x="544.273" y="768.091">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="132" name="WaterCenter" type="Liquid" x="416" y="768" width="32" height="16"/>
-  <object id="134" name="LavaCenter" type="Liquid" x="576" y="768" width="32" height="16"/>
-  <object id="135" name="WaterLeft" type="Liquid" x="415.781" y="784.031" rotation="180">
+  <object id="132" name="LFC" type="Sensor" x="416" y="768" width="32" height="16"/>
+  <object id="134" name="LWC" type="Sensor" x="576" y="768" width="32" height="16"/>
+  <object id="135" name="LFL" type="Sensor" x="415.781" y="784.031" rotation="180">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="136" name="LavaLeft" type="Liquid" x="576" y="783.938" rotation="180">
+  <object id="136" name="LWL" type="Sensor" x="576" y="783.938" rotation="180">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="138" name="WaterRight" type="Liquid" x="448.114" y="783.875" rotation="-180">
+  <object id="138" name="LFR" type="Sensor" x="448.114" y="783.875" rotation="-180">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
-  <object id="139" name="LavaRight" type="Liquid" x="608.375" y="784" rotation="-180">
+  <object id="139" name="LWR" type="Sensor" x="608.375" y="784" rotation="-180">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
   <object id="140" name="Floor" type="Box" x="576" y="640.05" width="32" height="29.8697"/>
@@ -169,11 +169,11 @@
   <object id="143" name="Floor" type="Ramp" x="480.468" y="640.164">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="144" name="PoisonCenter" type="Liquid" x="512.495" y="640.078" width="32" height="16"/>
-  <object id="145" name="PoisonLeft" type="Liquid" x="512.239" y="656.011" rotation="180">
+  <object id="144" name="LBC" type="Sensor" x="512.495" y="640.078" width="32" height="16"/>
+  <object id="145" name="LBL" type="Sensor" x="512.239" y="656.011" rotation="180">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="146" name="PoisonRight" type="Liquid" x="544.792" y="655.917" rotation="-180">
+  <object id="146" name="LBR" type="Sensor" x="544.792" y="655.917" rotation="-180">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
   <object id="158" name="DF" type="Sensor" x="423.273" y="702.773" width="24" height="24"/>
