@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, int drawOrder)
-        :DrawSpriteComponent(owner, spriteSheetPath, 0, 0, drawOrder)
+DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::string &spriteSheetPath, const std::string &spriteSheetData, float scale, int drawOrder)
+        :DrawSpriteComponent(owner, spriteSheetPath, 0, 0, drawOrder), mScale(scale)
 {
     LoadSpriteSheet(spriteSheetPath, spriteSheetData);
 }
@@ -53,10 +53,10 @@ void DrawAnimatedComponent::Draw(SDL_Renderer *renderer)
     Vector2 pos = GetOwner()->GetPosition();
 
     SDL_Rect dstrect{
-            (int)pos.x-26,
-            (int)pos.y-30,
-            static_cast<int>(mSpriteSheetData[spriteIdx]->w * (1.0/1.5)),
-            static_cast<int>(mSpriteSheetData[spriteIdx]->h * (1.0/1.5)),
+            (int)(pos.x) - 26,
+            (int)(pos.y) - 30,
+            static_cast<int>((float)(mSpriteSheetData[spriteIdx]->w) * mScale),
+            static_cast<int>((float)(mSpriteSheetData[spriteIdx]->h) * mScale),
     };
     auto rotation = mOwner->GetRotation();
     auto angle = rotation;
