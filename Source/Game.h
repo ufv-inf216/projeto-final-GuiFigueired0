@@ -54,6 +54,7 @@ public:
     class AudioSystem* GetSound() { return mAudio; }
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }
+    bool GetStateWin() { return mWin.first && mWin.second; }
     void SetWinWaterGirl(bool status) {mWin.first = status; }
     void SetWinFireBoy(bool status) {mWin.second = status; }
 

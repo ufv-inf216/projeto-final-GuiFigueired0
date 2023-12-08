@@ -63,7 +63,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
     }
 
     mDrawComponent->SetAnimation("Idle");
-    mDrawComponent->SetAnimFPS(10.0f);
+    mDrawComponent->SetAnimFPS(20.0f);
 }
 
 void Player::OnProcessInput(const uint8_t* state)
@@ -98,33 +98,37 @@ void Player::OnProcessInput(const uint8_t* state)
 
 void Player::OnUpdate(float deltaTime)
 {
+    mWinner = GetGame()->GetStateWin();
+
     ManageAnimations();
 
     auto contactEdge = GetBodyComponent()->GetBody()->GetContactList();
 
-    if(mType == PlayerType::WaterGirlHead)
+    if (mType == PlayerType::WaterGirlHead)
         GetGame()->SetWinWaterGirl(false);
-    if(mType == PlayerType::FireBoyHead)
+    if (mType == PlayerType::FireBoyHead)
         GetGame()->SetWinFireBoy(false);
 
-    while(contactEdge != nullptr){
+    while (contactEdge != nullptr) {
         auto contact = contactEdge->contact;
 
-        auto* bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
-        auto* bodyB = &contact->GetFixtureB()->GetBody()->GetUserData();
-        auto a = reinterpret_cast<WorldBodyComponent*>(bodyA->pointer);
-        auto b = (WorldBodyComponent*)(bodyB->pointer);
+        auto *bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
+        auto *bodyB = &contact->GetFixtureB()->GetBody()->GetUserData();
+        auto a = reinterpret_cast<WorldBodyComponent *>(bodyA->pointer);
+        auto b = (WorldBodyComponent *) (bodyB->pointer);
 
-        if(a->GetClass() == "Sensor" || b->GetClass() == "Sensor"){
-            SensorBodyComponent* sensor;
-            if(a->GetClass() == "Sensor")
-                sensor = (SensorBodyComponent*)a;
+        if (a->GetClass() == "Sensor" || b->GetClass() == "Sensor") {
+            SensorBodyComponent *sensor;
+            if (a->GetClass() == "Sensor")
+                sensor = (SensorBodyComponent *) a;
             else
-                sensor = (SensorBodyComponent*)b;
+                sensor = (SensorBodyComponent *) b;
 
-            if(mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" && sensor->GetFunction() == "Portal")
+            if (mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" &&
+                sensor->GetFunction() == "Portal")
                 GetGame()->SetWinFireBoy(true);
-            if(mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" && sensor->GetFunction() == "Portal")
+            if (mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" &&
+                sensor->GetFunction() == "Portal")
                 GetGame()->SetWinWaterGirl(true);
         }
 

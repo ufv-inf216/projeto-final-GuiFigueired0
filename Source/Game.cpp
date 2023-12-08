@@ -123,9 +123,6 @@ void Game::UpdateGame()
 
     UpdateActors(deltaTime);
 
-    if(mWin.first && mWin.second)
-        SDL_Quit();
-
     mAudio->Update(deltaTime);
 }
 
