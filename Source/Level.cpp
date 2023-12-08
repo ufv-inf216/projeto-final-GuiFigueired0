@@ -46,6 +46,11 @@ void Level::UpdateLevel(float deltaTime) {
         body->Update();
     }
 
+    for(auto & mActor : mActors){
+        auto actor = dynamic_cast<Block*>(mActor);
+        actor->SetPosition(actor->GetBodyComponent()->GetPosition());
+    }
+
 }
 
 void Level::LoadData(const std::string& fileName)
@@ -82,6 +87,8 @@ void Level::LoadData(const std::string& fileName)
                 auto block = new WorldBodyComponent(line, GetWorld(), tf);
                 mBodies.push_back(block);
                 auto myBlock = new Block(GetGame(), "", 45);
+                myBlock->SetPosition(block->GetPosition());
+                myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
             } else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
