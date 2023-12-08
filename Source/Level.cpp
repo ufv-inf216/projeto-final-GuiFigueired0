@@ -7,6 +7,8 @@
 #include "Actors/Player.h"
 #include "Actors/Block.h"
 #include "Components/DrawComponents/DrawTileComponent.h"
+#include "Components/WorldBodyComponent.h"
+#include "Components/SensorBodyComponent.h"
 
 // BOX2D
 float TIME_STEP = 1.0f / 60.0f;
@@ -90,7 +92,14 @@ void Level::LoadData(const std::string& fileName)
                 myBlock->SetPosition(block->GetPosition());
                 myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
-            } else {
+            } else if(tiles[0] == "Sensor") {
+                std::string type = tiles[1][0] == 'P' ? "Portal" : "Water";
+                std::cout << tiles[1] << std::endl;
+                std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
+                auto sensor = new SensorBodyComponent("Portal", "WaterGirl", line, GetWorld(), tf);
+                mBodies.push_back(sensor);
+            }
+            else {
                 mBodies.push_back(new WorldBodyComponent(line, GetWorld(), tf));
             }
         }
@@ -101,7 +110,7 @@ void Level::DrawColliders(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     for(int i=0; i<mBodies.size(); i++){
-        if(mBodies[i]->GetClass() != "Box" && mBodies[i]->GetClass() != "Block") continue;
+        if(mBodies[i]->GetClass() == "Ramp") continue;
         auto collider = mBodies[i]->GetBody();
         auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];

@@ -7,7 +7,7 @@
 #include "../CSV.h"
 
 WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, Transform* transform, float runVelocity, float jumpVelocity)
-    :   tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity), mIsOnGround(false), mWorld(world)
+    :   tf(transform), mRunVelocity(runVelocity), mJumpVelocity(jumpVelocity), mIsOnGround(false), mWorld(world), cont_Collision(0)
 {
     auto tiles = CSVHelper::Split(line);
     float x = std::stof(tiles[2]);
@@ -51,9 +51,9 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
 
         if(tiles[1] == "Block")
         {
-            mClass = "Block";
             b2BodyDef bodyDef;
             bodyDef.type = b2_dynamicBody;
+            bodyDef.fixedRotation = true;
             bodyDef.position = tf->posMapToWorld(pos, size);
             b2Body* dynamicBody = GetWorld()->CreateBody(&bodyDef);
 
@@ -73,7 +73,13 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
             mBody = dynamicBody;
             std::cout << "My Class is " << mClass << "\n";
             mBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
-        } else if(tiles[0] == "Floor" || tiles[0] == "Box")
+        }
+        else if(tiles[0] == "Sensor")
+        {
+            mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player, true, 0.0f, 1.0f);
+            mBody->GetFixtureList()->SetSensor(true);
+        }
+        else if(tiles[0] == "Floor" || tiles[0] == "Box")
         {
             mBody = CreateBody(pos, size, false, BodyTypes::Floor, BodyTypes::Player, true, 0.0f, 1.0f);
         }
@@ -81,6 +87,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         {
             mBody = CreateBody(pos, size, true, BodyTypes::Player, BodyTypes::Floor);
         }
+
     }
     Update();
 }

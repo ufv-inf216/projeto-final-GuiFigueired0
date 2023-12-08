@@ -19,6 +19,7 @@
 #include "Game.h"
 #include "Actors/Player.h"
 #include "Components/WorldBodyComponent.h"
+#include "Components/SensorBodyComponent.h"
 
 class MyContactListener : public b2ContactListener {
 public:
@@ -27,6 +28,7 @@ public:
 
     bool isPlayerOnGround(WorldBodyComponent* a, WorldBodyComponent* b);
     bool isPlayerOnBox(WorldBodyComponent* a, WorldBodyComponent* b);
+    bool isPlayerOnSensor(WorldBodyComponent* a, WorldBodyComponent* b);
 };
 
 
