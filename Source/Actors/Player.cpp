@@ -132,6 +132,11 @@ void Player::OnUpdate(float deltaTime)
             if (mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" &&
                 sensor->GetFunction() == "Portal")
                 GetGame()->SetWinWaterGirl(true);
+
+            if((mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" ||
+                mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl")
+                && sensor->GetFunction() == "Diamond")
+                std::cout << "Collided with diamond\n";
         }
 
         contactEdge = contactEdge->next;

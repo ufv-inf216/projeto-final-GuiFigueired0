@@ -71,7 +71,6 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
             fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
             dynamicBody->CreateFixture(&fixtureDef);
             mBody = dynamicBody;
-            std::cout << "My Class is " << mClass << "\n";
             mBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
         }
         else if(tiles[0] == "Sensor")

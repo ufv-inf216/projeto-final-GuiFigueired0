@@ -134,9 +134,6 @@
   <object id="124" name="Floor" type="Box" x="640" y="768" width="128" height="32"/>
   <object id="125" name="Floor" type="Box" x="480" y="768" width="64" height="32"/>
   <object id="126" name="Floor" type="Box" x="384" y="784" width="96" height="16"/>
-  <object id="151" name="Floor" type="Box" x="384" y="768" width="96" height="16"/>
-  <object id="154" name="Floor" type="Box" x="480.369" y="640.068" width="96" height="16"/>
-  <object id="155" name="Floor" type="Box" x="544" y="768" width="96" height="16"/>
   <object id="127" name="Floor" type="Box" x="544" y="784" width="96" height="16"/>
   <object id="128" name="Floor" type="Ramp" x="479.773" y="768.159">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
@@ -179,11 +176,11 @@
   <object id="146" name="PoisonRight" type="Liquid" x="544.792" y="655.917" rotation="-180">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
-  <object id="158" name="DiamondFire" type="Box" x="423.773" y="723.773" width="16" height="16"/>
-  <object id="160" name="DiamondWater" type="Box" x="582.864" y="722.682" width="16" height="16"/>
-  <object id="161" name="DiamondFire" type="Box" x="339.121" y="136.546" width="16" height="16"/>
-  <object id="162" name="DiamondWater" type="Box" x="218.212" y="410.121" width="16" height="16"/>
-  <object id="163" name="DiamondWater" type="Box" x="516" y="581" width="16" height="16"/>
-  <object id="164" name="DiamondFire" type="Box" x="648" y="445" width="16" height="16"/>
+  <object id="158" name="DF" type="Sensor" x="423.273" y="702.773" width="24" height="24"/>
+  <object id="160" name="DW" type="Sensor" x="585.864" y="702.182" width="24" height="24"/>
+  <object id="161" name="DW" type="Sensor" x="339.121" y="136.546" width="24" height="24"/>
+  <object id="162" name="DW" type="Sensor" x="217.712" y="407.121" width="24" height="24"/>
+  <object id="163" name="DF" type="Sensor" x="522.5" y="571" width="24" height="24"/>
+  <object id="164" name="DF" type="Sensor" x="648.5" y="435.5" width="24" height="24"/>
  </objectgroup>
 </map>

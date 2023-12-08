@@ -963,39 +963,6 @@
                 }, 
                 {
                  "height":16,
-                 "id":151,
-                 "name":"Floor",
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":96,
-                 "x":384,
-                 "y":768
-                }, 
-                {
-                 "height":16,
-                 "id":154,
-                 "name":"Floor",
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":96,
-                 "x":480.369,
-                 "y":640.068
-                }, 
-                {
-                 "height":16,
-                 "id":155,
-                 "name":"Floor",
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":96,
-                 "x":544,
-                 "y":768
-                }, 
-                {
-                 "height":16,
                  "id":127,
                  "name":"Floor",
                  "rotation":0,
@@ -1194,8 +1161,7 @@
                  "width":0,
                  "x":448.114,
                  "y":783.875
-                },
-            
+                }, 
                 {
                  "height":0,
                  "id":139,
@@ -1241,7 +1207,8 @@
                  "width":96,
                  "x":480.417,
                  "y":655.917
-                }, 
+                },
+            
                 {
                  "height":0,
                  "id":142,
@@ -1350,70 +1317,70 @@
                  "y":655.917
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":158,
-                 "name":"DiamondFire",
+                 "name":"DF",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":423.772727272727,
-                 "y":723.772727272727
+                 "width":24,
+                 "x":423.273,
+                 "y":702.773
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":160,
-                 "name":"DiamondWater",
+                 "name":"DW",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":582.863636363636,
-                 "y":722.681818181818
+                 "width":24,
+                 "x":585.864,
+                 "y":702.182
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":161,
-                 "name":"DiamondFire",
+                 "name":"DW",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":339.121166666667,
-                 "y":136.5455
+                 "width":24,
+                 "x":339.121,
+                 "y":136.546
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":162,
-                 "name":"DiamondWater",
+                 "name":"DW",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":218.212166666667,
-                 "y":410.121166666667
+                 "width":24,
+                 "x":217.712,
+                 "y":407.121
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":163,
-                 "name":"DiamondWater",
+                 "name":"DF",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":516,
-                 "y":581
+                 "width":24,
+                 "x":522.5,
+                 "y":571
                 }, 
                 {
-                 "height":16,
+                 "height":24,
                  "id":164,
-                 "name":"DiamondFire",
+                 "name":"DF",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Sensor",
                  "visible":true,
-                 "width":16,
-                 "x":648,
-                 "y":445
+                 "width":24,
+                 "x":648.5,
+                 "y":435.5
                 }],
          "opacity":1,
          "type":"objectgroup",

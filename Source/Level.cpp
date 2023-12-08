@@ -97,10 +97,18 @@ void Level::LoadData(const std::string& fileName)
             } else if(tiles[0] == "Sensor") {
                 auto x = std::stoi(tiles[4]);
                 auto y = std::stoi(tiles[5]);
-                std::string type = tiles[1][0] == 'P' ? "Portal" : "Water";
+                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : "Water";
                 std::cout << tiles[1] << std::endl;
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
-                auto myBlock = new Block(GetGame(), "Temple/Door", x, y);
+                Block* myBlock;
+                if(type == "Portal")
+                    myBlock = new Block(GetGame(), "Temple/Door", x, y);
+                else if(type == "Diamond" && affect == "FireBoy")
+                    myBlock = new Block(GetGame(), "Characters/DiamondFire", x, y);
+                else if(type == "Diamond" && affect == "WaterGirl")
+                    myBlock = new Block(GetGame(), "Characters/DiamondWater", x, y);
+                else
+                    myBlock = new Block(GetGame(), "Temple/Door", x, y);
                 myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf));
                 myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
                 mBodies.push_back(myBlock->GetBodyComponent());
