@@ -124,10 +124,10 @@
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
   <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
-  <object id="55" name="WaterGirl" type="Player" x="76.0003" y="626.333" width="32" height="32"/>
+  <object id="55" name="WaterGirl" type="Player" x="199" y="115.333" width="32" height="32"/>
   <object id="57" name="PF" type="Sensor" x="671.25" y="124.75" width="45" height="68.25"/>
   <object id="58" name="PW" type="Sensor" x="435.5" y="125.083" width="45" height="68"/>
-  <object id="56" name="FireBoy" type="Player" x="73.9997" y="721.333" width="32" height="32"/>
+  <object id="56" name="FireBoy" type="Player" x="264" y="117.333" width="32" height="32"/>
   <object id="59" name="Block" type="Box" x="238.333" y="530" width="45" height="45"/>
   <object id="147" name="Block" type="Box" x="403.333" y="413" width="29" height="32"/>
   <object id="123" name="Block" type="Box" x="246.5" y="304.417" width="45" height="45"/>
@@ -178,9 +178,9 @@
   </object>
   <object id="158" name="DF" type="Sensor" x="423.273" y="702.773" width="24" height="24"/>
   <object id="160" name="DW" type="Sensor" x="585.864" y="702.182" width="24" height="24"/>
-  <object id="161" name="DW" type="Sensor" x="339.121" y="136.546" width="24" height="24"/>
-  <object id="162" name="DW" type="Sensor" x="217.712" y="407.121" width="24" height="24"/>
-  <object id="163" name="DF" type="Sensor" x="522.5" y="571" width="24" height="24"/>
-  <object id="164" name="DF" type="Sensor" x="648.5" y="435.5" width="24" height="24"/>
+  <object id="161" name="DW" type="Sensor" x="618.121" y="254.546" width="24" height="24"/>
+  <object id="162" name="DW" type="Sensor" x="514.712" y="574.121" width="24" height="24"/>
+  <object id="163" name="DF" type="Sensor" x="193.5" y="403" width="24" height="24"/>
+  <object id="164" name="DF" type="Sensor" x="340.5" y="136.5" width="24" height="24"/>
  </objectgroup>
 </map>

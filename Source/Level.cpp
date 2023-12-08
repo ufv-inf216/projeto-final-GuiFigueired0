@@ -107,8 +107,10 @@ void Level::LoadData(const std::string& fileName)
                     mBodies.push_back(myLiquid.GetBodyComponent());
                 } else {
                     Block* myBlock;
-                    if(type == "Portal")
-                        myBlock = new Block(GetGame(), "Temple/Door", x, y);
+                    if(type == "Portal" && affect == "FireBoy")
+                        myBlock = new Block(GetGame(), "Temple/DoorFire", x, y);
+                    else if(type == "Portal" && affect == "WaterGirl")
+                        myBlock = new Block(GetGame(), "Temple/DoorWater", x, y);
                     else if(type == "Diamond" && affect == "FireBoy")
                         myBlock = new Block(GetGame(), "Characters/DiamondFire", x, y);
                     else if(type == "Diamond" && affect == "WaterGirl")
