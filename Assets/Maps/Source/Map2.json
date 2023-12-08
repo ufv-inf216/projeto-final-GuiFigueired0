@@ -859,8 +859,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":76.0003,
-                 "y":626.333
+                 "x":199.0003,
+                 "y":115.333
                 }, 
                 {
                  "height":68.25,
@@ -892,8 +892,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":73.9997,
-                 "y":721.333
+                 "x":263.9997,
+                 "y":117.333
                 }, 
                 {
                  "height":45,
@@ -1346,8 +1346,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":339.121,
-                 "y":136.546
+                 "x":618.121,
+                 "y":254.546
                 }, 
                 {
                  "height":24,
@@ -1357,8 +1357,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":217.712,
-                 "y":407.121
+                 "x":514.712,
+                 "y":574.121
                 }, 
                 {
                  "height":24,
@@ -1368,8 +1368,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":522.5,
-                 "y":571
+                 "x":193.5,
+                 "y":403
                 }, 
                 {
                  "height":24,
@@ -1379,8 +1379,8 @@
                  "type":"Sensor",
                  "visible":true,
                  "width":24,
-                 "x":648.5,
-                 "y":435.5
+                 "x":340.5,
+                 "y":136.5
                 }],
          "opacity":1,
          "type":"objectgroup",

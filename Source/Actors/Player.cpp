@@ -136,10 +136,12 @@ void Player::OnUpdate(float deltaTime)
                 sensor = (SensorBodyComponent *) b;
 
             if (mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" &&
-                sensor->GetFunction() == "Portal" && abs(GetPosition().x - sensor->GetPosition().x) < 10)
+                sensor->GetFunction() == "Portal" &&
+                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 6)
                 GetGame()->SetWinFireBoy(true);
             if (mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" &&
-                sensor->GetFunction() == "Portal" && abs(GetPosition().x - sensor->GetPosition().x) < 10)
+                sensor->GetFunction() == "Portal" &&
+                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 6)
                 GetGame()->SetWinWaterGirl(true);
 
             if((mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" ||

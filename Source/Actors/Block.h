@@ -17,6 +17,7 @@ public:
     void SetBodyComponent(WorldBodyComponent* bodyComponent) { mWorldBodyComponent = bodyComponent; }
     void OnUpdate(float deltaTime) override;
 private:
+    class DrawAnimatedComponent* mDrawComponent;
     WorldBodyComponent* mWorldBodyComponent;
     SoundHandle mSoundHandle;
 };
