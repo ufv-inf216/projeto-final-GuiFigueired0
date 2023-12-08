@@ -38,6 +38,7 @@ private:
     float mJumpSpeed;
     bool mIsDead;
     bool mWinner;
+    bool mIsRunning;
 
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;

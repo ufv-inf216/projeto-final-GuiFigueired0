@@ -16,6 +16,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
         , mType(type)
         , mWinner(false)
         , mIsDead(false)
+        , mIsRunning(false)
         , mForwardSpeed(forwardSpeed)
         , mJumpSpeed(jumpSpeed)
 {
@@ -27,7 +28,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
     vertices.push_back(mColliderComponent->GetMin() + Vector2(0, 32));
     vertices.push_back(mColliderComponent->GetMin() + Vector2(32, 0));
     vertices.push_back(mColliderComponent->GetMax());
-    //new DrawPolygonComponent(this, vertices);
+    new DrawPolygonComponent(this, vertices);
 
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Characters/CharAssets.png", "../Assets/Sprites/Characters/CharAssets.json", 1/1.5f, 110);
 
@@ -84,12 +85,20 @@ void Player::OnProcessInput(const uint8_t* state)
     if(state[SDL_SCANCODE_RIGHT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_D] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(true);
+        if(mWorldBodyComponent->GetVelocity().x != 0)
+            mIsRunning = true;
         mRotation = 0;
     }
     else if(state[SDL_SCANCODE_LEFT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_A] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
     {
         mWorldBodyComponent->Run(false);
+        if(mWorldBodyComponent->GetVelocity().x != 0)
+            mIsRunning = true;
         mRotation = Math::Pi;
+    }
+    else
+    {
+        mIsRunning = false;
     }
 
     if(state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead)
@@ -127,16 +136,18 @@ void Player::OnUpdate(float deltaTime)
                 sensor = (SensorBodyComponent *) b;
 
             if (mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" &&
-                sensor->GetFunction() == "Portal")
+                sensor->GetFunction() == "Portal" && abs(GetPosition().x - sensor->GetPosition().x) < 10)
                 GetGame()->SetWinFireBoy(true);
             if (mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" &&
-                sensor->GetFunction() == "Portal")
+                sensor->GetFunction() == "Portal" && abs(GetPosition().x - sensor->GetPosition().x) < 10)
                 GetGame()->SetWinWaterGirl(true);
 
             if((mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" ||
                 mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl")
-                && sensor->GetFunction() == "Diamond")
-                sensor->GetOwner()->SetState(ActorState::Paused);
+                && sensor->GetFunction() == "Diamond" && sensor->GetOwner()->GetState() != ActorState::Invisible) {
+                mGame->GetSound()->PlaySound("Diamond.mp3");
+                sensor->GetOwner()->SetState(ActorState::Invisible);
+            }
         }
 
         contactEdge = contactEdge->next;
@@ -159,7 +170,7 @@ void Player::ManageAnimations()
         else
             mDrawComponent->SetAnimation("Default");
     }
-    else if(mWorldBodyComponent->GetVelocity().x == 0)
+    else if(!mIsRunning)
     {
         if(GetBodyComponent()->IsOnGround())
         {
@@ -183,7 +194,7 @@ void Player::ManageAnimations()
     else
     {
         //AJUSTAR ANGULAÇÃO DA CABEÇA
-        SetAngle(mWorldBodyComponent->GetAngle()*(180.0f / M_PI));
+        //SetAngle(mWorldBodyComponent->GetAngle()*(180.0f / M_PI));
         //std::cout << GetAngle() << '\n';
         mDrawComponent->SetAnimation("Running");
     }
