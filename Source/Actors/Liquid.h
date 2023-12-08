@@ -24,7 +24,9 @@ class Liquid : public Actor
 public:
     explicit Liquid(const std::string &type, const std::string &affectBody, const std::string &orientation, Game* game, const std::string &line, b2World* world, Transform* transform);
 
-    WorldBodyComponent* GetBodyComponent() { return mSensorBodyComponent; }
+    SensorBodyComponent* GetBodyComponent() { return mSensorBodyComponent; }
+
+    LiquidType GetType() { return mType; }
 
 private:
     LiquidType mType;

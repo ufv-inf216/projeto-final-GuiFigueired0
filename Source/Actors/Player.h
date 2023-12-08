@@ -29,6 +29,8 @@ public:
 
     WorldBodyComponent* GetBodyComponent() { return mWorldBodyComponent; }
 
+    PlayerType GetType() { return mType; }
+
 private:
     void ManageAnimations();
 

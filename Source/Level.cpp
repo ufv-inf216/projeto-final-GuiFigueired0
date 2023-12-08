@@ -99,14 +99,12 @@ void Level::LoadData(const std::string& fileName)
             } else if(tiles[0] == "Sensor") {
                 auto x = std::stoi(tiles[4]);
                 auto y = std::stoi(tiles[5]);
-                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : "Liquid";
-                std::cout << tiles[1] << std::endl;
+                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : tiles[1][0] == 'L' ? "Liquid" : "None";
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : tiles[1][1] == 'W' ? "WaterGirl" : "Both";
                 if(type == "Liquid"){
                     std::string orientation = tiles[1][2] == 'R' ? "Right" : tiles[1][2] == 'L' ? "Left" : "Center";
                     Liquid myLiquid(type, affect, orientation, GetGame(), line, GetWorld(), tf);
                     mBodies.push_back(myLiquid.GetBodyComponent());
-                    std::cout << "Created Liquid" << std::endl;
                 } else {
                     Block* myBlock;
                     if(type == "Portal")
@@ -131,7 +129,7 @@ void Level::DrawColliders(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     for(int i=0; i<mBodies.size(); i++){
-        if(mBodies[i]->GetClass() == "Ramp" || mBodies[i]->GetClass() == "Liquid") continue;
+        if(mBodies[i]->GetClass() == "Ramp") continue;
         auto collider = mBodies[i]->GetBody();
         auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
         b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];

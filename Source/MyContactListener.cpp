@@ -3,6 +3,7 @@
 //
 
 #include "MyContactListener.h"
+#include "Actors/Liquid.h"
 
 void MyContactListener::BeginContact(b2Contact* contact) {
     auto* bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
@@ -20,15 +21,27 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 b->cont_Collision++;
             }
         } else if (isPlayerOnSensor(a, b)) {
-            //std::cout << "Begin Collision with portal\n";
-                SensorBodyComponent* sensor;
-                if(a->GetClass() == "Sensor")
-                    sensor = (SensorBodyComponent*)a;
-                else
-                    sensor = (SensorBodyComponent*)b;
-                //std::cout << "Sensor: " << sensor->GetAffectBody() << "\n";
-                //std::cout << "Function: " << sensor->GetFunction() << "\n";
-
+            SensorBodyComponent *sensor;
+            WorldBodyComponent *player;
+            if (a->GetClass() == "Sensor") {
+                sensor = (SensorBodyComponent *) a;
+                player = (WorldBodyComponent *) b;
+            }
+            else{
+                sensor = (SensorBodyComponent *) b;
+                player = (WorldBodyComponent *) a;
+            }
+            if(sensor->GetFunction() == "Liquid"){
+                auto character = dynamic_cast<class Player*>(player->GetOwner());
+                if(character->GetType() == PlayerType::FireBoyHead &&
+                    (sensor->GetAffectBody() == "FireBoy" || sensor->GetAffectBody() == "Both")){
+                    std::cout << "Killed FireBoy" << std::endl;
+                }
+                else if(character->GetType() == PlayerType::WaterGirlHead &&
+                    (sensor->GetAffectBody() == "WaterGirl" || sensor->GetAffectBody() == "Both")){
+                    std::cout << "Killed WaterGirl" << std::endl;
+                }
+            }
         }
     }
 }
@@ -51,7 +64,17 @@ void MyContactListener::EndContact(b2Contact *contact) {
                     b->SetIsOnGround(false);
             }
         } else if (isPlayerOnSensor(a, b)) {
-            //std::cout << "End Collision with portal\n";
+            SensorBodyComponent *sensor;
+            WorldBodyComponent *player;
+            if (a->GetClass() == "Sensor") {
+                sensor = (SensorBodyComponent *) a;
+                player = (WorldBodyComponent *) b;
+            }
+            else{
+                sensor = (SensorBodyComponent *) b;
+                player = (WorldBodyComponent *) a;
+            }
+
         }
     }
 }
