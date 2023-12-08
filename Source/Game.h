@@ -54,6 +54,8 @@ public:
     class AudioSystem* GetSound() { return mAudio; }
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }
+    void SetWinWaterGirl(bool status) {mWin.first = status; }
+    void SetWinFireBoy(bool status) {mWin.second = status; }
 
 private:
     void ProcessInput();
@@ -92,4 +94,5 @@ private:
     std::vector<Level*> mLevels;
     int mCurrentLevel;
     bool mShowColliders;
+    std::pair<bool, bool> mWin;
 };

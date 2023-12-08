@@ -96,7 +96,7 @@ void Level::LoadData(const std::string& fileName)
                 std::string type = tiles[1][0] == 'P' ? "Portal" : "Water";
                 std::cout << tiles[1] << std::endl;
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : "WaterGirl";
-                auto sensor = new SensorBodyComponent("Portal", "WaterGirl", line, GetWorld(), tf);
+                auto sensor = new SensorBodyComponent(type, affect, line, GetWorld(), tf);
                 mBodies.push_back(sensor);
             }
             else {

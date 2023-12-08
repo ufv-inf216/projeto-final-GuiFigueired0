@@ -99,6 +99,37 @@ void Player::OnProcessInput(const uint8_t* state)
 void Player::OnUpdate(float deltaTime)
 {
     ManageAnimations();
+
+    auto contactEdge = GetBodyComponent()->GetBody()->GetContactList();
+
+    if(mType == PlayerType::WaterGirlHead)
+        GetGame()->SetWinWaterGirl(false);
+    if(mType == PlayerType::FireBoyHead)
+        GetGame()->SetWinFireBoy(false);
+
+    while(contactEdge != nullptr){
+        auto contact = contactEdge->contact;
+
+        auto* bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
+        auto* bodyB = &contact->GetFixtureB()->GetBody()->GetUserData();
+        auto a = reinterpret_cast<WorldBodyComponent*>(bodyA->pointer);
+        auto b = (WorldBodyComponent*)(bodyB->pointer);
+
+        if(a->GetClass() == "Sensor" || b->GetClass() == "Sensor"){
+            SensorBodyComponent* sensor;
+            if(a->GetClass() == "Sensor")
+                sensor = (SensorBodyComponent*)a;
+            else
+                sensor = (SensorBodyComponent*)b;
+
+            if(mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" && sensor->GetFunction() == "Portal")
+                GetGame()->SetWinFireBoy(true);
+            if(mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" && sensor->GetFunction() == "Portal")
+                GetGame()->SetWinWaterGirl(true);
+        }
+
+        contactEdge = contactEdge->next;
+    }
 }
 
 void Player::ManageAnimations()

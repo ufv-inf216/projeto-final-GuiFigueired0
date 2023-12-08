@@ -68,6 +68,7 @@ bool Game::Initialize()
 
     // Initialize the level
     GetLevel(mCurrentLevel)->InicializeLevel();
+    mWin = {0,0};
 
     return true;
 }
@@ -119,7 +120,11 @@ void Game::UpdateGame()
     GetLevel(mCurrentLevel)->UpdateLevel(deltaTime);
 
     // Update all actors and pending actors
+
     UpdateActors(deltaTime);
+
+    if(mWin.first && mWin.second)
+        SDL_Quit();
 
     mAudio->Update(deltaTime);
 }

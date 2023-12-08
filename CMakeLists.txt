@@ -61,6 +61,10 @@ add_executable(${PROJECT_NAME}
         Source/Level.h
         Source/MyContactListener.cpp
         Source/MyContactListener.h
+        Source/Components/SensorBodyComponent.cpp
+        Source/Components/SensorBodyComponent.h
+        Source/Actors/Liquid.cpp
+        Source/Actors/Liquid.h
 )
 
 ####### DO NOT EDIT BELLOW
