@@ -19,5 +19,4 @@ public:
 private:
     WorldBodyComponent* mWorldBodyComponent;
     SoundHandle mSoundHandle;
-    float mAudioTime;
 };

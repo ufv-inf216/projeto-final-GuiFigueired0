@@ -4,6 +4,7 @@
 #include <string>
 #include "../Components/WorldBodyComponent.h"
 #include "../Transform.h"
+#include "../AudioSystem.h"
 
 enum class PlayerType
 {
@@ -43,4 +44,6 @@ private:
     class AABBColliderComponent* mColliderComponent;
     WorldBodyComponent* mWorldBodyComponent;
     b2Body *mPlayerBody;
+
+    SoundHandle mSoundJump;
 };

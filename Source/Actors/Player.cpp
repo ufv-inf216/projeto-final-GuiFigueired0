@@ -68,14 +68,16 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
 
 void Player::OnProcessInput(const uint8_t* state)
 {
-    if(state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
+    if((state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs)) || (state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs)))
     {
         if(GetBodyComponent()->IsOnGround()){
-            if(mType == PlayerType::FireBoyHead)
-                GetGame()->GetSound()->PlaySound("Jump fb.mp3");
-            if(mType == PlayerType::WaterGirlHead)
-                GetGame()->GetSound()->PlaySound("Jump wg.mp3");
             mWorldBodyComponent->Jump();
+            if(mType == PlayerType::FireBoyHead)
+                if(GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
+                    mSoundJump = GetGame()->GetSound()->PlaySound("Jump fb.mp3");
+            if(mType == PlayerType::WaterGirlHead)
+                if(GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
+                    mSoundJump = GetGame()->GetSound()->PlaySound("Jump wg.mp3");
         }
     }
 
