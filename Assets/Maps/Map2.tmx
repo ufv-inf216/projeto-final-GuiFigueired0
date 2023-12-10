@@ -124,10 +124,10 @@
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
   <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
-  <object id="55" name="WaterGirl" type="Player" x="85" y="625.333" width="32" height="32"/>
-  <object id="57" name="PF" type="Sensor" x="671.25" y="124.75" width="45" height="68.25"/>
-  <object id="58" name="PW" type="Sensor" x="435.5" y="125.083" width="45" height="68"/>
-  <object id="56" name="FireBoy" type="Player" x="87" y="727.333" width="32" height="32"/>
+  <object id="55" name="WaterGirl" type="Player" x="270.333" y="55.9997" width="32" height="32"/>
+  <object id="57" name="PF" type="Sensor" x="672.364" y="126.386" width="64" height="70"/>
+  <object id="58" name="PW" type="Sensor" x="416" y="124.545" width="64" height="70"/>
+  <object id="56" name="FireBoy" type="Player" x="351" y="112.666" width="32" height="32"/>
   <object id="59" name="Block" type="Box" x="238.333" y="530" width="45" height="45"/>
   <object id="147" name="Block" type="Box" x="403.333" y="413" width="29" height="32"/>
   <object id="123" name="Block" type="Box" x="246.5" y="304.417" width="45" height="45"/>
