@@ -35,11 +35,11 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 auto character = dynamic_cast<class Player*>(player->GetOwner());
                 if(character->GetType() == PlayerType::FireBoyHead &&
                     (sensor->GetAffectBody() == "FireBoy" || sensor->GetAffectBody() == "Both")){
-                    std::cout << "Killed FireBoy" << std::endl;
+                    character->Kill();
                 }
                 else if(character->GetType() == PlayerType::WaterGirlHead &&
                     (sensor->GetAffectBody() == "WaterGirl" || sensor->GetAffectBody() == "Both")){
-                    std::cout << "Killed WaterGirl" << std::endl;
+                    character->Kill();
                 }
             }
         }

@@ -140,6 +140,7 @@ void Game::UpdateActors(float deltaTime)
         mActors.emplace_back(pending);
     }
     mPendingActors.clear();
+    mPendingActors.clear();
 
     std::vector<Actor*> deadActors;
     for (auto actor : mActors)

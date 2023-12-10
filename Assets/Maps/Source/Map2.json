@@ -1115,71 +1115,71 @@
                  "y":640.164
                 }, 
                 {
-                 "height":24,
+                 "height":12,
                  "id":158,
                  "name":"DF",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":579.523,
-                 "y":706.773
+                 "width":12,
+                 "x":426.023,
+                 "y":719.273
                 }, 
                 {
-                 "height":24,
+                 "height":12,
                  "id":160,
                  "name":"DW",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":419.697333333333,
-                 "y":706.598666666667
+                 "width":12,
+                 "x":583.447,
+                 "y":718.099
                 }, 
                 {
-                 "height":24,
+                 "height":12,
                  "id":161,
                  "name":"DW",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":618.121,
-                 "y":254.546
+                 "width":12,
+                 "x":88.4543333333334,
+                 "y":131.879333333333
                 }, 
                 {
-                 "height":24,
-                 "id":162,
+                 "height":12,
+                 "id":194,
                  "name":"DW",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":211.712,
-                 "y":404.121
+                 "width":12,
+                 "x":254.454333333333,
+                 "y":410.879333333333
                 }, 
                 {
-                 "height":24,
+                 "height":12,
                  "id":163,
                  "name":"DF",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":516.681818181818,
-                 "y":579.363636363636
+                 "width":12,
+                 "x":522.432,
+                 "y":586.114
                 },
             
                 {
-                 "height":24,
+                 "height":12,
                  "id":164,
                  "name":"DF",
                  "rotation":0,
                  "type":"Sensor",
                  "visible":true,
-                 "width":24,
-                 "x":81.5,
-                 "y":100.5
+                 "width":12,
+                 "x":613.833333333333,
+                 "y":272.5
                 }, 
                 {
                  "height":16,
@@ -1379,8 +1379,8 @@
                  "type":"Ramp",
                  "visible":true,
                  "width":0,
-                 "x":575.727272727273,
-                 "y":639.848484848485
+                 "x":575.727,
+                 "y":639.848
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1389,7 +1389,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":194,
+ "nextobjectid":195,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
