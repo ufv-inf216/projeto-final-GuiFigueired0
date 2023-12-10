@@ -67,7 +67,7 @@ bool Game::Initialize()
     mTicksCount = SDL_GetTicks();
 
     // Initialize the level
-    GetLevel(mCurrentLevel)->InicializeLevel();
+    GetLevel()->InicializeLevel();
     mWin = {0,0};
 
     return true;
@@ -117,7 +117,7 @@ void Game::UpdateGame()
     mTicksCount = SDL_GetTicks();
 
     // Box2D
-    GetLevel(mCurrentLevel)->UpdateLevel(deltaTime);
+    GetLevel()->UpdateLevel(deltaTime);
 
     // Update all actors and pending actors
 
@@ -230,7 +230,7 @@ void Game::GenerateOutput()
         }
     }
     if(showColliders())
-        GetLevel(mCurrentLevel)->DrawColliders(mRenderer);
+        GetLevel()->DrawColliders(mRenderer);
 
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);

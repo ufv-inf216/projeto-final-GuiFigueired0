@@ -49,11 +49,12 @@ void Level::UpdateLevel(float deltaTime) {
         auto actor = dynamic_cast<Block*>(mActor);
         actor->SetPosition(actor->GetBodyComponent()->GetPosition());
     }
-
-    mWatergirl->GetBodyComponent()->Update();
-    mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
-    mFireboy->GetBodyComponent()->Update();
-    mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+    if(!GetGame()->GetStateWin()){
+        mWatergirl->GetBodyComponent()->Update();
+        mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
+        mFireboy->GetBodyComponent()->Update();
+        mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+    }
 }
 
 void Level::LoadData(const std::string& fileName)

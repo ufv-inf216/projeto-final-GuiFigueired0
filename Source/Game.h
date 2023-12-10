@@ -50,7 +50,7 @@ public:
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
     // Level
-    class Level* GetLevel(int id) { return mLevels[id]; }
+    class Level* GetLevel() { return mLevels[mCurrentLevel]; }
     class AudioSystem* GetSound() { return mAudio; }
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }

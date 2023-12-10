@@ -19,6 +19,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
         , mIsRunning(false)
         , mForwardSpeed(forwardSpeed)
         , mJumpSpeed(jumpSpeed)
+        , mWinnerTime(0)
 {
     mColliderComponent = new AABBColliderComponent(this, 0, 0, 32, 32, ColliderLayer::Player);
     mWorldBodyComponent = new WorldBodyComponent(line, world, transform, this);
@@ -69,41 +70,40 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
 
 void Player::OnProcessInput(const uint8_t* state)
 {
-    if((state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs)) || (state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs)))
-    {
-        if(GetBodyComponent()->IsOnGround()){
-            mWorldBodyComponent->Jump();
-            if(mType == PlayerType::FireBoyHead)
-                if(GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
-                    mSoundJump = GetGame()->GetSound()->PlaySound("Jump fb.mp3");
-            if(mType == PlayerType::WaterGirlHead)
-                if(GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
-                    mSoundJump = GetGame()->GetSound()->PlaySound("Jump wg.mp3");
+    if(!mIsDead && !mWinner) {
+        if ((state[SDL_SCANCODE_UP] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs)) ||
+            (state[SDL_SCANCODE_W] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))) {
+            if (GetBodyComponent()->IsOnGround()) {
+                mWorldBodyComponent->Jump();
+                if (mType == PlayerType::FireBoyHead)
+                    if (GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
+                        mSoundJump = GetGame()->GetSound()->PlaySound("Jump fb.mp3");
+                if (mType == PlayerType::WaterGirlHead)
+                    if (GetGame()->GetSound()->GetSoundState(mSoundJump) != SoundState::Playing)
+                        mSoundJump = GetGame()->GetSound()->PlaySound("Jump wg.mp3");
+            }
         }
-    }
 
-    if(state[SDL_SCANCODE_RIGHT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_D] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
-    {
-        mWorldBodyComponent->Run(true);
-        if(mWorldBodyComponent->GetVelocity().x != 0)
-            mIsRunning = true;
-        mRotation = 0;
-    }
-    else if(state[SDL_SCANCODE_LEFT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) || state[SDL_SCANCODE_A] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs))
-    {
-        mWorldBodyComponent->Run(false);
-        if(mWorldBodyComponent->GetVelocity().x != 0)
-            mIsRunning = true;
-        mRotation = Math::Pi;
-    }
-    else
-    {
-        mIsRunning = false;
-    }
+        if (state[SDL_SCANCODE_RIGHT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) ||
+            state[SDL_SCANCODE_D] && (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs)) {
+            mWorldBodyComponent->Run(true);
+            if (mWorldBodyComponent->GetVelocity().x != 0)
+                mIsRunning = true;
+            mRotation = 0;
+        } else if (state[SDL_SCANCODE_LEFT] && (mType == PlayerType::FireBoyHead || mType == PlayerType::FireBoyLegs) ||
+                   state[SDL_SCANCODE_A] &&
+                   (mType == PlayerType::WaterGirlHead || mType == PlayerType::WaterGirlLegs)) {
+            mWorldBodyComponent->Run(false);
+            if (mWorldBodyComponent->GetVelocity().x != 0)
+                mIsRunning = true;
+            mRotation = Math::Pi;
+        } else {
+            mIsRunning = false;
+        }
 
-    if(state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead)
-    {
-        GetGame()->changeShowColliders();
+        if (state[SDL_SCANCODE_C] && mType == PlayerType::FireBoyHead) {
+            GetGame()->changeShowColliders();
+        }
     }
 }
 
@@ -112,6 +112,11 @@ void Player::OnUpdate(float deltaTime)
     mWinner = GetGame()->GetStateWin();
 
     ManageAnimations();
+
+    if(mWinner){
+        mWinnerTime += deltaTime;
+        return;
+    }
 
     auto contactEdge = GetBodyComponent()->GetBody()->GetContactList();
 
@@ -137,11 +142,11 @@ void Player::OnUpdate(float deltaTime)
 
             if (mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" &&
                 sensor->GetFunction() == "Portal" &&
-                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 6)
+                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 10)
                 GetGame()->SetWinFireBoy(true);
             if (mType == PlayerType::WaterGirlHead && sensor->GetAffectBody() == "WaterGirl" &&
                 sensor->GetFunction() == "Portal" &&
-                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 6)
+                abs((GetPosition().x + mWorldBodyComponent->GetSize().x)/2 - (sensor->GetPosition().x + sensor->GetSize().x)/2) < 10)
                 GetGame()->SetWinWaterGirl(true);
 
             if((mType == PlayerType::FireBoyHead && sensor->GetAffectBody() == "FireBoy" ||
@@ -160,10 +165,15 @@ void Player::ManageAnimations()
 {
     if(mWinner)
     {
-        if(mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
-            mDrawComponent->SetAnimation("Stairs");
-        else
-            mDrawComponent->SetAnimation("Default");
+        if(mWinnerTime >= 9*0.16) {
+            if (mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
+                mDrawComponent->SetAnimation("Stairs");
+            else
+                mDrawComponent->SetAnimation("Default");
+        }
+        else{
+            mDrawComponent->SetAnimation("Idle");
+        }
     }
     else if(mIsDead)
     {
