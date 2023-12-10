@@ -80,7 +80,9 @@ void DrawAnimatedComponent::Update(float deltaTime)
     mAnimTimer += mAnimFPS*deltaTime*(1+(GetOwner()->GetForward().x/3000.0f));
 
     while(mAnimTimer >= (float)mAnimations[mAnimName].size()){
-        if(mAnimName == "Dead" || mAnimName == "Stairs") GetGame()->Shutdown();
+        if(mAnimName == "Dead" || mAnimName == "Stairs"){
+            GetGame()->Shutdown();
+        }
         else mAnimTimer -= (float)mAnimations[mAnimName].size();
     }
 

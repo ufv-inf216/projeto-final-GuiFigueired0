@@ -124,12 +124,12 @@
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
   <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
-  <object id="55" name="WaterGirl" type="Player" x="270.333" y="55.9997" width="32" height="32"/>
+  <object id="55" name="WaterGirl" type="Player" x="63.6667" y="624" width="32" height="32"/>
   <object id="57" name="PF" type="Sensor" x="672.364" y="126.386" width="64" height="70"/>
   <object id="58" name="PW" type="Sensor" x="416" y="124.545" width="64" height="70"/>
-  <object id="56" name="FireBoy" type="Player" x="351" y="112.666" width="32" height="32"/>
+  <object id="56" name="FireBoy" type="Player" x="64.3333" y="715.333" width="32" height="32"/>
   <object id="59" name="Block" type="Box" x="238.333" y="530" width="45" height="45"/>
-  <object id="147" name="Block" type="Box" x="403.333" y="413" width="29" height="32"/>
+  <object id="147" name="Block" type="Box" x="547.333" y="393.667" width="29" height="32"/>
   <object id="123" name="Block" type="Box" x="246.5" y="304.417" width="45" height="45"/>
   <object id="124" name="Floor" type="Box" x="640" y="768" width="128" height="32"/>
   <object id="125" name="Floor" type="Box" x="480" y="768" width="64" height="32"/>
@@ -152,11 +152,11 @@
   <object id="143" name="Floor" type="Ramp" x="480.468" y="640.164">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="158" name="DF" type="Sensor" x="426.023" y="719.273" width="12" height="12"/>
-  <object id="160" name="DW" type="Sensor" x="583.447" y="718.099" width="12" height="12"/>
+  <object id="158" name="DF" type="Sensor" x="419.69" y="718.94" width="12" height="12"/>
+  <object id="160" name="DW" type="Sensor" x="577.114" y="718.432" width="12" height="12"/>
   <object id="161" name="DW" type="Sensor" x="88.4543" y="131.879" width="12" height="12"/>
   <object id="194" name="DW" type="Sensor" x="254.454" y="410.879" width="12" height="12"/>
-  <object id="163" name="DF" type="Sensor" x="522.432" y="586.114" width="12" height="12"/>
+  <object id="163" name="DF" type="Sensor" x="512.765" y="585.114" width="12" height="12"/>
   <object id="164" name="DF" type="Sensor" x="613.833" y="272.5" width="12" height="12"/>
   <object id="181" name="LFC" type="Sensor" x="416" y="768" width="32" height="16"/>
   <object id="182" name="LFL" type="Sensor" x="384" y="768">

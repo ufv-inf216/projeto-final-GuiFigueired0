@@ -25,6 +25,7 @@ public:
     void UpdateLevel(float deltaTime);
     void DrawColliders(SDL_Renderer *renderer);
     class Game* GetGame() { return mGame; }
+    std::vector<class Actor*>* GetActors() { return &mActors; }
 
     // Tiled
     void LoadData(const std::string& fileName);

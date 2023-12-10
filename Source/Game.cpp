@@ -60,7 +60,7 @@ bool Game::Initialize()
     }
 
     mAudio = new AudioSystem(16);
-    //mAudio->PlaySound("Level Music.mp3",true);
+    mAudio->PlaySound("Level Music.mp3",true);
 
     Random::Init();
 
@@ -258,6 +258,11 @@ void Game::Shutdown()
     while (!mActors.empty())
     {
         delete mActors.back();
+    }
+
+    while (!GetLevel()->GetActors()->empty())
+    {
+        delete GetLevel()->GetActors()->back();
     }
 
     SDL_DestroyRenderer(mRenderer);

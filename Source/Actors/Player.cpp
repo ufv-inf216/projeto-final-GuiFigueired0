@@ -29,7 +29,7 @@ Player::Player(Game* game, const std::string &line, b2World* world, PlayerType t
     vertices.push_back(mColliderComponent->GetMin() + Vector2(0, 32));
     vertices.push_back(mColliderComponent->GetMin() + Vector2(32, 0));
     vertices.push_back(mColliderComponent->GetMax());
-    new DrawPolygonComponent(this, vertices);
+    //new DrawPolygonComponent(this, vertices);
 
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Characters/CharAssets.png", "../Assets/Sprites/Characters/CharAssets.json", 1/1.5f, Vector2(26,30), 110);
 
