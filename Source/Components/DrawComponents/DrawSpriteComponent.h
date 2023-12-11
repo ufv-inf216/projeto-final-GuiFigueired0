@@ -20,4 +20,6 @@ protected:
 
     int mWidth;
     int mHeight;
+
+    bool mFlip;
 };

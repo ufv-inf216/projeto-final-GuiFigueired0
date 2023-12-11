@@ -10,18 +10,26 @@ DrawSpriteComponent::DrawSpriteComponent(class Actor* owner, const std::string &
         :DrawComponent(owner, drawOrder)
         ,mWidth(width)
         ,mHeight(height)
+        ,mFlip(false)
 {
     mSpriteSheetSurface = GetGame()->LoadTexture(texturePath);
+
+    if(texturePath == "../Assets/Sprites/Menu/PreloaderAssets.png")
+        mFlip = true;
 }
 
 void DrawSpriteComponent::Draw(SDL_Renderer *renderer)
 {
+    SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
+
+    if(mFlip)
+        flip = SDL_FLIP_NONE;
+
     if(GetOwner()->GetState() != ActorState::Invisible) {
         Vector2 pos = GetOwner()->GetPosition();
-        Vector2 camera = GetGame()->GetCameraPos();
         SDL_Rect dstrect{
-                (int) pos.x - (int) camera.x,
-                (int) pos.y - (int) camera.y,
+                (int) pos.x,
+                (int) pos.y,
                 mWidth,
                 mHeight,
         };
@@ -31,7 +39,7 @@ void DrawSpriteComponent::Draw(SDL_Renderer *renderer)
                 nullptr, &dstrect,
                 mOwner->GetRotation(),
                 nullptr,
-                SDL_RendererFlip::SDL_FLIP_HORIZONTAL
+                flip
         );
     }
 }

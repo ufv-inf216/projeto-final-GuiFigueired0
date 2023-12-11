@@ -56,7 +56,6 @@ void DrawTileComponent::Draw(SDL_Renderer* renderer)
     for (size_t i = 0; i < numRows; i++) {
         for (size_t j = 0; j < numCols; j++) {
             Vector2 pos = mOwner->GetPosition();
-            Vector2 cameraPos = mOwner->GetGame()->GetCameraPos();
 
             int tile = mTiles[i][j];
 
@@ -73,8 +72,8 @@ void DrawTileComponent::Draw(SDL_Renderer* renderer)
             pos.y += i * mTileSize;
 
             SDL_Rect clipRect =  {x, y, mTileSize, mTileSize};
-            SDL_Rect renderQuad = {static_cast<int>(pos.x - cameraPos.x),
-                                   static_cast<int>(pos.y - cameraPos.y),
+            SDL_Rect renderQuad = {static_cast<int>(pos.x),
+                                   static_cast<int>(pos.y),
                                    clipRect.w,
                                    clipRect.h};
 

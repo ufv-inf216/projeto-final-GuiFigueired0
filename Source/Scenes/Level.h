@@ -8,18 +8,20 @@
 #include <SDL.h>
 #include <vector>
 #include <string>
-#include "Math.h"
-#include "CSV.h"
-#include <Box2D/Box2D.h>
-#include "Transform.h"
-#include "Game.h"
-#include "Actors/Player.h"
-#include "MyContactListener.h"
+#include "../Math.h"
+#include "../CSV.h"
+#include "box2d/box2d.h"
+#include "../Transform.h"
+#include "../Game.h"
+#include "../Actors/Player.h"
+#include "../MyContactListener.h"
 #include <fstream>
+#include "Scene.h"
 
-class Level {
+class Level : public Scene {
 public:
     Level(Game* game, std::string layerFileName, std::string objectsFileName);
+    ~Level();
 
     void InicializeLevel();
     void UpdateLevel(float deltaTime);
@@ -31,6 +33,8 @@ public:
 
     // Box2d
     class b2World* GetWorld() { return mWorld; }
+
+    void Load() override;
 private:
     class Game *mGame;
     Transform *tf;

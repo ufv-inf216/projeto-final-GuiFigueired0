@@ -34,18 +34,12 @@ add_executable(${PROJECT_NAME}
         Source/Components/DrawComponents/DrawSpriteComponent.h
         Source/Components/DrawComponents/DrawPolygonComponent.cpp
         Source/Components/DrawComponents/DrawPolygonComponent.h
-        Source/Actors/Mario.cpp
-        Source/Actors/Mario.h
         Source/Components/ColliderComponents/AABBColliderComponent.cpp
         Source/Components/ColliderComponents/AABBColliderComponent.h
         Source/Components/DrawComponents/DrawAnimatedComponent.cpp
         Source/Components/DrawComponents/DrawAnimatedComponent.h
         Source/Actors/Block.cpp
         Source/Actors/Block.h
-        Source/Actors/Goomba.cpp
-        Source/Actors/Goomba.h
-        Source/Actors/Spawner.cpp
-        Source/Actors/Spawner.h
         Source/CSV.h
         Source/Components/DrawComponents/DrawTileComponent.h
         Source/Components/DrawComponents/DrawTileComponent.cpp
@@ -57,14 +51,18 @@ add_executable(${PROJECT_NAME}
         Source/Actors/Player.h
         Source/Components/WorldBodyComponent.cpp
         Source/Components/WorldBodyComponent.h
-        Source/Level.cpp
-        Source/Level.h
+        Source/Scenes/Level.cpp
+        Source/Scenes/Level.h
         Source/MyContactListener.cpp
         Source/MyContactListener.h
         Source/Components/SensorBodyComponent.cpp
         Source/Components/SensorBodyComponent.h
         Source/Actors/Liquid.cpp
         Source/Actors/Liquid.h
+        Source/Scenes/Menu.h
+        Source/Scenes/Scene.h
+        Source/Scenes/Scene.cpp
+        Source/Scenes/Menu.cpp
 )
 
 ####### DO NOT EDIT BELLOW

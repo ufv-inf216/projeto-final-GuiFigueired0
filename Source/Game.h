@@ -12,7 +12,7 @@
 #include <string>
 #include "Math.h"
 #include "CSV.h"
-#include "Level.h"
+#include "Scenes/Level.h"
 #include <Box2D/Box2D.h>
 #include "Transform.h"
 #include "Actors/Actor.h"
@@ -21,6 +21,21 @@
 class Game
 {
 public:
+    const float SCENE_TRANSITION_TIME = 0.25f;
+
+    enum class GameScene
+    {
+        Menu,
+        Level
+    };
+
+    enum class FadeState
+    {
+        FadeIn,
+        FadeOut,
+        None
+    };
+
     Game(int windowWidth, int windowHeight);
 
     bool Initialize();
@@ -42,10 +57,11 @@ public:
     void RemoveCollider(class AABBColliderComponent* collider);
     std::vector<class AABBColliderComponent*>& GetColliders() { return mColliders; }
 
+    void SetScene(GameScene gameState);
+
     // Window functions
     int GetWindowWidth() const { return mWindowWidth; }
     int GetWindowHeight() const { return mWindowHeight; }
-    Vector2 GetCameraPos() const { return Vector2(0,0); };
 
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
@@ -63,6 +79,10 @@ private:
     void UpdateGame();
     void GenerateOutput();
 
+    // Unload actors for scene transition
+    void InitializeScene();
+    void UnloadActors();
+
     // All the actors in the game
     std::vector<class Actor*> mActors;
     std::vector<class Actor*> mPendingActors;
@@ -76,6 +96,7 @@ private:
     // SDL stuff
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
+    AudioSystem *mAudio;
 
     // Window properties
     int mWindowWidth;
@@ -86,10 +107,15 @@ private:
 
     // Track if we're updating actors right now
     bool mIsRunning;
+    bool mLevelRunning;
     bool mUpdatingActors;
 
-    // Audios
-    class AudioSystem *mAudio;
+    // Scene transition effect
+    FadeState mFadeState;
+    float mSceneTransitionTime;
+
+    GameScene mGameState;
+    class Scene *mScene;
 
     // Levels
     std::vector<Level*> mLevels;

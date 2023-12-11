@@ -386,6 +386,8 @@ public:
 	/// Dump this body to a file
 	void Dump();
 
+    ~b2Body();
+
 private:
 
 	friend class b2World;
@@ -418,9 +420,8 @@ private:
 	};
 
 	b2Body(const b2BodyDef* bd, b2World* world);
-	~b2Body();
 
-	void SynchronizeFixtures();
+    void SynchronizeFixtures();
 	void SynchronizeTransform();
 
 	// This is used to prevent connected bodies from colliding.

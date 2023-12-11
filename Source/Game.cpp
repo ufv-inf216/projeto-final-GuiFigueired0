@@ -22,19 +22,23 @@
 #include "Components/ColliderComponents/AABBColliderComponent.h"
 #include <Box2D/Box2D.h>
 #include "Components/DrawComponents/DrawPolygonComponent.h"
+#include "Scenes/Menu.h"
+#include "Scenes/Level.h"
 
 Game::Game(int windowWidth, int windowHeight)
         :mWindow(nullptr)
         ,mRenderer(nullptr)
         ,mTicksCount(0)
         ,mIsRunning(true)
+        ,mLevelRunning(false)
         ,mUpdatingActors(false)
+        ,mFadeState(FadeState::None)
+        ,mSceneTransitionTime(0.0f)
         ,mWindowWidth(windowWidth)
         ,mWindowHeight(windowHeight)
         ,mCurrentLevel(0)
-        ,mShowColliders(false)
+        ,mGameState(GameScene::Menu)
 {
-    mLevels.emplace_back(new Level(this, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/Map1_Objects.csv"));
 }
 
 bool Game::Initialize()
@@ -59,18 +63,52 @@ bool Game::Initialize()
         return false;
     }
 
-    mAudio = new AudioSystem(16);
-    //mAudio->PlaySound("Level Music.mp3",true);
+    if (IMG_Init(IMG_INIT_PNG) == 0)
+    {
+        SDL_Log("Unable to initialize SDL_image: %s", SDL_GetError());
+        return false;
+    }
+
+    mAudio = new AudioSystem();
 
     Random::Init();
 
     mTicksCount = SDL_GetTicks();
 
-    // Initialize the level
-    GetLevel(mCurrentLevel)->InicializeLevel();
-    mWin = {0,0};
+    InitializeScene();
 
     return true;
+}
+
+void Game::InitializeScene(){
+    switch (mGameState)
+    {
+        case GameScene::Menu:
+            mScene = new Menu(this);
+            mScene->Load();
+            break;
+
+        case GameScene::Level:
+            mWin = {0,0};
+            mLevels.push_back(new Level(this, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/Map1_Objects.csv"));
+            mScene = mLevels.back();
+            mScene->Load();
+            mLevelRunning = true;
+            break;
+        default:
+            break;
+    }
+}
+
+void Game::SetScene(GameScene gameState)
+{
+    // Stop all sounds
+    mAudio->StopAllSounds();
+    mFadeState = FadeState::FadeOut;
+    mLevelRunning = false;
+
+    // Handle scene transition
+    mGameState = gameState;
 }
 
 void Game::RunLoop()
@@ -102,6 +140,9 @@ void Game::ProcessInput()
     {
         actor->ProcessInput(state);
     }
+
+    mAudio->ProcessInput(state);
+    mScene->ProcessInput(state);
 }
 
 void Game::UpdateGame()
@@ -116,14 +157,36 @@ void Game::UpdateGame()
 
     mTicksCount = SDL_GetTicks();
 
-    // Box2D
-    GetLevel(mCurrentLevel)->UpdateLevel(deltaTime);
+    mAudio->Update(deltaTime);
 
     // Update all actors and pending actors
-
     UpdateActors(deltaTime);
 
-    mAudio->Update(deltaTime);
+    if (mFadeState == FadeState::FadeOut)
+    {
+        mSceneTransitionTime += deltaTime;
+        if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
+        {
+            mSceneTransitionTime = 0.0f;
+            mFadeState = FadeState::FadeIn;
+
+            UnloadActors();
+            InitializeScene();
+        }
+    }
+    else if (mFadeState == FadeState::FadeIn)
+    {
+        mSceneTransitionTime += deltaTime;
+        if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
+        {
+            mFadeState = FadeState::None;
+            mSceneTransitionTime = 0.0f;
+        }
+    }
+
+    if(mLevelRunning && mGameState == GameScene::Level)
+        GetLevel(mCurrentLevel)->UpdateLevel(deltaTime);
+
 }
 
 void Game::UpdateActors(float deltaTime)
@@ -231,6 +294,20 @@ void Game::GenerateOutput()
     if(showColliders())
         GetLevel(mCurrentLevel)->DrawColliders(mRenderer);
 
+    // Apply fade effect if changing scene
+    if (mFadeState == FadeState::FadeOut)
+    {
+        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, static_cast<Uint8>(255 * mSceneTransitionTime/SCENE_TRANSITION_TIME));
+        SDL_RenderFillRect(mRenderer, nullptr);
+    }
+    else if (mFadeState == FadeState::FadeIn)
+    {
+        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, static_cast<Uint8>(255 * (1.0f - mSceneTransitionTime/SCENE_TRANSITION_TIME)));
+        SDL_RenderFillRect(mRenderer, nullptr);
+    }
+
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);
 }
@@ -252,12 +329,22 @@ SDL_Texture* Game::LoadTexture(const std::string& texturePath) {
     return texture;
 }
 
-void Game::Shutdown()
+void Game::UnloadActors()
 {
     while (!mActors.empty())
     {
         delete mActors.back();
     }
+
+    delete mScene;
+}
+
+void Game::Shutdown()
+{
+    UnloadActors();
+
+    delete mAudio;
+    IMG_Quit();
 
     SDL_DestroyRenderer(mRenderer);
     SDL_DestroyWindow(mWindow);

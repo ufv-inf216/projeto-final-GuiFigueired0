@@ -3,13 +3,14 @@
 //
 
 #include "Level.h"
-#include "Actors/Actor.h"
-#include "Actors/Player.h"
-#include "Actors/Block.h"
-#include "Components/DrawComponents/DrawTileComponent.h"
-#include "Components/WorldBodyComponent.h"
-#include "Components/SensorBodyComponent.h"
-#include "Actors/Liquid.h"
+#include "Scene.h"
+#include "../Actors/Actor.h"
+#include "../Actors/Player.h"
+#include "../Actors/Block.h"
+#include "../Components/DrawComponents/DrawTileComponent.h"
+#include "../Components/WorldBodyComponent.h"
+#include "../Components/SensorBodyComponent.h"
+#include "../Actors/Liquid.h"
 
 // BOX2D
 float TIME_STEP = 1.0f / 60.0f;
@@ -18,6 +19,7 @@ const int POSITION_ITERATIONS = 3;
 
 Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
         : mGame(game),
+          Scene(game),
           mLayerFileName(std::move(layerFileName)),
           mObjectsFileName(std::move(objectsFileName)),
           mFireboy(nullptr),
@@ -25,7 +27,30 @@ Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
           mWorld(nullptr),
           tf(new Transform()),
           mContactListener(new MyContactListener())
-{}
+{
+}
+
+Level::~Level()
+{
+    delete mWorld;
+    delete mFireboy;
+    delete mWatergirl;
+    delete tf;
+    delete mContactListener;
+    while(!mWorldColliders.empty()){
+        delete mWorldColliders.back();
+    }
+    while(!mBodies.empty()){
+        delete mBodies.back();
+    }
+    while(!mActors.empty()){
+        delete mActors.back();
+    }
+}
+
+void Level::Load(){
+    InicializeLevel();
+}
 
 void Level::InicializeLevel() {
     b2Vec2 gravity(0.0f, -40.0f);
@@ -37,6 +62,7 @@ void Level::InicializeLevel() {
 
     new DrawTileComponent(map, "../Assets/Maps/Map2.csv", "../Assets/Maps/finalBlocks.png", 800, 800, 32);
     LoadData("../Assets/Maps/Map2_Objects.csv");
+    mGame->GetSound()->PlaySound("Level Music.mp3", true);
 }
 
 void Level::UpdateLevel(float deltaTime) {
