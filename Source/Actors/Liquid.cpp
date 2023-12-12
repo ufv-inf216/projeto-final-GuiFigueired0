@@ -14,13 +14,15 @@ Liquid::Liquid(const std::string &type, const std::string &affectBody, const std
     mType = affectBody == "WaterGirl" ? LiquidType::Lava : affectBody == "FireBoy" ? LiquidType::Water : LiquidType::Poison;
     mPos = orientation == "Right" ? LiquidPos::Right : orientation == "Left" ? LiquidPos::Left : LiquidPos::Center;
 
-    Vector2 position;
-    if((mType == LiquidType::Lava || mType == LiquidType::Poison) && mPos == LiquidPos::Center)
-        position = Vector2(0,11);
-    else if((mType == LiquidType::Lava || mType == LiquidType::Poison) && mPos == LiquidPos::Left)
-        position = Vector2(0,7);
+    Vector2 position = Vector2::Zero;
+    //if((mType == LiquidType::Lava || mType == LiquidType::Poison) && mPos == LiquidPos::Center)
+        //position = Vector2(8,9);
+    if((mType == LiquidType::Lava || mType == LiquidType::Poison) && mPos == LiquidPos::Left)
+        position = Vector2(8,5);
+    else if((mType == LiquidType::Lava || mType == LiquidType::Poison) && mPos == LiquidPos::Right)
+        position = Vector2(8,6);
     else
-        position = Vector2(0,8);
+        position = Vector2(8,9);
 
     mDrawComponent = new DrawAnimatedComponent(this, "../Assets/Sprites/Ground/GroundAssets.png", "../Assets/Sprites/Ground/GroundAssets.json", 1, position, 150);
 

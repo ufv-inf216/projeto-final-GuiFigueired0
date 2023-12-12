@@ -185,7 +185,7 @@ void Game::UpdateGame()
     }
 
     if(mLevelRunning && mGameState == GameScene::Level)
-        GetLevel(mCurrentLevel)->UpdateLevel(deltaTime);
+        GetLevel()->UpdateLevel(deltaTime);
 
 }
 
@@ -202,6 +202,7 @@ void Game::UpdateActors(float deltaTime)
     {
         mActors.emplace_back(pending);
     }
+    mPendingActors.clear();
     mPendingActors.clear();
 
     std::vector<Actor*> deadActors;
@@ -292,7 +293,7 @@ void Game::GenerateOutput()
         }
     }
     if(showColliders())
-        GetLevel(mCurrentLevel)->DrawColliders(mRenderer);
+        GetLevel()->DrawColliders(mRenderer);
 
     // Apply fade effect if changing scene
     if (mFadeState == FadeState::FadeOut)

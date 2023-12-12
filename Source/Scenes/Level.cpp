@@ -75,11 +75,12 @@ void Level::UpdateLevel(float deltaTime) {
         auto actor = dynamic_cast<Block*>(mActor);
         actor->SetPosition(actor->GetBodyComponent()->GetPosition());
     }
-
-    mWatergirl->GetBodyComponent()->Update();
-    mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
-    mFireboy->GetBodyComponent()->Update();
-    mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+    if(!GetGame()->GetStateWin()){
+        mWatergirl->GetBodyComponent()->Update();
+        mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
+        mFireboy->GetBodyComponent()->Update();
+        mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+    }
 }
 
 void Level::LoadData(const std::string& fileName)
@@ -113,18 +114,18 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
             } else if(tiles[1] == "Block"){
-                auto x = std::stoi(tiles[4]);
-                auto y = std::stoi(tiles[5]);
+                auto w = std::stoi(tiles[4]);
+                auto h = std::stoi(tiles[5]);
 
-                auto myBlock = new Block(GetGame(), "Blocks/Block", x, y);
+                auto myBlock = new Block(GetGame(), "Blocks/Block", w, h);
                 auto block = new WorldBodyComponent(line, GetWorld(), tf, myBlock);
                 mBodies.push_back(block);
                 myBlock->SetPosition(block->GetPosition());
                 myBlock->SetBodyComponent(block);
                 mActors.push_back(myBlock);
             } else if(tiles[0] == "Sensor") {
-                auto x = std::stoi(tiles[4]);
-                auto y = std::stoi(tiles[5]);
+                auto w = std::stoi(tiles[4]);
+                auto h = std::stoi(tiles[5]);
                 std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : tiles[1][0] == 'L' ? "Liquid" : "None";
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : tiles[1][1] == 'W' ? "WaterGirl" : "Both";
                 if(type == "Liquid"){
@@ -135,13 +136,13 @@ void Level::LoadData(const std::string& fileName)
                 } else {
                     Block* myBlock;
                     if(type == "Portal" && affect == "FireBoy")
-                        myBlock = new Block(GetGame(), "Temple/DoorFire", x, y);
+                        myBlock = new Block(GetGame(), "Temple/DoorFire", w, h);
                     else if(type == "Portal" && affect == "WaterGirl")
-                        myBlock = new Block(GetGame(), "Temple/DoorWater", x, y);
+                        myBlock = new Block(GetGame(), "Temple/DoorWater", w, h);
                     else if(type == "Diamond" && affect == "FireBoy")
-                        myBlock = new Block(GetGame(), "Characters/DiamondFire", x, y);
+                        myBlock = new Block(GetGame(), "Characters/DiamondFire", w*2, h*2);
                     else if(type == "Diamond" && affect == "WaterGirl")
-                        myBlock = new Block(GetGame(), "Characters/DiamondWater", x, y);
+                        myBlock = new Block(GetGame(), "Characters/DiamondWater", w*2, h*2);
                     myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf, myBlock));
                     myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
                     mBodies.push_back(myBlock->GetBodyComponent());

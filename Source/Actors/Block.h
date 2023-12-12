@@ -20,4 +20,5 @@ private:
     class DrawAnimatedComponent* mDrawComponent;
     WorldBodyComponent* mWorldBodyComponent;
     SoundHandle mSoundHandle;
+    std::string mDoorType;
 };

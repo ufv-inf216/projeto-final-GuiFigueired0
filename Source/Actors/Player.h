@@ -38,6 +38,7 @@ private:
 
     float mForwardSpeed;
     float mJumpSpeed;
+    float mWinnerTime;
     bool mIsDead;
     bool mWinner;
     bool mIsRunning;
