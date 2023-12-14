@@ -19,7 +19,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
     if(tiles[1] == "Wall") mType = BodyTypes::Wall;
     if(tiles[1] == "Floor" || tiles[1] == "Block") mType = BodyTypes::Floor;
     if(tiles[1] == "Ceiling") mType = BodyTypes::Ceiling;
-    if(tiles[1] == "Ball") mType = BodyTypes::Ball;
+    if(tiles[1][0] == 'P') mType = BodyTypes::Platform;
     if(tiles[1] == "Portal") mType = BodyTypes::Sensor;
 
     if(tiles[0] == "Ramp") {
@@ -49,7 +49,27 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         float height = std::stof(tiles[5]);
         Vector2 size(width, height);
 
-        if(tiles[1] == "Block")
+        if(tiles[0] == "Platform" && tiles[1][0] == 'P') {
+            b2BodyDef bodyDef;
+            bodyDef.type = b2_kinematicBody;
+            bodyDef.position = tf->posMapToWorld(pos, size);
+            b2Body* kinematicBody = GetWorld()->CreateBody(&bodyDef);
+            kinematicBody->SetLinearVelocity(b2Vec2(0.0f, 1.0f));
+
+            // Adicionando uma forma ao corpo (um retângulo)
+            b2PolygonShape kinematicBox;
+            b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
+            kinematicBox.SetAsBox(worldSize.x, worldSize.y);
+
+            // Configurando a densidade, fricção e restituição
+            b2FixtureDef fixtureDef;
+            fixtureDef.shape = &kinematicBox;
+            fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
+            kinematicBody->CreateFixture(&fixtureDef);
+            mBody = kinematicBody;
+            mBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+        }
+        else if(tiles[1] == "Block")
         {
             b2BodyDef bodyDef;
             bodyDef.type = b2_dynamicBody;
@@ -117,7 +137,6 @@ class b2Body *WorldBodyComponent::CreateBody(const Vector2 &position, const Vect
 }
 
 void WorldBodyComponent::Update(){
-    if(GetClass()=="Ramp" || GetClass() == "Sensor" || GetClass() == "Ball") return;
     if(GetType() == BodyTypes::Player)
         mBody->SetLinearVelocity(b2Vec2(0, mBody->GetLinearVelocity().y));
 }

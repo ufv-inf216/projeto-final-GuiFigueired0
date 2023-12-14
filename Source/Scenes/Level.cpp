@@ -120,10 +120,9 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
             } else if(tiles[1][0] == 'P'){
-                auto w = std::stoi(tiles[4]);
-                auto h = std::stoi(tiles[5]);
-                if(tiles[0] == "Box"){
-                    mPlatforms.push_back(new Platform(GetGame(), line, GetWorld(), tf, 0));
+                if(tiles[0] == "Platform"){
+                    auto newPlatform = new class Platform(GetGame(), line, GetWorld(), tf, 2);
+                    mPlatforms.push_back(newPlatform);
                     mBodies.push_back(mPlatforms.back()->GetBodyComponent());
                 } else {
                     int id = tiles[1][1] - '0';
@@ -131,6 +130,7 @@ void Level::LoadData(const std::string& fileName)
                     auto mySensor = new SensorBodyComponent("Platform", "Platform", line, GetWorld(), tf, myPlatform);
                     if(tiles[1][2] == 'T') myPlatform->SetTopSensor(mySensor);
                     else myPlatform->SetBottomSensor(mySensor);
+                    mBodies.push_back(mySensor);
                 }
 
             } else if(tiles[1] == "Block"){

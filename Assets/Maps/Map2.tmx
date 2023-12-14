@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="198">
  <editorsettings>
-  <export target="Map2.csv" format="csv"/>
+  <export target="Source/Map2.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="finalBlocks.png" width="256" height="256"/>
@@ -179,7 +179,7 @@
   <object id="193" name="Floor" type="Ramp" x="575.727" y="639.848">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
-  <object id="195" name="P0" type="Box" x="32" y="448" width="64" height="16"/>
+  <object id="195" name="P0" type="Box" x="40.25" y="511" width="41.5" height="16"/>
   <object id="196" name="P0T" type="Sensor" x="32" y="446" width="64" height="2"/>
   <object id="197" name="P0B" type="Sensor" x="32" y="576" width="64" height="2"/>
  </objectgroup>

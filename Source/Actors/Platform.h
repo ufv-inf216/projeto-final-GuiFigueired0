@@ -34,6 +34,7 @@ private:
     SensorBodyComponent *topSensor, *bottomSensor;
     float mVelocity;
     int id;
+    float hPos;
 };
 
 

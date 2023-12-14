@@ -18,7 +18,7 @@ enum BodyTypes {
     Floor = 4,
     Ceiling = 8,
     Box = 16,
-    Ball = 32,
+    Platform = 32,
     Sensor = 64
 };
 

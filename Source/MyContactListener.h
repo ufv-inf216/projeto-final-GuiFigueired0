@@ -16,6 +16,7 @@
 #include "Transform.h"
 #include "Actors/Actor.h"
 #include "Actors/Player.h"
+#include "Actors/Platform.h"
 #include "Game.h"
 #include "Actors/Player.h"
 #include "Components/WorldBodyComponent.h"

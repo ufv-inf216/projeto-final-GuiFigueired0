@@ -8,7 +8,7 @@
 void MyContactListener::BeginContact(b2Contact* contact) {
     auto* bodyA = &contact->GetFixtureA()->GetBody()->GetUserData();
     auto* bodyB = &contact->GetFixtureB()->GetBody()->GetUserData();
-    auto a = reinterpret_cast<WorldBodyComponent*>(bodyA->pointer);
+    auto a = (WorldBodyComponent*)(bodyA->pointer);
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
         if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b)) {
@@ -43,6 +43,7 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 }
             }
         }
+
     }
 }
 
@@ -63,7 +64,7 @@ void MyContactListener::EndContact(b2Contact *contact) {
                 if(b->cont_Collision == 0)
                     b->SetIsOnGround(false);
             }
-        } else if (isPlayerOnSensor(a, b)) {
+        } else if(isPlayerOnSensor(a, b)) {
             SensorBodyComponent *sensor;
             WorldBodyComponent *player;
             if (a->GetClass() == "Sensor") {
