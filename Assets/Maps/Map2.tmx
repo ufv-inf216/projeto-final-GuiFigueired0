@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="195">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="198">
  <editorsettings>
-  <export target="Source/Map2.json" format="json"/>
+  <export target="Map2.csv" format="csv"/>
  </editorsettings>
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="finalBlocks.png" width="256" height="256"/>
@@ -22,7 +22,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
-1,2,2,5,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,1,
+1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,
@@ -35,7 +35,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="2" name="colliders">
+ <objectgroup id="2" name="colliders" class="Sensor">
   <object id="1" name="Wall" type="Box" x="0" y="0" width="32" height="800"/>
   <object id="3" name="Wall" type="Box" x="768" y="0" width="32" height="800"/>
   <object id="6" name="Floor" type="Box" x="32" y="768" width="352" height="32"/>
@@ -55,7 +55,7 @@
   <object id="21" name="Floor" type="Box" x="32.2194" y="352.849" width="639.75" height="29.4886"/>
   <object id="23" name="Floor" type="Box" x="224.261" y="192.266" width="544" height="29.4886"/>
   <object id="17" name="Floor" type="Box" x="416.364" y="640.054" width="64" height="29.8697"/>
-  <object id="11" name="Floor" type="Box" x="127.905" y="448" width="352.095" height="30"/>
+  <object id="11" name="Floor" type="Box" x="96" y="448" width="384.095" height="30"/>
   <object id="9" name="Ceiling" type="Box" x="32" y="606" width="352" height="2"/>
   <object id="14" name="Ceiling" type="Box" x="32" y="606" width="352" height="2"/>
   <object id="16" name="Ceiling" type="Box" x="32.0528" y="701.921" width="256" height="1.96591"/>
@@ -120,13 +120,10 @@
   <object id="52" name="Floor" type="Ramp" x="191.914" y="160.091">
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
-  <object id="156" name="Floor" type="Ramp" x="127" y="448">
-   <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
-  </object>
   <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
   <object id="55" name="WaterGirl" type="Player" x="63.6667" y="624" width="32" height="32"/>
-  <object id="57" name="PF" type="Sensor" x="672.364" y="126.386" width="64" height="70"/>
-  <object id="58" name="PW" type="Sensor" x="416" y="124.545" width="64" height="70"/>
+  <object id="57" name="SF" type="Sensor" x="672.364" y="126.386" width="64" height="70"/>
+  <object id="58" name="SW" type="Sensor" x="416" y="124.545" width="64" height="70"/>
   <object id="56" name="FireBoy" type="Player" x="64.3333" y="715.333" width="32" height="32"/>
   <object id="59" name="Block" type="Box" x="238.333" y="530" width="45" height="45"/>
   <object id="147" name="Block" type="Box" x="547.333" y="393.667" width="29" height="32"/>
@@ -182,5 +179,8 @@
   <object id="193" name="Floor" type="Ramp" x="575.727" y="639.848">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
+  <object id="195" name="P0" type="Box" x="32" y="448" width="64" height="16"/>
+  <object id="196" name="P0T" type="Sensor" x="32" y="446" width="64" height="2"/>
+  <object id="197" name="P0B" type="Sensor" x="32" y="576" width="64" height="2"/>
  </objectgroup>
 </map>

@@ -67,8 +67,14 @@ void Level::InicializeLevel() {
 
 void Level::UpdateLevel(float deltaTime) {
     GetWorld()->Step(deltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+
     for(auto &body: mBodies){
         body->Update();
+    }
+
+    for(auto &platform: mPlatforms){
+        platform->OnUpdate();
+        platform->SetPosition(platform->GetBodyComponent()->GetPosition());
     }
 
     for(auto & mActor : mActors){
@@ -113,6 +119,20 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl = new class Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
+            } else if(tiles[1][0] == 'P'){
+                auto w = std::stoi(tiles[4]);
+                auto h = std::stoi(tiles[5]);
+                if(tiles[0] == "Box"){
+                    mPlatforms.push_back(new Platform(GetGame(), line, GetWorld(), tf, 0));
+                    mBodies.push_back(mPlatforms.back()->GetBodyComponent());
+                } else {
+                    int id = tiles[1][1] - '0';
+                    auto myPlatform = mPlatforms[id];
+                    auto mySensor = new SensorBodyComponent("Platform", "Platform", line, GetWorld(), tf, myPlatform);
+                    if(tiles[1][2] == 'T') myPlatform->SetTopSensor(mySensor);
+                    else myPlatform->SetBottomSensor(mySensor);
+                }
+
             } else if(tiles[1] == "Block"){
                 auto w = std::stoi(tiles[4]);
                 auto h = std::stoi(tiles[5]);
@@ -126,7 +146,7 @@ void Level::LoadData(const std::string& fileName)
             } else if(tiles[0] == "Sensor") {
                 auto w = std::stoi(tiles[4]);
                 auto h = std::stoi(tiles[5]);
-                std::string type = tiles[1][0] == 'P' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : tiles[1][0] == 'L' ? "Liquid" : "None";
+                std::string type = tiles[1][0] == 'S' ? "Portal" : tiles[1][0] == 'D' ? "Diamond" : tiles[1][0] == 'L' ? "Liquid" : "None";
                 std::string affect = tiles[1][1] == 'F' ? "FireBoy" : tiles[1][1] == 'W' ? "WaterGirl" : "Both";
                 if(type == "Liquid"){
                     std::string orientation = tiles[1][2] == 'R' ? "Right" : tiles[1][2] == 'L' ? "Left" : "Center";

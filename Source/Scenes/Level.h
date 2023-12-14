@@ -17,6 +17,7 @@
 #include "../MyContactListener.h"
 #include <fstream>
 #include "Scene.h"
+#include "../Actors/Platform.h"
 
 class Level : public Scene {
 public:
@@ -52,7 +53,7 @@ private:
     class MyContactListener *mContactListener;
     std::vector<WorldBodyComponent*> mBodies;
     std::vector<class Actor*> mActors;
+    std::vector<class Platform*> mPlatforms;
 };
-
 
 #endif

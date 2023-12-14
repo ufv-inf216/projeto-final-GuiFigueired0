@@ -63,6 +63,8 @@ add_executable(${PROJECT_NAME}
         Source/Scenes/Scene.h
         Source/Scenes/Scene.cpp
         Source/Scenes/Menu.cpp
+        Source/Actors/Platform.cpp
+        Source/Actors/Platform.h
 )
 
 ####### DO NOT EDIT BELLOW
