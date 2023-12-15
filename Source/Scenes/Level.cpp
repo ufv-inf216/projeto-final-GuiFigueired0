@@ -119,11 +119,11 @@ void Level::LoadData(const std::string& fileName)
                     mWatergirl = new class Player(GetGame(), line, GetWorld(), PlayerType::WaterGirlHead, tf);
                     mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
                 }
-            } else if(tiles[1][0] == 'P'){
-                if(tiles[0] == "Platform"){
-                    auto newPlatform = new class Platform(GetGame(), line, GetWorld(), tf, 2);
-                    mPlatforms.push_back(newPlatform);
-                    mBodies.push_back(mPlatforms.back()->GetBodyComponent());
+            } else if(tiles[0] == "Platform"){
+                auto newPlatform = new class Platform(GetGame(), line, GetWorld(), tf);
+                mPlatforms.push_back(newPlatform);
+                mBodies.push_back(mPlatforms.back()->GetBodyComponent());
+                /*
                 } else {
                     int id = tiles[1][1] - '0';
                     auto myPlatform = mPlatforms[id];
@@ -132,7 +132,7 @@ void Level::LoadData(const std::string& fileName)
                     else myPlatform->SetBottomSensor(mySensor);
                     mBodies.push_back(mySensor);
                 }
-
+                */
             } else if(tiles[1] == "Block"){
                 auto w = std::stoi(tiles[4]);
                 auto h = std::stoi(tiles[5]);

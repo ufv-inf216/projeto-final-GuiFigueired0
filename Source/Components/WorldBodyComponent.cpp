@@ -19,7 +19,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
     if(tiles[1] == "Wall") mType = BodyTypes::Wall;
     if(tiles[1] == "Floor" || tiles[1] == "Block") mType = BodyTypes::Floor;
     if(tiles[1] == "Ceiling") mType = BodyTypes::Ceiling;
-    if(tiles[1][0] == 'P') mType = BodyTypes::Platform;
+    if(tiles[0] == "Platform") mType = BodyTypes::Platform;
     if(tiles[1] == "Portal") mType = BodyTypes::Sensor;
 
     if(tiles[0] == "Ramp") {
@@ -49,7 +49,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         float height = std::stof(tiles[5]);
         Vector2 size(width, height);
 
-        if(tiles[0] == "Platform" && tiles[1][0] == 'P') {
+        if(tiles[0] == "Platform") {
             b2BodyDef bodyDef;
             bodyDef.type = b2_kinematicBody;
             bodyDef.position = tf->posMapToWorld(pos, size);

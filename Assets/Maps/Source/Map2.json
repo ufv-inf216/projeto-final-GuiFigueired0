@@ -1362,35 +1362,29 @@
                 {
                  "height":16,
                  "id":195,
-                 "name":"P0",
+                 "name":"0",
+                 "properties":[
+                        {
+                         "name":"BottomLimit",
+                         "type":"float",
+                         "value":576
+                        }, 
+                        {
+                         "name":"TopLimit",
+                         "type":"float",
+                         "value":448
+                        }, 
+                        {
+                         "name":"Velocity",
+                         "type":"float",
+                         "value":2
+                        }],
                  "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":41.5,
-                 "x":40.25,
-                 "y":511
-                }, 
-                {
-                 "height":2,
-                 "id":196,
-                 "name":"P0T",
-                 "rotation":0,
-                 "type":"Sensor",
-                 "visible":true,
-                 "width":64,
-                 "x":32,
-                 "y":446
-                }, 
-                {
-                 "height":2,
-                 "id":197,
-                 "name":"P0B",
-                 "rotation":0,
-                 "type":"Sensor",
+                 "type":"Platform",
                  "visible":true,
                  "width":64,
                  "x":32,
-                 "y":576
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",

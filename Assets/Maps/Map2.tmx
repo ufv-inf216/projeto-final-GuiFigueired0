@@ -179,8 +179,12 @@
   <object id="193" name="Floor" type="Ramp" x="575.727" y="639.848">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
-  <object id="195" name="P0" type="Box" x="40.25" y="511" width="41.5" height="16"/>
-  <object id="196" name="P0T" type="Sensor" x="32" y="446" width="64" height="2"/>
-  <object id="197" name="P0B" type="Sensor" x="32" y="576" width="64" height="2"/>
+  <object id="195" name="0" type="Platform" x="32" y="448" width="64" height="16">
+   <properties>
+    <property name="BottomLimit" type="float" value="576"/>
+    <property name="TopLimit" type="float" value="448"/>
+    <property name="Velocity" type="float" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
