@@ -105,7 +105,7 @@ void Game::InitializeScene(){
             mCurrentLevel++;
             mWin = {0,0};
             mDead = 0;
-            layerFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Layer1.csv";
+            layerFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + ".csv";
             objectsFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Objects.csv";
             mLevels.push_back(new Level(this, layerFileName, objectsFileName));
             mScene = mLevels.back();
@@ -126,9 +126,6 @@ void Game::SetScene(GameScene gameState)
 
     // Handle scene transition
     mGameState = gameState;
-
-    if(mGameState == GameScene::Menu)
-        mCurrentLevel = 0;
 }
 
 void Game::RunLoop()
@@ -171,7 +168,6 @@ void Game::ProcessInput()
     if(GetStateWin() && timeEnd <= 0){
         SetScene(GameScene::Level);
         timeEnd = 12.0f;
-        mWin = {0,0};
     }
     else if(GetStateWin()){
         timeEnd -= 0.1f;
