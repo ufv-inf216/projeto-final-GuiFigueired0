@@ -23,8 +23,9 @@ with open(fileInputName, 'r') as file:
 					if object["type"] == "Platform":
 						customProperties = object["properties"]
 						line += ',' + str(customProperties[0]["value"]) # BottomLimit
+						line += ',' + str(customProperties[2]["value"]) # Velocity
+						line += ',' + str(customProperties[3]["value"]) # Color
 						line += ',' + str(customProperties[1]["value"]) # TopLimit
-						line += ',' + str(customProperties[2]["value"]) + ',' # Velocity
 					else:
 						line += ",,,,"
 				outFile.write(line + '\n')

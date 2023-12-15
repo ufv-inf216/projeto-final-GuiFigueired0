@@ -133,11 +133,11 @@ void Level::LoadData(const std::string& fileName)
                     mBodies.push_back(mySensor);
                 }
                 */
-            } else if(tiles[1] == "Block"){
+            } else if(tiles[0] == "Block" || tiles[0] == "Ball"){
                 auto w = std::stoi(tiles[4]);
                 auto h = std::stoi(tiles[5]);
 
-                auto myBlock = new Block(GetGame(), "Blocks/Block", w, h);
+                auto myBlock = new Block(GetGame(), "Blocks/" + tiles[0], w, h);
                 auto block = new WorldBodyComponent(line, GetWorld(), tf, myBlock);
                 mBodies.push_back(block);
                 myBlock->SetPosition(block->GetPosition());
@@ -181,10 +181,18 @@ void Level::DrawColliders(SDL_Renderer *renderer){
     for(int i=0; i<mBodies.size(); i++){
         if(mBodies[i]->GetClass() == "Ramp") continue;
         auto collider = mBodies[i]->GetBody();
-        auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
-        b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
-        auto position = tf->posWorldToMap(collider->GetPosition(), worldSize);
-        Vector2 size(worldSize.x*32, worldSize.y*32);
+        Vector2 size, position;
+        if(mBodies[i]->GetClass() == "Ball"){
+            auto shape = dynamic_cast<b2CircleShape*>(collider->GetFixtureList()->GetShape());
+            float radius = shape->m_radius;
+            position = tf->posWorldToMap(collider->GetPosition(), b2Vec2(2 * radius, 2 * radius));
+            size = Vector2(2*radius*32, 2*radius*32);
+        } else {
+            auto groundBox = dynamic_cast<b2PolygonShape*>(collider->GetFixtureList()->GetShape());
+            b2Vec2 worldSize = groundBox->m_vertices[2] - groundBox->m_vertices[0];
+            position = tf->posWorldToMap(collider->GetPosition(), worldSize);
+            size = Vector2(worldSize.x*32, worldSize.y*32);
+        }
 
         std::vector<Vector2> vertices;
         vertices.push_back(position);

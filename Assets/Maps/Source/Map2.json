@@ -442,19 +442,19 @@
                          "y":0
                         }, 
                         {
-                         "x":31.8125,
-                         "y":31.9375
+                         "x":31.8670802696078,
+                         "y":32.253288269043
                         }, 
                         {
-                         "x":-0.0625,
-                         "y":32
+                         "x":-0.0626072303921569,
+                         "y":32.31640625
                         }],
                  "rotation":0,
                  "type":"Ramp",
                  "visible":true,
                  "width":0,
-                 "x":480.152,
-                 "y":448.065
+                 "x":480.097419730392,
+                 "y":448.01421875
                 }, 
                 {
                  "height":0,
@@ -875,9 +875,9 @@
                 {
                  "height":45,
                  "id":59,
-                 "name":"Block",
+                 "name":"Box",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Block",
                  "visible":true,
                  "width":45,
                  "x":238.333,
@@ -886,9 +886,9 @@
                 {
                  "height":32,
                  "id":147,
-                 "name":"Block",
+                 "name":"Box",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Block",
                  "visible":true,
                  "width":29,
                  "x":547.333,
@@ -897,9 +897,9 @@
                 {
                  "height":45,
                  "id":123,
-                 "name":"Block",
+                 "name":"Box",
                  "rotation":0,
-                 "type":"Box",
+                 "type":"Block",
                  "visible":true,
                  "width":45,
                  "x":246.5,
@@ -1370,6 +1370,11 @@
                          "value":576
                         }, 
                         {
+                         "name":"Color",
+                         "type":"string",
+                         "value":"Red"
+                        }, 
+                        {
                          "name":"TopLimit",
                          "type":"float",
                          "value":448
@@ -1385,6 +1390,18 @@
                  "width":64,
                  "x":32,
                  "y":448
+                }, 
+                {
+                 "ellipse":true,
+                 "height":24,
+                 "id":198,
+                 "name":"8",
+                 "rotation":0,
+                 "type":"Ball",
+                 "visible":true,
+                 "width":24,
+                 "x":357,
+                 "y":414.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1393,7 +1410,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":198,
+ "nextobjectid":199,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
