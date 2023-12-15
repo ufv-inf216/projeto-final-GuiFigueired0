@@ -20,6 +20,21 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 b->SetIsOnGround(true);
                 b->cont_Collision++;
             }
+        } else if(isPlayerOnPlatform(a, b)) {
+            if(b->GetType() == BodyTypes::Player){
+                if(a->GetPosition().x < b->GetPosition().x &&
+                   a->GetPosition().x + a->GetSize().x > b->GetPosition().x &&
+                   a->GetPosition().y > b->GetPosition().y + b->GetSize().y)
+                    b->SetIsOnGround(true);
+                b->cont_Collision++;
+            }
+            else{
+                if(b->GetPosition().x < a->GetPosition().x &&
+                   b->GetPosition().x + b->GetSize().x > a->GetPosition().x &&
+                   b->GetPosition().y > a->GetPosition().y + a->GetSize().y)
+                    a->SetIsOnGround(true);
+                a->cont_Collision++;
+            }
         } else if (isPlayerOnSensor(a, b)) {
             SensorBodyComponent *sensor;
             WorldBodyComponent *player;
@@ -53,7 +68,7 @@ void MyContactListener::EndContact(b2Contact *contact) {
     auto a = reinterpret_cast<WorldBodyComponent*>(bodyA->pointer);
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
-        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b)) {
+        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b) || isPlayerOnPlatform(a, b)) {
             if(a->GetType() == BodyTypes::Player){
                 a->cont_Collision--;
                 if(a->cont_Collision == 0)
@@ -97,6 +112,13 @@ bool MyContactListener::isPlayerOnBox(WorldBodyComponent *a, WorldBodyComponent 
 bool MyContactListener::isPlayerOnSensor(WorldBodyComponent *a, WorldBodyComponent *b) {
     if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
         if(a->GetClass() == "Sensor" || b->GetClass() == "Sensor")
+            return true;
+    return false;
+}
+
+bool MyContactListener::isPlayerOnPlatform(WorldBodyComponent *a, WorldBodyComponent *b) {
+    if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
+        if(a->GetClass() == "Platform" || b->GetClass() == "Platform")
             return true;
     return false;
 }
