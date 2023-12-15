@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="211">
- <editorsettings>
-  <export target="Source/Map2.json" format="json"/>
- </editorsettings>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="217">
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="finalBlocks.png" width="256" height="256"/>
  </tileset>
- <layer id="1" name="Layer1" width="25" height="25">
+ <layer id="1" name="Camada de Blocos 1" width="25" height="25">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
-1,2,2,2,2,5,1,1,6,2,2,2,2,2,2,2,5,1,1,6,2,2,2,2,1,
+1,2,2,2,2,5,1,1,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
-1,1,1,1,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
+1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,6,2,2,2,2,2,2,2,1,
 1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,6,2,2,2,2,2,2,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
-1,2,2,5,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,1,
+1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,
@@ -35,151 +32,98 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="2" name="colliders" class="Sensor">
-  <object id="1" name="Wall" type="Box" x="0" y="0" width="32" height="800"/>
-  <object id="3" name="Wall" type="Box" x="768" y="0" width="32" height="800"/>
-  <object id="6" name="Floor" type="Box" x="32" y="768" width="352" height="32"/>
-  <object id="25" name="Floor" type="Box" x="32" y="256" width="94" height="96"/>
-  <object id="27" name="Floor" type="Box" x="192" y="160" width="64" height="32"/>
-  <object id="28" name="Floor" type="Box" x="544" y="160" width="64" height="32"/>
-  <object id="30" name="Floor" type="Box" x="386" y="288" width="126" height="64"/>
-  <object id="29" name="Floor" type="Box" x="736" y="672" width="32" height="32"/>
-  <object id="26" name="Wall" type="Box" x="126" y="256" width="2" height="96"/>
-  <object id="31" name="Wall" type="Box" x="383.979" y="287.958" width="2" height="64"/>
-  <object id="150" name="Wall" type="Box" x="286.002" y="672.564" width="2" height="29.6667"/>
-  <object id="32" name="Wall" type="Box" x="704" y="704" width="64" height="64"/>
-  <object id="8" name="Floor" type="Box" x="32" y="576" width="352" height="30"/>
-  <object id="13" name="Floor" type="Box" x="32" y="576" width="352" height="30"/>
-  <object id="15" name="Floor" type="Box" x="32.0528" y="672.432" width="253.5" height="29.4886"/>
-  <object id="19" name="Floor" type="Box" x="480.553" y="480.182" width="288" height="29.4886"/>
-  <object id="21" name="Floor" type="Box" x="32.2194" y="352.849" width="639.75" height="29.4886"/>
-  <object id="23" name="Floor" type="Box" x="224.261" y="192.266" width="544" height="29.4886"/>
-  <object id="17" name="Floor" type="Box" x="416.364" y="640.054" width="64" height="29.8697"/>
-  <object id="11" name="Floor" type="Box" x="128.25" y="448" width="351.845" height="30"/>
-  <object id="9" name="Ceiling" type="Box" x="32" y="606" width="352" height="2"/>
-  <object id="14" name="Ceiling" type="Box" x="32" y="606" width="352" height="2"/>
-  <object id="16" name="Ceiling" type="Box" x="32.0528" y="701.921" width="256" height="1.96591"/>
-  <object id="20" name="Ceiling" type="Box" x="480.553" y="509.671" width="288" height="1.96591"/>
-  <object id="22" name="Ceiling" type="Box" x="32.2194" y="382.338" width="672" height="1.96591"/>
-  <object id="24" name="Ceiling" type="Box" x="224.261" y="221.754" width="544" height="1.96591"/>
-  <object id="18" name="Ceiling" type="Box" x="416.364" y="669.924" width="224" height="1.96631"/>
-  <object id="10" name="Ceiling" type="Box" x="96" y="478" width="384" height="2"/>
-  <object id="7" name="Ceiling" type="Box" x="32" y="0" width="736" height="32"/>
-  <object id="33" name="Ceiling" type="Box" x="224" y="224" width="96" height="64"/>
-  <object id="34" name="Ceiling" type="Box" x="608" y="384" width="96" height="32"/>
-  <object id="35" name="Ceiling" type="Box" x="672" y="512" width="96" height="32"/>
-  <object id="36" name="Ceiling" type="Box" x="736" y="544" width="32" height="32"/>
-  <object id="37" name="Floor" type="Ramp" x="608" y="160">
-   <polygon points="0,0 31.8125,31.9375 -0.0625,32"/>
-  </object>
-  <object id="41" name="Floor" type="Ramp" x="480.097" y="448.014">
+ <objectgroup id="2" name="colliders">
+  <object id="87" name="Wall" type="Box" x="0.181818" y="0" width="32" height="800"/>
+  <object id="88" name="Wall" type="Box" x="768.182" y="0" width="32" height="800"/>
+  <object id="89" name="Floor" type="Box" x="32.1818" y="768" width="439" height="32"/>
+  <object id="90" name="Floor" type="Box" x="32.1818" y="256" width="94" height="96"/>
+  <object id="91" name="Floor" type="Box" x="192.182" y="160" width="64" height="32"/>
+  <object id="93" name="Floor" type="Box" x="386.182" y="288" width="126" height="64"/>
+  <object id="94" name="Floor" type="Box" x="736.182" y="672" width="32" height="32"/>
+  <object id="95" name="Wall" type="Box" x="126.182" y="256" width="2" height="96"/>
+  <object id="96" name="Wall" type="Box" x="384.161" y="287.958" width="2" height="64"/>
+  <object id="97" name="Wall" type="Box" x="286.184" y="672.564" width="2" height="29.6667"/>
+  <object id="98" name="Wall" type="Box" x="704.182" y="704" width="64" height="64"/>
+  <object id="99" name="Floor" type="Box" x="32.1818" y="576" width="352" height="30"/>
+  <object id="100" name="Floor" type="Box" x="32.1818" y="576" width="352" height="30"/>
+  <object id="101" name="Floor" type="Box" x="32.2346" y="672.432" width="253.5" height="29.4886"/>
+  <object id="102" name="Floor" type="Box" x="480.735" y="480.182" width="288" height="29.4886"/>
+  <object id="103" name="Floor" type="Box" x="32.4012" y="352.849" width="639.75" height="29.4886"/>
+  <object id="104" name="Floor" type="Box" x="513.443" y="192.266" width="255" height="29.4886"/>
+  <object id="105" name="Floor" type="Box" x="416.546" y="640.054" width="158" height="29.8697"/>
+  <object id="106" name="Floor" type="Box" x="128.432" y="448" width="351.845" height="30"/>
+  <object id="107" name="Ceiling" type="Box" x="32.1818" y="606" width="352" height="2"/>
+  <object id="108" name="Ceiling" type="Box" x="32.1818" y="606" width="352" height="2"/>
+  <object id="109" name="Ceiling" type="Box" x="32.2346" y="701.921" width="256" height="1.96591"/>
+  <object id="110" name="Ceiling" type="Box" x="480.735" y="509.671" width="288" height="1.96591"/>
+  <object id="111" name="Ceiling" type="Box" x="32.4012" y="382.338" width="672" height="1.96591"/>
+  <object id="112" name="Ceiling" type="Box" x="224.443" y="221.754" width="544" height="1.96591"/>
+  <object id="113" name="Ceiling" type="Box" x="416.546" y="669.924" width="224" height="1.96631"/>
+  <object id="114" name="Ceiling" type="Box" x="96.1818" y="478" width="384" height="2"/>
+  <object id="115" name="Ceiling" type="Box" x="32.1818" y="0" width="736" height="32"/>
+  <object id="117" name="Ceiling" type="Box" x="608.182" y="384" width="96" height="32"/>
+  <object id="118" name="Ceiling" type="Box" x="672.182" y="512" width="96" height="32"/>
+  <object id="119" name="Ceiling" type="Box" x="736.182" y="544" width="32" height="32"/>
+  <object id="121" name="Floor" type="Ramp" x="480.279" y="448.014">
    <polygon points="0,0 31.8671,32.2533 -0.0626072,32.3164"/>
   </object>
-  <object id="42" name="Floor" type="Ramp" x="608" y="639.974">
+  <object id="122" name="Floor" type="Ramp" x="608.182" y="639.974">
    <polygon points="0,0 31.8125,29.9848 -0.0625,30.0435"/>
   </object>
-  <object id="157" name="Floor" type="Ramp" x="672" y="352.974">
+  <object id="123" name="Floor" type="Ramp" x="672.182" y="352.974">
    <polygon points="0,0 31.8125,29.9848 -0.0625,30.0435"/>
   </object>
-  <object id="39" name="Floor" type="Ramp" x="256.094" y="160">
+  <object id="124" name="Floor" type="Ramp" x="256.276" y="160">
    <polygon points="0,0 31.8125,31.9375 -0.0625,32"/>
   </object>
-  <object id="40" name="Floor" type="Ramp" x="512.126" y="288.031">
+  <object id="125" name="Floor" type="Ramp" x="512.308" y="288.031">
    <polygon points="0,0 63.9993,64.374 -0.125735,64.5"/>
   </object>
-  <object id="43" name="Floor" type="Ramp" x="384.247" y="576.213">
+  <object id="126" name="Floor" type="Ramp" x="384.429" y="576.213">
    <polygon points="0,0 63.9993,63.4667 -0.125735,63.5909"/>
   </object>
-  <object id="44" name="Ceiling" type="Ramp" x="416.091" y="672">
+  <object id="127" name="Ceiling" type="Ramp" x="416.273" y="672">
    <polygon points="0,0 -31.2727,-31.7273 0,-31.8182"/>
   </object>
-  <object id="45" name="Ceiling" type="Ramp" x="384" y="640">
+  <object id="128" name="Ceiling" type="Ramp" x="384.182" y="640">
    <polygon points="0,0 -31.2727,-31.7273 0,-31.8182"/>
   </object>
-  <object id="46" name="Ceiling" type="Ramp" x="480.413" y="511.87">
+  <object id="129" name="Ceiling" type="Ramp" x="480.595" y="511.87">
    <polygon points="0,0 -31.5771,-31.7273 0,-31.8182"/>
   </object>
-  <object id="47" name="Ceiling" type="Ramp" x="608.089" y="415.83">
+  <object id="130" name="Ceiling" type="Ramp" x="608.271" y="415.83">
    <polygon points="0,0 -31.5771,-31.7273 0,-31.8182"/>
   </object>
-  <object id="50" name="Ceiling" type="Ramp" x="224.173" y="223.837">
+  <object id="131" name="Ceiling" type="Ramp" x="224.355" y="223.837">
    <polygon points="0,0 -31.5771,-31.7273 0,-31.8182"/>
   </object>
-  <object id="48" name="Ceiling" type="Ramp" x="672" y="544">
+  <object id="132" name="Ceiling" type="Ramp" x="672.182" y="544">
    <polygon points="0,0 -31.5771,-31.7273 0,-31.8182"/>
   </object>
-  <object id="49" name="Ceiling" type="Ramp" x="736" y="576">
+  <object id="133" name="Ceiling" type="Ramp" x="736.182" y="576">
    <polygon points="0,0 -31.5771,-31.7273 0,-31.8182"/>
   </object>
-  <object id="51" name="Floor" type="Ramp" x="543.909" y="160.091">
+  <object id="135" name="Floor" type="Ramp" x="128.303" y="448.212">
    <polygon points="0,0 0.0909091,31.9091 -31.7273,32"/>
   </object>
-  <object id="210" name="Floor" type="Ramp" x="128.121" y="448.212">
+  <object id="136" name="Floor" type="Ramp" x="736.091" y="671.904">
    <polygon points="0,0 0.0909091,31.9091 -31.7273,32"/>
   </object>
-  <object id="66" name="Floor" type="Ramp" x="735.909" y="671.904">
-   <polygon points="0,0 0.0909091,31.9091 -31.7273,32"/>
-  </object>
-  <object id="52" name="Floor" type="Ramp" x="191.914" y="160.091">
+  <object id="137" name="Floor" type="Ramp" x="192.096" y="160.091">
    <polygon points="0,0 0.0860877,29.8525 -30.0446,29.9375"/>
   </object>
-  <object id="53" name="Ceiling" type="Box" x="160" y="190" width="32" height="2"/>
-  <object id="57" name="SF" type="Sensor" x="672.364" y="126.386" width="64" height="70"/>
-  <object id="58" name="SW" type="Sensor" x="416" y="124.545" width="64" height="70"/>
-  <object id="59" name="Box" type="Block" x="238.333" y="530" width="45" height="45"/>
-  <object id="147" name="Box" type="Block" x="258.833" y="316.167" width="29" height="32"/>
-  <object id="124" name="Floor" type="Box" x="640" y="768" width="128" height="32"/>
-  <object id="125" name="Floor" type="Box" x="480" y="768" width="64" height="32"/>
-  <object id="126" name="Floor" type="Box" x="384" y="784" width="96" height="16"/>
-  <object id="127" name="Floor" type="Box" x="544" y="784" width="96" height="16"/>
-  <object id="128" name="Floor" type="Ramp" x="479.773" y="768.159">
-   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
-  </object>
-  <object id="129" name="Floor" type="Ramp" x="639.818" y="768.182">
-   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
-  </object>
-  <object id="130" name="Floor" type="Ramp" x="384.091" y="768.273">
-   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
-  </object>
-  <object id="131" name="Floor" type="Ramp" x="544.273" y="768.091">
-   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
-  </object>
-  <object id="140" name="Floor" type="Box" x="576" y="640.05" width="32" height="29.8697"/>
-  <object id="141" name="Floor" type="Box" x="480.417" y="655.917" width="96" height="13.875"/>
-  <object id="143" name="Floor" type="Ramp" x="480.468" y="640.164">
-   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
-  </object>
-  <object id="158" name="DF" type="Sensor" x="419.273" y="697.815" width="24" height="24"/>
-  <object id="205" name="DF" type="Sensor" x="516.94" y="572.815" width="24" height="24"/>
-  <object id="208" name="DF" type="Sensor" x="619.94" y="268.815" width="24" height="24"/>
-  <object id="209" name="DW" type="Sensor" x="78.94" y="119.815" width="24" height="24"/>
-  <object id="207" name="DW" type="Sensor" x="256.107" y="402.107" width="24" height="24"/>
-  <object id="204" name="DW" type="Sensor" x="580.273" y="698.482" width="24" height="24"/>
-  <object id="181" name="LFC" type="Sensor" x="416" y="768" width="32" height="16"/>
-  <object id="182" name="LFL" type="Sensor" x="384" y="768">
-   <polygon points="0,0 32,0 32,16.3125"/>
-  </object>
-  <object id="183" name="LFR" type="Sensor" x="448" y="768">
-   <polygon points="0,0 -0.125,15.875 31.625,0"/>
-  </object>
-  <object id="187" name="LBC" type="Sensor" x="512" y="640" width="32" height="16"/>
-  <object id="188" name="LBL" type="Sensor" x="480" y="640">
-   <polygon points="0,0 32,0 32,16.3125"/>
-  </object>
-  <object id="189" name="LBR" type="Sensor" x="544" y="640">
-   <polygon points="0,0 -0.125,15.875 31.625,0"/>
-  </object>
-  <object id="190" name="LWC" type="Sensor" x="576" y="768" width="32" height="16"/>
-  <object id="191" name="LWL" type="Sensor" x="544" y="768">
-   <polygon points="0,0 32,0 32,16.3125"/>
-  </object>
-  <object id="192" name="LWR" type="Sensor" x="608" y="768">
-   <polygon points="0,0 -0.125,15.875 31.625,0"/>
-  </object>
-  <object id="193" name="Floor" type="Ramp" x="575.727" y="639.848">
-   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
-  </object>
-  <object id="195" name="0" type="Platform" x="704" y="384" width="64" height="16">
+  <object id="138" name="Ceiling" type="Box" x="160.182" y="190" width="32" height="2"/>
+  <object id="139" name="SF" type="Sensor" x="672.546" y="126.386" width="64" height="70"/>
+  <object id="140" name="SW" type="Sensor" x="553.182" y="126.545" width="64" height="70"/>
+  <object id="141" name="Box" type="Block" x="272.515" y="527" width="45" height="45"/>
+  <object id="143" name="Floor" type="Box" x="569.182" y="768" width="199" height="32"/>
+  <object id="151" name="Floor" type="Box" x="576.182" y="640.05" width="32" height="29.8697"/>
+  <object id="154" name="DF" type="Sensor" x="507.455" y="690.815" width="24" height="24"/>
+  <object id="156" name="DF" type="Sensor" x="51.1218" y="527.815" width="24" height="24"/>
+  <object id="157" name="DW" type="Sensor" x="394.122" y="86.815" width="24" height="24"/>
+  <object id="158" name="DW" type="Sensor" x="241.289" y="318.107" width="24" height="24"/>
+  <object id="159" name="DW" type="Sensor" x="679.955" y="570.482" width="24" height="24"/>
+  <object id="170" name="0" type="Platform" x="222.182" y="269" width="64" height="16">
    <properties>
     <property name="BottomLimit" type="float" value="480"/>
     <property name="Color" value="Red"/>
@@ -187,11 +131,56 @@
     <property name="Velocity" type="float" value="2"/>
    </properties>
   </object>
-  <object id="199" name="WaterGirl" type="Player" x="358" y="153.667" width="32" height="32">
+  <object id="171" name="WaterGirl" type="Player" x="463.515" y="101.667" width="32" height="32">
    <ellipse/>
   </object>
-  <object id="200" name="FireBoy" type="Player" x="295.333" y="150.334" width="32" height="32">
+  <object id="172" name="FireBoy" type="Player" x="310.182" y="99.667" width="32" height="32">
    <ellipse/>
   </object>
+  <object id="184" name="Floor" type="Box" x="473" y="785.021" width="96" height="13.875"/>
+  <object id="185" name="Floor" type="Ramp" x="473.051" y="769.268">
+   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
+  </object>
+  <object id="186" name="LBC" type="Sensor" x="504.583" y="769.104" width="32" height="16"/>
+  <object id="187" name="LBL" type="Sensor" x="472.583" y="769.104">
+   <polygon points="0,0 32,0 32,16.3125"/>
+  </object>
+  <object id="188" name="LBR" type="Sensor" x="536.583" y="769.104">
+   <polygon points="0,0 -0.125,15.875 31.625,0"/>
+  </object>
+  <object id="189" name="Floor" type="Ramp" x="568.31" y="768.952">
+   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
+  </object>
+  <object id="202" name="Floor" type="Box" x="223.5" y="192.256" width="96" height="29.4886"/>
+  <object id="203" name="Box" type="Block" x="202.5" y="113.5" width="45" height="45"/>
+  <object id="204" name="Floor" type="Box" x="320" y="207" width="96" height="16"/>
+  <object id="205" name="Floor" type="Ramp" x="415.818" y="191.182">
+   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
+  </object>
+  <object id="206" name="Floor" type="Ramp" x="320.273" y="191.091">
+   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
+  </object>
+  <object id="207" name="LWC" type="Sensor" x="352" y="191" width="32" height="16"/>
+  <object id="208" name="LWL" type="Sensor" x="320" y="191">
+   <polygon points="0,0 32,0 32,16.3125"/>
+  </object>
+  <object id="209" name="LWR" type="Sensor" x="384" y="191">
+   <polygon points="0,0 -0.125,15.875 31.625,0"/>
+  </object>
+  <object id="210" name="Floor" type="Box" x="416" y="208" width="96" height="16"/>
+  <object id="211" name="Floor" type="Ramp" x="511.818" y="192.182">
+   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
+  </object>
+  <object id="212" name="Floor" type="Ramp" x="416.273" y="192.091">
+   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
+  </object>
+  <object id="213" name="LWC" type="Sensor" x="448" y="192" width="32" height="16"/>
+  <object id="214" name="LWL" type="Sensor" x="416" y="192">
+   <polygon points="0,0 32,0 32,16.3125"/>
+  </object>
+  <object id="215" name="LWR" type="Sensor" x="480" y="192">
+   <polygon points="0,0 -0.125,15.875 31.625,0"/>
+  </object>
+  <object id="216" name="Box" type="Block" x="576.5" y="446" width="29" height="32"/>
  </objectgroup>
 </map>

@@ -234,10 +234,10 @@
     <property name="Velocity" type="float" value="2"/>
    </properties>
   </object>
-  <object id="85" name="WaterGirl" type="Player" x="65" y="626" width="32" height="32">
+  <object id="85" name="WaterGirl" type="Player" x="301.224" y="117.969" width="32" height="32">
    <ellipse/>
   </object>
-  <object id="86" name="FireBoy" type="Player" x="66.3333" y="716" width="32" height="32">
+  <object id="86" name="FireBoy" type="Player" x="363.838" y="115.061" width="32" height="32">
    <ellipse/>
   </object>
   <object id="261" type="Button" x="128" y="559.33" width="24" height="16"/>
