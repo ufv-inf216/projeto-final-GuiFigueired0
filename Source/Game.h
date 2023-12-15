@@ -77,10 +77,14 @@ public:
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }
     bool GetStateWin() { return mWin.first && mWin.second; }
+    bool GetStateDead() { return mDead; }
     void SetWinWaterGirl(bool status) {mWin.first = status; }
     void SetWinFireBoy(bool status) {mWin.second = status; }
+    void SetDead(bool status) {mDead = status; }
 
 private:
+    float timeEnd;
+
     void ProcessInput();
     void UpdateGame();
     void GenerateOutput();
@@ -132,4 +136,5 @@ private:
     int mCurrentLevel;
     bool mShowColliders;
     std::pair<bool, bool> mWin;
+    bool mDead;
 };

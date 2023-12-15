@@ -32,11 +32,13 @@ Game::Game(int windowWidth, int windowHeight)
         ,mTicksCount(0)
         ,mIsRunning(true)
         ,mIsPaused(false)
+        ,mDead(false)
         ,timePaused(0)
         ,mLevelRunning(false)
         ,mUpdatingActors(false)
         ,mFadeState(FadeState::None)
-        ,mSceneTransitionTime(0.0f)
+        ,mSceneTransitionTime(0.6f)
+        ,timeEnd(12.0f)
         ,mWindowWidth(windowWidth)
         ,mWindowHeight(windowHeight)
         ,mCurrentLevel(0)
@@ -102,6 +104,7 @@ void Game::InitializeScene(){
         case GameScene::Level:
             mCurrentLevel++;
             mWin = {0,0};
+            mDead = 0;
             layerFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Layer1.csv";
             objectsFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Objects.csv";
             mLevels.push_back(new Level(this, layerFileName, objectsFileName));
@@ -123,6 +126,9 @@ void Game::SetScene(GameScene gameState)
 
     // Handle scene transition
     mGameState = gameState;
+
+    if(mGameState == GameScene::Menu)
+        mCurrentLevel = 0;
 }
 
 void Game::RunLoop()
@@ -162,7 +168,23 @@ void Game::ProcessInput()
         timePaused -= 0.1f;
     }
 
-    if(!mIsPaused) {
+    if(GetStateWin() && timeEnd <= 0){
+        SetScene(GameScene::Level);
+        timeEnd = 12.0f;
+        mWin = {0,0};
+    }
+    else if(GetStateWin()){
+        timeEnd -= 0.1f;
+    }
+
+    if(GetStateDead() && timeEnd <= 0){
+        Shutdown();
+    }
+    else if(GetStateDead()){
+        timeEnd -= 0.1f;
+    }
+
+    if(!mIsPaused && !GetStateDead() && !GetStateWin()) {
         for (auto actor: mActors) {
             actor->ProcessInput(state);
         }
@@ -194,7 +216,7 @@ void Game::UpdateGame()
         mSceneTransitionTime += deltaTime;
         if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
         {
-            mSceneTransitionTime = 0.3f;
+            mSceneTransitionTime = 0.6f;
             mFadeState = FadeState::FadeIn;
 
             UnloadActors();
@@ -207,7 +229,7 @@ void Game::UpdateGame()
         if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
         {
             mFadeState = FadeState::None;
-            mSceneTransitionTime = 0.3f;
+            mSceneTransitionTime = 0.6f;
         }
     }
 
