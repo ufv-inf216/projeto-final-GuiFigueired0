@@ -160,9 +160,9 @@ void Level::LoadData(const std::string& fileName)
                     else if(type == "Portal" && affect == "WaterGirl")
                         myBlock = new Block(GetGame(), "Temple/DoorWater", w, h);
                     else if(type == "Diamond" && affect == "FireBoy")
-                        myBlock = new Block(GetGame(), "Characters/DiamondFire", w*2, h*2);
+                        myBlock = new Block(GetGame(), "Characters/DiamondFire", w, h);
                     else if(type == "Diamond" && affect == "WaterGirl")
-                        myBlock = new Block(GetGame(), "Characters/DiamondWater", w*2, h*2);
+                        myBlock = new Block(GetGame(), "Characters/DiamondWater", w, h);
                     myBlock->SetBodyComponent(new SensorBodyComponent(type, affect, line, GetWorld(), tf, myBlock));
                     myBlock->SetPosition(myBlock->GetBodyComponent()->GetPosition());
                     mBodies.push_back(myBlock->GetBodyComponent());
