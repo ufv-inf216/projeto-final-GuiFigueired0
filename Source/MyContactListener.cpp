@@ -11,7 +11,7 @@ void MyContactListener::BeginContact(b2Contact* contact) {
     auto a = (WorldBodyComponent*)(bodyA->pointer);
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
-        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b)) {
+        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b) || isPlayerOnBall(a, b)) {
             if(a->GetType() == BodyTypes::Player){
                 a->SetIsOnGround(true);
                 a->cont_Collision++;
@@ -71,7 +71,7 @@ void MyContactListener::EndContact(b2Contact *contact) {
     auto a = reinterpret_cast<WorldBodyComponent*>(bodyA->pointer);
     auto b = (WorldBodyComponent*)(bodyB->pointer);
     if(a && b) {
-        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b) || isPlayerOnPlatform(a, b)) {
+        if(isPlayerOnGround(a, b) || isPlayerOnBox(a, b) || isPlayerOnPlatform(a, b) || isPlayerOnBall(a, b)) {
             if(a->GetType() == BodyTypes::Player){
                 a->cont_Collision--;
                 if(a->cont_Collision == 0)
@@ -122,6 +122,13 @@ bool MyContactListener::isPlayerOnSensor(WorldBodyComponent *a, WorldBodyCompone
 bool MyContactListener::isPlayerOnPlatform(WorldBodyComponent *a, WorldBodyComponent *b) {
     if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
         if(a->GetClass() == "Platform" || b->GetClass() == "Platform")
+            return true;
+    return false;
+}
+
+bool MyContactListener::isPlayerOnBall(WorldBodyComponent *a, WorldBodyComponent *b) {
+    if(a->GetType() == BodyTypes::Player || b->GetType() == BodyTypes::Player)
+        if(a->GetClass() == "Ball" || b->GetClass() == "Ball")
             return true;
     return false;
 }

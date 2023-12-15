@@ -31,6 +31,7 @@ public:
     bool isPlayerOnBox(WorldBodyComponent* a, WorldBodyComponent* b);
     bool isPlayerOnSensor(WorldBodyComponent* a, WorldBodyComponent* b);
     bool isPlayerOnPlatform(WorldBodyComponent* a, WorldBodyComponent* b);
+    bool isPlayerOnBall(WorldBodyComponent* a, WorldBodyComponent* b);
 };
 
 
