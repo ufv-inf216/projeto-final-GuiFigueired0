@@ -24,12 +24,14 @@
 #include "Components/DrawComponents/DrawPolygonComponent.h"
 #include "Scenes/Menu.h"
 #include "Scenes/Level.h"
+#include "Font.h"
 
 Game::Game(int windowWidth, int windowHeight)
         :mWindow(nullptr)
         ,mRenderer(nullptr)
         ,mTicksCount(0)
         ,mIsRunning(true)
+        ,mIsPaused(false)
         ,mLevelRunning(false)
         ,mUpdatingActors(false)
         ,mFadeState(FadeState::None)
@@ -66,6 +68,12 @@ bool Game::Initialize()
     if (IMG_Init(IMG_INIT_PNG) == 0)
     {
         SDL_Log("Unable to initialize SDL_image: %s", SDL_GetError());
+        return false;
+    }
+
+    if (TTF_Init() != 0)
+    {
+        SDL_Log("Unable to initialize SDL_ttf: %s", SDL_GetError());
         return false;
     }
 
@@ -167,7 +175,7 @@ void Game::UpdateGame()
         mSceneTransitionTime += deltaTime;
         if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
         {
-            mSceneTransitionTime = 0.0f;
+            mSceneTransitionTime = 0.3f;
             mFadeState = FadeState::FadeIn;
 
             UnloadActors();
@@ -180,7 +188,7 @@ void Game::UpdateGame()
         if (mSceneTransitionTime >= SCENE_TRANSITION_TIME)
         {
             mFadeState = FadeState::None;
-            mSceneTransitionTime = 0.0f;
+            mSceneTransitionTime = 0.3f;
         }
     }
 
@@ -328,6 +336,30 @@ SDL_Texture* Game::LoadTexture(const std::string& texturePath) {
     }
 
     return texture;
+}
+
+Font* Game::GetFont(const std::string& fileName)
+{
+    auto iter = mFonts.find(fileName);
+    if (iter != mFonts.end())
+    {
+        return iter->second;
+    }
+    else
+    {
+        Font* font = new Font(this);
+        if (font->Load(fileName))
+        {
+            mFonts.emplace(fileName, font);
+        }
+        else
+        {
+            font->Unload();
+            delete font;
+            font = nullptr;
+        }
+        return font;
+    }
 }
 
 void Game::UnloadActors()

@@ -58,6 +58,11 @@ public:
     std::vector<class AABBColliderComponent*>& GetColliders() { return mColliders; }
 
     void SetScene(GameScene gameState);
+    void SetIsPaused(bool paused) { mIsPaused = paused; }
+
+    SDL_Renderer* GetRenderer() { return mRenderer; }
+
+    class Font* GetFont(const std::string& fileName);
 
     // Window functions
     int GetWindowWidth() const { return mWindowWidth; }
@@ -93,6 +98,8 @@ private:
     // All the collision components
     std::vector<class AABBColliderComponent*> mColliders;
 
+    std::map<std::string, class Font*> mFonts;
+
     // SDL stuff
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
@@ -109,6 +116,7 @@ private:
     bool mIsRunning;
     bool mLevelRunning;
     bool mUpdatingActors;
+    bool mIsPaused;
 
     // Scene transition effect
     FadeState mFadeState;

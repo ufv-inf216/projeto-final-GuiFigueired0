@@ -65,12 +65,17 @@ add_executable(${PROJECT_NAME}
         Source/Scenes/Menu.cpp
         Source/Actors/Platform.cpp
         Source/Actors/Platform.h
+        Source/Font.h
+        Source/Font.cpp
+        Source/Components/DrawComponents/DrawTextComponent.h
+        Source/Components/DrawComponents/DrawTextComponent.cpp
 )
 
 ####### DO NOT EDIT BELLOW
 find_package(SDL2 2.28.2 EXACT REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer box2d)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer SDL2_ttf::SDL2_ttf box2d)

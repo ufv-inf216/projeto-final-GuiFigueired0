@@ -6,10 +6,12 @@
 #include "../Game.h"
 #include "../Actors/Actor.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"
+#include "../Components/DrawComponents/DrawTextComponent.h"
 
 Menu::Menu(Game* game)
      :Scene(game)
 {
+    mMenuFont = game->GetFont("../Assets/Fonts/solemnit.ttf");
 }
 
 void Menu::Load()
@@ -20,7 +22,11 @@ void Menu::Load()
     // Press Space label
     auto *title = new Actor(GetGame());
     new DrawSpriteComponent(title, "../Assets/Sprites/Menu/PreloaderAssets.png", 465, 72);
-    title->SetPosition(Vector2(mGame->GetWindowWidth()/2.0f - 232.5, mGame->GetWindowHeight()/2.0f - 36));
+    title->SetPosition(Vector2(mGame->GetWindowWidth()/2.0f - 232.5, mGame->GetWindowHeight()/2.0f - 36 - 60));
+
+    auto *pressSpace = new Actor(GetGame());
+    pressSpace->SetPosition(Vector2(mGame->GetWindowWidth()/2.0f, mGame->GetWindowHeight()/2.0f + 132.0f));
+    new DrawTextComponent(pressSpace, "PRESS SPACE", mMenuFont, 200, 28, 64);
 
     mGame->GetSound()->PlaySound("Menu Music.mp3", true);
 }
