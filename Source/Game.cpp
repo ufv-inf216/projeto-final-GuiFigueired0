@@ -32,6 +32,7 @@ Game::Game(int windowWidth, int windowHeight)
         ,mTicksCount(0)
         ,mIsRunning(true)
         ,mIsPaused(false)
+        ,timePaused(0)
         ,mLevelRunning(false)
         ,mUpdatingActors(false)
         ,mFadeState(FadeState::None)
@@ -149,13 +150,26 @@ void Game::ProcessInput()
 
     const Uint8* state = SDL_GetKeyboardState(nullptr);
 
-    for (auto actor : mActors)
-    {
-        actor->ProcessInput(state);
+    if(state[SDL_SCANCODE_P] && !mIsPaused && timePaused <= 0) {
+        mIsPaused = true;
+        timePaused = 0.6f;
+    }
+    else if(state[SDL_SCANCODE_P] && mIsPaused && timePaused <= 0) {
+        mIsPaused = false;
+        timePaused = 0.6f;
+    }
+    else{
+        timePaused -= 0.1f;
     }
 
-    mAudio->ProcessInput(state);
-    mScene->ProcessInput(state);
+    if(!mIsPaused) {
+        for (auto actor: mActors) {
+            actor->ProcessInput(state);
+        }
+
+        mAudio->ProcessInput(state);
+        mScene->ProcessInput(state);
+    }
 }
 
 void Game::UpdateGame()

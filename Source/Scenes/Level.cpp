@@ -26,7 +26,8 @@ Level::Level(Game *game,std::string layerFileName, std::string objectsFileName)
           mWatergirl(nullptr),
           mWorld(nullptr),
           tf(new Transform()),
-          mContactListener(new MyContactListener())
+          mContactListener(new MyContactListener()),
+          mIsPaused(false)
 {
 }
 
@@ -66,27 +67,41 @@ void Level::InicializeLevel() {
 }
 
 void Level::UpdateLevel(float deltaTime) {
-    GetWorld()->Step(deltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+    if(!mGame->GetStatePaused()) {
+        if(mIsPaused){
+            mIsPaused = false;
+            delete pausedImage;
+        }
 
-    for(auto &body: mBodies){
-        body->Update();
+        GetWorld()->Step(deltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+
+        for (auto &body: mBodies) {
+            body->Update();
+        }
+
+        for (auto &platform: mPlatforms) {
+            platform->OnUpdate();
+            platform->SetPosition(platform->GetBodyComponent()->GetPosition());
+        }
+
+        for (auto &mActor: mActors) {
+            auto actor = dynamic_cast<Block *>(mActor);
+            actor->SetPosition(actor->GetBodyComponent()->GetPosition());
+        }
+        if (!GetGame()->GetStateWin()) {
+            mWatergirl->GetBodyComponent()->Update();
+            mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
+            mFireboy->GetBodyComponent()->Update();
+            mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
+        }
+    }
+    else if(!mIsPaused){
+        mIsPaused = true;
+        auto aux = new Actor(GetGame());
+        pausedImage = new DrawSpriteComponent(aux, "../Assets/Sprites/Menu/Paused.png", 800, 800, 1000);
+        aux->SetPosition(Vector2(0,0));
     }
 
-    for(auto &platform: mPlatforms){
-        platform->OnUpdate();
-        platform->SetPosition(platform->GetBodyComponent()->GetPosition());
-    }
-
-    for(auto & mActor : mActors){
-        auto actor = dynamic_cast<Block*>(mActor);
-        actor->SetPosition(actor->GetBodyComponent()->GetPosition());
-    }
-    if(!GetGame()->GetStateWin()){
-        mWatergirl->GetBodyComponent()->Update();
-        mWatergirl->SetPosition(mWatergirl->GetBodyComponent()->GetPosition());
-        mFireboy->GetBodyComponent()->Update();
-        mFireboy->SetPosition(mFireboy->GetBodyComponent()->GetPosition());
-    }
 }
 
 void Level::LoadData(const std::string& fileName)
