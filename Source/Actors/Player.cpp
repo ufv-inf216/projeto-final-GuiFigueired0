@@ -125,6 +125,15 @@ void Player::OnUpdate(float deltaTime)
     if (mType == PlayerType::FireBoyHead)
         GetGame()->SetWinFireBoy(false);
 
+    for(auto p : *GetGame()->GetLevel()->GetPlatforms()){
+        if(mWorldBodyComponent->IsOnGround() &&
+           p->GetBodyComponent()->GetPosition().y < mWorldBodyComponent->GetPosition().y &&
+           fabs(p->GetBodyComponent()->GetPosition().y - mWorldBodyComponent->GetPosition().y) < 32 &&
+           fabs((p->GetBodyComponent()->GetPosition().x + p->GetBodyComponent()->GetSize().x/2) -
+           (mWorldBodyComponent->GetPosition().x + GetBodyComponent()->GetSize().x/2)) < p->GetBodyComponent()->GetSize().x/4)
+                p->SetColision();
+    }
+
     while (contactEdge != nullptr) {
         auto contact = contactEdge->contact;
 

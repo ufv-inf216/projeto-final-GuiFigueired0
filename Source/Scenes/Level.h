@@ -29,6 +29,7 @@ public:
     void DrawColliders(SDL_Renderer *renderer);
     class Game* GetGame() { return mGame; }
     std::vector<class Actor*>* GetActors() { return &mActors; }
+    std::vector<class Platform*>* GetPlatforms() { return &mPlatforms; }
 
     // Tiled
     void LoadData(const std::string& fileName);

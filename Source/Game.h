@@ -71,7 +71,7 @@ public:
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
     // Level
-    class Level* GetLevel() { return mLevels[mCurrentLevel]; }
+    class Level* GetLevel() { return mLevels[mCurrentLevel-1]; }
     class AudioSystem* GetSound() { return mAudio; }
     bool showColliders() const { return mShowColliders; }
     void changeShowColliders() { mShowColliders = !mShowColliders; }

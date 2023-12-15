@@ -89,16 +89,21 @@ bool Game::Initialize()
 }
 
 void Game::InitializeScene(){
+    std::string layerFileName;
+    std::string objectsFileName;
+
     switch (mGameState)
     {
         case GameScene::Menu:
             mScene = new Menu(this);
             mScene->Load();
             break;
-
         case GameScene::Level:
+            mCurrentLevel++;
             mWin = {0,0};
-            mLevels.push_back(new Level(this, "../Assets/Maps/Map1_Layer1.csv", "../Assets/Maps/Map1_Objects.csv"));
+            layerFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Layer1.csv";
+            objectsFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + "_Objects.csv";
+            mLevels.push_back(new Level(this, layerFileName, objectsFileName));
             mScene = mLevels.back();
             mScene->Load();
             mLevelRunning = true;
