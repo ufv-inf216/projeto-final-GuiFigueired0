@@ -67,6 +67,7 @@ public:
     // Window functions
     int GetWindowWidth() const { return mWindowWidth; }
     int GetWindowHeight() const { return mWindowHeight; }
+    bool GetStatePaused() const { return mIsPaused; }
 
     SDL_Texture* LoadTexture(const std::string& texturePath);
 
@@ -117,6 +118,7 @@ private:
     bool mLevelRunning;
     bool mUpdatingActors;
     bool mIsPaused;
+    float timePaused;
 
     // Scene transition effect
     FadeState mFadeState;

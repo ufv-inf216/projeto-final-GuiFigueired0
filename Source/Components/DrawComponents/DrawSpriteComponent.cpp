@@ -14,7 +14,8 @@ DrawSpriteComponent::DrawSpriteComponent(class Actor* owner, const std::string &
 {
     mSpriteSheetSurface = GetGame()->LoadTexture(texturePath);
 
-    if(texturePath == "../Assets/Sprites/Menu/PreloaderAssets.png")
+    if(texturePath == "../Assets/Sprites/Menu/PreloaderAssets.png" ||
+       texturePath == "../Assets/Sprites/Menu/Paused.png")
         mFlip = true;
 }
 

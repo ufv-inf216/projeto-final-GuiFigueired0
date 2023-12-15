@@ -55,6 +55,10 @@ private:
     std::vector<WorldBodyComponent*> mBodies;
     std::vector<class Actor*> mActors;
     std::vector<class Platform*> mPlatforms;
+
+    bool mIsPaused;
+
+    class DrawSpriteComponent *pausedImage;
 };
 
 #endif
