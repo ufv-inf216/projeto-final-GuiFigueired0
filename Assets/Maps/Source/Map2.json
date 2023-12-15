@@ -829,17 +829,6 @@
                  "y":190
                 }, 
                 {
-                 "height":32,
-                 "id":55,
-                 "name":"WaterGirl",
-                 "rotation":0,
-                 "type":"Player",
-                 "visible":true,
-                 "width":32,
-                 "x":63.6667,
-                 "y":624
-                }, 
-                {
                  "height":70,
                  "id":57,
                  "name":"SF",
@@ -860,17 +849,6 @@
                  "width":64,
                  "x":416,
                  "y":124.545
-                }, 
-                {
-                 "height":32,
-                 "id":56,
-                 "name":"FireBoy",
-                 "rotation":0,
-                 "type":"Player",
-                 "visible":true,
-                 "width":32,
-                 "x":64.3333,
-                 "y":715.333
                 }, 
                 {
                  "height":45,
@@ -1156,8 +1134,7 @@
                  "width":12,
                  "x":613.833,
                  "y":272.5
-                },
-            
+                }, 
                 {
                  "height":16,
                  "id":181,
@@ -1192,7 +1169,8 @@
                  "width":0,
                  "x":384,
                  "y":768
-                }, 
+                },
+            
                 {
                  "height":0,
                  "id":183,
@@ -1402,6 +1380,30 @@
                  "width":24,
                  "x":357,
                  "y":414.333333333333
+                }, 
+                {
+                 "ellipse":true,
+                 "height":32,
+                 "id":199,
+                 "name":"WaterGirl",
+                 "rotation":0,
+                 "type":"Player",
+                 "visible":true,
+                 "width":32,
+                 "x":64.6666666666667,
+                 "y":625.666666666667
+                }, 
+                {
+                 "ellipse":true,
+                 "height":32,
+                 "id":200,
+                 "name":"FireBoy",
+                 "rotation":0,
+                 "type":"Player",
+                 "visible":true,
+                 "width":32,
+                 "x":66,
+                 "y":715.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1410,7 +1412,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":199,
+ "nextobjectid":204,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

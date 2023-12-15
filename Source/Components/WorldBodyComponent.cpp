@@ -23,7 +23,6 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
     if(tiles[1] == "Portal") mType = BodyTypes::Sensor;
 
     if(tiles[0] == "Ramp") {
-        // Defina os vértices para um triângulo (em metros)
         b2Vec2 vertices[3];
         vertices[0] = tf->pointMapToWorld(std::stof(tiles[4])+x, std::stof(tiles[5])+y);
         vertices[1] = tf->pointMapToWorld(std::stof(tiles[6])+x, std::stof(tiles[7])+y);
@@ -56,12 +55,10 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
             b2Body* kinematicBody = GetWorld()->CreateBody(&bodyDef);
             kinematicBody->SetLinearVelocity(b2Vec2(0.0f, 1.0f));
 
-            // Adicionando uma forma ao corpo (um retângulo)
             b2PolygonShape kinematicBox;
             b2Vec2 worldSize(tf->sizeMapToWorld(size.x), tf->sizeMapToWorld(size.y));
             kinematicBox.SetAsBox(worldSize.x, worldSize.y);
 
-            // Configurando a densidade, fricção e restituição
             b2FixtureDef fixtureDef;
             fixtureDef.shape = &kinematicBox;
             fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
@@ -76,15 +73,13 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
             bodyDef.position = tf->posMapToWorld(pos, size);
             b2Body* dynamicBody = GetWorld()->CreateBody(&bodyDef);
 
-            // Adicionando uma forma ao corpo (uma bola)
             b2CircleShape dynamicCircle;
-            float radius = size.x/64.0f; // Ajuste o raio conforme necessário
+            float radius = size.x/64.0f;
             dynamicCircle.m_radius = radius;
 
-            // Configurando a densidade, fricção e restituição
             b2FixtureDef fixtureDef;
             fixtureDef.shape = &dynamicCircle;
-            fixtureDef.density = 3.0f; // Ajuste conforme necessário
+            fixtureDef.density = 3.0f;
             fixtureDef.friction = 0.8f;
             fixtureDef.restitution = 0.0f;
             fixtureDef.filter.categoryBits = BodyTypes::Player | BodyTypes::Floor;
@@ -127,7 +122,27 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
         }
         else if(tiles[0] == "Player")
         {
-            mBody = CreateBody(pos, size, true, BodyTypes::Player, BodyTypes::Floor);
+            b2BodyDef bodyDef;
+            bodyDef.type = b2_dynamicBody;
+            bodyDef.fixedRotation = false;
+            b2Vec2 worldPos = tf->posMapToWorld(pos, size);
+            bodyDef.position = worldPos;
+            b2Body* body = GetWorld()->CreateBody(&bodyDef);
+            body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+
+            b2CircleShape shape;
+            float radius = size.x/64.0f;
+            shape.m_radius = radius;
+
+            auto fixtureDef = new b2FixtureDef();
+            fixtureDef->shape = &shape;
+            fixtureDef->density = 1.0f;
+            fixtureDef->friction = 0.0f;
+            fixtureDef->restitution = 0.0f;
+            fixtureDef->filter.categoryBits = BodyTypes::Player;
+            fixtureDef->filter.maskBits = BodyTypes::Floor;
+            body->CreateFixture(fixtureDef);
+            mBody = body;
         }
 
     }
@@ -169,7 +184,7 @@ Vector2 WorldBodyComponent::GetVelocity() {
 }
 
 Vector2 WorldBodyComponent::GetPosition() {
-    if(GetClass() == "Ball"){
+    if(GetClass() == "Ball" || GetClass() == "Player"){
         auto shape = dynamic_cast<b2CircleShape*>(mBody->GetFixtureList()->GetShape());
         float radius = shape->m_radius;
         return tf->posWorldToMap(mBody->GetPosition(), b2Vec2(2 * radius, 2 * radius));
@@ -181,9 +196,15 @@ Vector2 WorldBodyComponent::GetPosition() {
 }
 
 Vector2 WorldBodyComponent::GetSize() {
-    auto shape = dynamic_cast<b2PolygonShape*>(mBody->GetFixtureList()->GetShape());
-    b2Vec2 worldSize = shape->m_vertices[2] - shape->m_vertices[0];
-    return Vector2(worldSize.x*32, worldSize.y*32);
+    if(GetClass() == "Ball" || GetClass() == "Player"){
+        auto shape = dynamic_cast<b2CircleShape*>(mBody->GetFixtureList()->GetShape());
+        float radius = shape->m_radius;
+        return Vector2(radius*64, radius*64);
+    } else {
+        auto shape = dynamic_cast<b2PolygonShape*>(mBody->GetFixtureList()->GetShape());
+        b2Vec2 worldSize = shape->m_vertices[2] - shape->m_vertices[0];
+        return Vector2(worldSize.x*32, worldSize.y*32);
+    }
 
 }
 
