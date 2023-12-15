@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="217">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="221">
+ <editorsettings>
+  <export target="Source/Map2.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="finalBlocks.png" width="256" height="256"/>
  </tileset>
@@ -152,35 +155,27 @@
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
   <object id="202" name="Floor" type="Box" x="223.5" y="192.256" width="96" height="29.4886"/>
-  <object id="203" name="Box" type="Block" x="202.5" y="113.5" width="45" height="45"/>
   <object id="204" name="Floor" type="Box" x="320" y="207" width="96" height="16"/>
-  <object id="205" name="Floor" type="Ramp" x="415.818" y="191.182">
-   <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
-  </object>
   <object id="206" name="Floor" type="Ramp" x="320.273" y="191.091">
    <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
   </object>
-  <object id="207" name="LWC" type="Sensor" x="352" y="191" width="32" height="16"/>
+  <object id="207" name="LWC" type="Sensor" x="352" y="191.563" width="32" height="16"/>
   <object id="208" name="LWL" type="Sensor" x="320" y="191">
    <polygon points="0,0 32,0 32,16.3125"/>
-  </object>
-  <object id="209" name="LWR" type="Sensor" x="384" y="191">
-   <polygon points="0,0 -0.125,15.875 31.625,0"/>
   </object>
   <object id="210" name="Floor" type="Box" x="416" y="208" width="96" height="16"/>
   <object id="211" name="Floor" type="Ramp" x="511.818" y="192.182">
    <polygon points="0,0 0.0909091,15.8639 -31.7273,15.9091"/>
   </object>
-  <object id="212" name="Floor" type="Ramp" x="416.273" y="192.091">
-   <polygon points="0,0 -0.0909091,15.8639 31.7273,15.9091"/>
-  </object>
-  <object id="213" name="LWC" type="Sensor" x="448" y="192" width="32" height="16"/>
-  <object id="214" name="LWL" type="Sensor" x="416" y="192">
-   <polygon points="0,0 32,0 32,16.3125"/>
-  </object>
+  <object id="213" name="LWC" type="Sensor" x="448.125" y="191.625" width="32" height="16"/>
+  <object id="219" name="LWC" type="Sensor" x="384" y="191.625" width="32" height="16"/>
+  <object id="220" name="LWC" type="Sensor" x="416.125" y="191.625" width="32" height="16"/>
   <object id="215" name="LWR" type="Sensor" x="480" y="192">
    <polygon points="0,0 -0.125,15.875 31.625,0"/>
   </object>
   <object id="216" name="Box" type="Block" x="576.5" y="446" width="29" height="32"/>
+  <object id="217" type="Ball" x="206.5" y="100.5" width="46" height="46">
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

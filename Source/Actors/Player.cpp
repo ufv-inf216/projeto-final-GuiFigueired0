@@ -129,7 +129,7 @@ void Player::OnUpdate(float deltaTime)
 
     for(auto p : *GetGame()->GetLevel()->GetPlatforms()){
         if (mWorldBodyComponent->IsOnGround() &&
-            p->GetBodyComponent()->GetPosition().x < mWorldBodyComponent->GetPosition().x + mWorldBodyComponent->GetSize().x &&
+            p->GetBodyComponent()->GetPosition().x < mWorldBodyComponent->GetPosition().x &&
             p->GetBodyComponent()->GetPosition().x + p->GetBodyComponent()->GetSize().x > mWorldBodyComponent->GetPosition().x + mWorldBodyComponent->GetSize().x/2 &&
             p->GetBodyComponent()->GetPosition().y + p->GetBodyComponent()->GetSize().y > mWorldBodyComponent->GetPosition().y &&
             p->GetBodyComponent()->GetPosition().y < mWorldBodyComponent->GetPosition().y + mWorldBodyComponent->GetSize().y/2.0f){
