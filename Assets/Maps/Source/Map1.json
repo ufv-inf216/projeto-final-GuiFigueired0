@@ -1391,8 +1391,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":358.000033333333,
-                 "y":153.667
+                 "x":63,
+                 "y":625.667
                 }, 
                 {
                  "ellipse":true,
@@ -1403,8 +1403,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":32,
-                 "x":295.333333333333,
-                 "y":150.333666666667
+                 "x":63.333,
+                 "y":724.334
                 }],
          "opacity":1,
          "type":"objectgroup",
