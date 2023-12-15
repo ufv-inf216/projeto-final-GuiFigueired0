@@ -190,6 +190,7 @@ void Player::ManageAnimations()
     }
     else if(mIsDead)
     {
+        mGame->SetDead(true);
         if(mType == PlayerType::FireBoyHead || mType == PlayerType::WaterGirlHead)
             mDrawComponent->SetAnimation("Dead");
         else

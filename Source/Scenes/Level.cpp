@@ -61,13 +61,13 @@ void Level::InicializeLevel() {
     // Tiled
     auto* map = new Actor(GetGame());
 
-    new DrawTileComponent(map, "../Assets/Maps/Map2.csv", "../Assets/Maps/finalBlocks.png", 800, 800, 32);
-    LoadData("../Assets/Maps/Map2_Objects.csv");
+    new DrawTileComponent(map, mLayerFileName, "../Assets/Maps/finalBlocks.png", 800, 800, 32);
+    LoadData(mObjectsFileName);
     mGame->GetSound()->PlaySound("Level Music.mp3", true);
 }
 
 void Level::UpdateLevel(float deltaTime) {
-    if(!mGame->GetStatePaused()) {
+    if(!mGame->GetStatePaused() && !mGame->GetStateDead() && !mGame->GetStateWin()) {
         if(mIsPaused){
             mIsPaused = false;
             delete pausedImage;
@@ -96,10 +96,12 @@ void Level::UpdateLevel(float deltaTime) {
         }
     }
     else if(!mIsPaused){
-        mIsPaused = true;
-        auto aux = new Actor(GetGame());
-        pausedImage = new DrawSpriteComponent(aux, "../Assets/Sprites/Menu/Paused.png", 800, 800, 1000);
-        aux->SetPosition(Vector2(0,0));
+        if(mGame->GetStatePaused()) {
+            mIsPaused = true;
+            auto aux = new Actor(GetGame());
+            pausedImage = new DrawSpriteComponent(aux, "../Assets/Sprites/Menu/Paused.png", 800, 800, 1000);
+            aux->SetPosition(Vector2(0, 0));
+        }
     }
 
 }
