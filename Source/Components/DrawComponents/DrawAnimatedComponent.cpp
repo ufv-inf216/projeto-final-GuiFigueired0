@@ -52,22 +52,27 @@ void DrawAnimatedComponent::Draw(SDL_Renderer *renderer)
     auto spriteIdx =  mAnimations[mAnimName][(int)mAnimTimer];
     Vector2 pos = GetOwner()->GetPosition();
 
+    float offX = mOffset.x;
+    float offY = mOffset.y;
+
+    if(mAnimName == "RunningF")
+        offX += 10;
+    if(mAnimName == "RunningW")
+        offX += 16;
+
     SDL_Rect dstrect{
-            (int)(pos.x - mOffset.x),
-            (int)(pos.y - mOffset.y),
+            (int)(pos.x - offX),
+            (int)(pos.y - offY),
             static_cast<int>((float)(mSpriteSheetData[spriteIdx]->w) * mScale),
             static_cast<int>((float)(mSpriteSheetData[spriteIdx]->h) * mScale),
     };
     auto rotation = mOwner->GetRotation();
-    auto angle = rotation;
-    if(mAnimName == "Running")
-        angle = abs(mOwner->GetAngle());
     SDL_RenderCopyEx(
             renderer,
             mSpriteSheetSurface,
             mSpriteSheetData[spriteIdx],
             &dstrect,
-            angle,
+            rotation,
             nullptr,
             (rotation == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL
     );
