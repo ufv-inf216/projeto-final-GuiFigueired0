@@ -27,8 +27,3 @@ void Platform::OnUpdate() {
         mVelocity = -mVelocity;
     mWorldBodyComponent->GetBody()->SetLinearVelocity(b2Vec2(0.0f, mVelocity));
 }
-
-void Platform::SetColision() {
-    mVelocity = -mVelocity;
-    mWorldBodyComponent->GetBody()->SetLinearVelocity(b2Vec2(0.0f, mVelocity));
-}

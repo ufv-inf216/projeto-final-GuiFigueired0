@@ -20,19 +20,22 @@ void MyContactListener::BeginContact(b2Contact* contact) {
                 b->SetIsOnGround(true);
                 b->cont_Collision++;
             }
-        } else if(isPlayerOnPlatform(a, b)) {
-            if(b->GetType() == BodyTypes::Player){
-                if(a->GetPosition().x < b->GetPosition().x &&
-                   a->GetPosition().x + a->GetSize().x > b->GetPosition().x &&
-                   a->GetPosition().y > b->GetPosition().y + b->GetSize().y)
+        } else if (isPlayerOnPlatform(a, b)) {
+            if (b->GetType() == BodyTypes::Player) {
+                if (a->GetPosition().x < b->GetPosition().x + b->GetSize().x &&
+                    a->GetPosition().x + a->GetSize().x > b->GetPosition().x &&
+                    a->GetPosition().y + a->GetSize().y > b->GetPosition().y &&
+                    a->GetPosition().y < b->GetPosition().y + b->GetSize().y) {
                     b->SetIsOnGround(true);
+                }
                 b->cont_Collision++;
-            }
-            else{
-                if(b->GetPosition().x < a->GetPosition().x &&
-                   b->GetPosition().x + b->GetSize().x > a->GetPosition().x &&
-                   b->GetPosition().y > a->GetPosition().y + a->GetSize().y)
+            } else {
+                if (b->GetPosition().x < a->GetPosition().x + a->GetSize().x &&
+                    b->GetPosition().x + b->GetSize().x > a->GetPosition().x &&
+                    b->GetPosition().y + b->GetSize().y > a->GetPosition().y &&
+                    b->GetPosition().y < a->GetPosition().y + a->GetSize().y) {
                     a->SetIsOnGround(true);
+                }
                 a->cont_Collision++;
             }
         } else if (isPlayerOnSensor(a, b)) {

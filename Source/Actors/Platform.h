@@ -23,8 +23,6 @@ public:
     WorldBodyComponent* GetBodyComponent() { return mWorldBodyComponent; }
     int GetId() { return id; }
 
-    void SetColision();
-
     void OnUpdate();
 private:
     class WorldBodyComponent* mWorldBodyComponent;

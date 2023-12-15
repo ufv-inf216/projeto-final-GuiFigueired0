@@ -136,7 +136,7 @@ WorldBodyComponent::WorldBodyComponent(const std::string &line, b2World* world, 
 
             auto fixtureDef = new b2FixtureDef();
             fixtureDef->shape = &shape;
-            fixtureDef->density = 1.0f;
+            fixtureDef->density = 1.2f;
             fixtureDef->friction = 0.0f;
             fixtureDef->restitution = 0.0f;
             fixtureDef->filter.categoryBits = BodyTypes::Player;
