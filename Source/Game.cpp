@@ -103,6 +103,8 @@ void Game::InitializeScene(){
             break;
         case GameScene::Level:
             mCurrentLevel++;
+            if(mCurrentLevel == 4)
+                Shutdown();
             mWin = {0,0};
             mDead = 0;
             layerFileName = "../Assets/Maps/Map" + std::to_string(mCurrentLevel) + ".csv";
